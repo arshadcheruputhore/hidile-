@@ -35,7 +35,7 @@ const TrustedBrandsScroll = () => {
   ];
 
   return (
-    <div className="w-full overflow-hidden relative mt-12 sm:mt-16">
+    <div className="w-full overflow-hidden relative mt-12 sm:mt-16 max-w-7xl mx-auto">
       {/* Header */}
       <div className="text-center mb-8 sm:mb-12 px-6">
         <div className="flex flex-col sm:flex-row items-center justify-center gap-2 text-gray-700 text-base sm:text-lg font-medium">
@@ -50,7 +50,7 @@ const TrustedBrandsScroll = () => {
           {topRowBrands.map((brand, index) => (
             <div
               key={`top-${brand.name}-${index}`}
-              className="flex-shrink-0 cursor-pointer"
+              className="flex-shrink-0"
             >
               <div className="flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-3 sm:py-4 rounded-lg bg-gray-100 min-w-[160px] sm:min-w-[200px]">
                 <div className={`w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br ${brand.colors} rounded-lg sm:rounded-xl flex items-center justify-center text-white`}>
@@ -71,7 +71,7 @@ const TrustedBrandsScroll = () => {
           {bottomRowBrands.map((brand, index) => (
             <div
               key={`bottom-${brand.name}-${index}`}
-              className="flex-shrink-0 cursor-pointer"
+              className="flex-shrink-0"
             >
               <div className="flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-3 sm:py-4 rounded-lg bg-gray-100 min-w-[160px] sm:min-w-[200px]">
                 <div className={`w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br ${brand.colors} rounded-lg sm:rounded-xl flex items-center justify-center text-white shadow-md`}>

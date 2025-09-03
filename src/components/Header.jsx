@@ -10,134 +10,134 @@ const NAV = [
   {
     label: "Features",
     to: "/features",
-    children: [
-      {
-        icon: CheckSquare,
-        label: "Custom Tasks",
-        description: "Learn about your users",
-        to: "/features"
-      },
-      {
-        icon: Users,
-        label: "chat",
-        description: "Real-time analytics user trends",
-        to: "/features"
-      },
-      {
-        icon: LayoutTemplate,
-        label: "Templates",
-        description: "Monitor your metrics",
-        to: "/features"
-      },
-      {
-        icon: FileText,
-        label: "Files",
-        description: "Measure B2B account health",
-        to: "/features"
-      },
-      {
-        icon: Calendar,
-        label: "Calendar",
-        description: "Segments with perfect target",
-        to: "/features"
-      },
-      {
-        icon: Settings,
-        label: "Settings",
-        description: "Surface hidden trends",
-        to: "/features"
-      },
-      {
-        icon: BarChart3,
-        label: "Board",
-        description: "Enhance team communication",
-        to: "/features"
-      },
-      {
-        icon: Bell,
-        label: "Project Management",
-        description: "Insights from customer reviews",
-        to: "/features"
-      },
-      {
-        icon: ExternalLink,
-        label: "Integrations",
-        description: "Optimize user experience",
-        to: "/features"
-      },
-      {
-        icon: Workflow,
-        label: "Workflow",
-        description: "Comprehensive performance",
-        to: "/features"
-      },
-      {
-        icon: Bell,
-        label: "Custom Dashboards",
-        description: "Insights from customer reviews",
-        to: "/features"
-      },
-      {
-        icon: Bell,
-        label: "Invoices",
-        description: "Insights from customer reviews",
-        to: "/features"
-      },
-    ],
+    // children: [
+    //   {
+    //     icon: CheckSquare,
+    //     label: "Custom Tasks",
+    //     description: "Learn about your users",
+    //     to: "/features"
+    //   },
+    //   {
+    //     icon: Users,
+    //     label: "chat",
+    //     description: "Real-time analytics user trends",
+    //     to: "/features"
+    //   },
+    //   {
+    //     icon: LayoutTemplate,
+    //     label: "Templates",
+    //     description: "Monitor your metrics",
+    //     to: "/features"
+    //   },
+    //   {
+    //     icon: FileText,
+    //     label: "Files",
+    //     description: "Measure B2B account health",
+    //     to: "/features"
+    //   },
+    //   {
+    //     icon: Calendar,
+    //     label: "Calendar",
+    //     description: "Segments with perfect target",
+    //     to: "/features"
+    //   },
+    //   {
+    //     icon: Settings,
+    //     label: "Settings",
+    //     description: "Surface hidden trends",
+    //     to: "/features"
+    //   },
+    //   {
+    //     icon: BarChart3,
+    //     label: "Board",
+    //     description: "Enhance team communication",
+    //     to: "/features"
+    //   },
+    //   {
+    //     icon: Bell,
+    //     label: "Project Management",
+    //     description: "Insights from customer reviews",
+    //     to: "/features"
+    //   },
+    //   {
+    //     icon: ExternalLink,
+    //     label: "Integrations",
+    //     description: "Optimize user experience",
+    //     to: "/features"
+    //   },
+    //   {
+    //     icon: Workflow,
+    //     label: "Workflow",
+    //     description: "Comprehensive performance",
+    //     to: "/features"
+    //   },
+    //   {
+    //     icon: Bell,
+    //     label: "Custom Dashboards",
+    //     description: "Insights from customer reviews",
+    //     to: "/features"
+    //   },
+    //   {
+    //     icon: Bell,
+    //     label: "Invoices",
+    //     description: "Insights from customer reviews",
+    //     to: "/features"
+    //   },
+    // ],
   },
   {
-    label: "Industries",
-    to: "/industries",
-    children: [
-      {
-        icon: CheckSquare,
-        label: "Finance & Accounting",
-        description: "CA firms, tax management, compliance, and financial reporting",
-        to: "/industries"
-      },
-      {
-        icon: Users,
-        label: "Logistics & Transportation",
-        description: "Fleet management, route optimization, and delivery tracking",
-        to: "/industries"
-      },
-      {
-        icon: LayoutTemplate,
-        label: "Automotive",
-        description: "Service management, parts inventory, and customer relations",
-        to: "/industries"
-      },
-      {
-        icon: FileText,
-        label: "Real Estate",
-        description: "Property management, client tracking, and transaction workflows",
-        to: "/industries"
-      },
-      {
-        icon: Calendar,
-        label: "Healthcare",
-        description: "Patient management, EHR systems, telemedicine, and clinical workflows",
-        to: "/industries"
-      },
-      {
-        icon: Settings,
-        label: "Construction",
-        description: "Project management, safety compliance, and resource planning",
-        to: "/industries"
-      },
-      {
-        icon: BarChart3,
-        label: "Manufacturing",
-        description: "Production planning, quality control, and supply chain management",
-        to: "/industries"
-      },
-      {
-        icon: Bell,
-        label: "Professional Services",
-        description: "Client management, project billing, and service delivery",
-        to: "/industries"
-      }
-    ],
+    label: "CA-Auditing Firms",
+    to: "/CA-Auditing-Firms",
+    // children: [
+    //   {
+    //     icon: CheckSquare,
+    //     label: "Finance & Accounting",
+    //     description: "CA firms, tax management, compliance, and financial reporting",
+    //     to: "/industries"
+    //   },
+    //   {
+    //     icon: Users,
+    //     label: "Logistics & Transportation",
+    //     description: "Fleet management, route optimization, and delivery tracking",
+    //     to: "/industries"
+    //   },
+    //   {
+    //     icon: LayoutTemplate,
+    //     label: "Automotive",
+    //     description: "Service management, parts inventory, and customer relations",
+    //     to: "/industries"
+    //   },
+    //   {
+    //     icon: FileText,
+    //     label: "Real Estate",
+    //     description: "Property management, client tracking, and transaction workflows",
+    //     to: "/industries"
+    //   },
+    //   {
+    //     icon: Calendar,
+    //     label: "Healthcare",
+    //     description: "Patient management, EHR systems, telemedicine, and clinical workflows",
+    //     to: "/industries"
+    //   },
+    //   {
+    //     icon: Settings,
+    //     label: "Construction",
+    //     description: "Project management, safety compliance, and resource planning",
+    //     to: "/industries"
+    //   },
+    //   {
+    //     icon: BarChart3,
+    //     label: "Manufacturing",
+    //     description: "Production planning, quality control, and supply chain management",
+    //     to: "/industries"
+    //   },
+    //   {
+    //     icon: Bell,
+    //     label: "Professional Services",
+    //     description: "Client management, project billing, and service delivery",
+    //     to: "/industries"
+    //   }
+    // ],
   },
   { label: "Services", to: "/services" },
   {
@@ -167,12 +167,12 @@ const NAV = [
         description: "Join our team and explore job opportunities",
         to: "/resources/careers"
       },
-      {
-        icon: CheckSquare,
-        label: "News",
-        description: "Join our team and explore job opportunities",
-        to: "/resources/careers"
-      },
+      // {
+      //   icon: CheckSquare,
+      //   label: "News",
+      //   description: "Join our team and explore job opportunities",
+      //   to: "/resources/careers"
+      // },
     ],
   },
   { label: "Pricing", to: "/pricing" },

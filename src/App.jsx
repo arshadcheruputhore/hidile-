@@ -24,7 +24,7 @@ function App() {
           <Route path="features" element={<Features />} />
           <Route path="services" element={<Services />} />
           <Route path="service-details" element={<ServiceDetails />} />
-          <Route path="industries" element={<Industries />} />
+          <Route path="CA-Auditing-Firms" element={<Industries />} />
           <Route path="pricing" element={<Pricing />} />
           <Route path="resources" element={<ResourcesLayout />}>
             <Route path="contact-us" element={<ContactUs />} />

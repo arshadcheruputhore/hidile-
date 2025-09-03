@@ -3,15 +3,15 @@ import React from "react";
 export default function ToolsCardHome() {
     return (
         <section className="relative w-full text-gray-900 mt-14 sm:mt-20 sm:px-3 px-1">
-            <div className="mx-auto">
+            <div className="mx-auto max-w-7xl">
                 {/* Heading */}
                 <div className="text-center mb-6 sm:mb-8">
-                    <h1 className="text-2xl font-medium md:text-[40px] text-gray-900 mb-2 sm:mb-2.5">
+                    <h1 className="text-2xl font-medium md:text-4xl text-gray-900 mb-2 sm:mb-2.5">
                         The Tools That Keep Your <br />
                         <span className="sm:hidden">Work Moving</span>
                         <span className="hidden sm:inline">Work Moving</span>
                     </h1>
-                    <p className="text-gray-600 max-w-2xl mx-auto leading-relaxed text-sm sm:text-base">
+                    <p className="text-gray-600 max-w-2xl mx-auto leading-relaxed text-sm">
                         Track progress, manage deadlines, and collaborate effortlessly with
                         an all-in-one toolkit designed to keep your projects on schedule and
                         your team aligned.
@@ -23,8 +23,8 @@ export default function ToolsCardHome() {
                     {/* Card 1 */}
                     <div className="pt-6 sm:pt-8 pl-6 sm:pl-8 rounded-2xl shadow-lg transition bg-white flex flex-col justify-between md:col-span-2">
                         <div className="w-full sm:w-2/3 max-sm:pr-3">
-                            <h3 className="text-xl sm:text-[26px] font-semibold text-gray-900 mb-2 sm:mb-2.5 tracking-wide">
-                                Transform Your Goals into Results
+                            <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 mb-2 sm:mb-2.5 tracking-wide">
+                                OKR's for Goal Tracking
                             </h3>
                             <p className="text-gray-800 leading-6 text-sm mb-6 sm:mb-9 pr-4 sm:pr-0">
                                 Drive organizational success with our comprehensive OKR system.
@@ -43,19 +43,16 @@ export default function ToolsCardHome() {
                     {/* Card 2 */}
                     <div className="rounded-2xl shadow-lg transition bg-white flex flex-col md:col-span-1 justify-between">
                         <div className="w-full pt-6 sm:pt-8 px-6 sm:px-8">
-                            <h3 className="text-xl sm:text-[26px] font-semibold text-gray-900 mb-2 sm:mb-2.5 tracking-wide">
-                                Visualize Your Tasks <br className="hidden sm:block" />
-                                <span className="sm:hidden">on a Calendar</span>
-                                <span className="hidden sm:inline">on a Calendar</span>
+                            <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 mb-2 sm:mb-2.5 tracking-wide">
+                                Visualize Your Timeboxing
                             </h3>
-                            <p className="text-gray-800 leading-6 text-sm mb-3 sm:mb-3">
-                                See every task in context — plan, track, and manage deadlines with
-                                a calendar that keeps your team in sync and projects on schedule.
+                            <p className="text-gray-800 leading-6 text-sm mb-3">
+                                Research shows time-boxing is the #1 productivity tool for better focus and results.
                             </p>
                         </div>
 
                         <div className="flex-1 flex items-end justify-end">
-                            <div className="w-full sm:w-3/4 h-auto">
+                            <div className="w-full md:w-[90%] h-auto">
                                 <img src="/img/okr-calender.png" alt="OKR System img" className="w-full h-full object-contain drop-shadow-lg rounded-br-2xl rounded-tl-2xl" />
                             </div>
                         </div>
@@ -64,12 +61,11 @@ export default function ToolsCardHome() {
                     {/* Card 3 */}
                     <div className="rounded-2xl shadow-lg transition bg-white flex flex-col md:col-span-1 justify-between">
                         <div className="w-full pt-6 sm:pt-8 px-6 sm:px-8">
-                            <h3 className="text-xl sm:text-[26px] font-semibold text-gray-900 mb-2 sm:mb-2.5 tracking-wide">
-                                Keep Work on Track
+                            <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 mb-2 sm:mb-2.5 tracking-wide">
+                                AI Agents. Real-time progress.
                             </h3>
                             <p className="text-gray-800 leading-6 text-sm mb-4">
-                                Track progress at every stage, spot roadblocks early, and keep
-                                your team focused on delivering results.
+                               Track progress at every stage. Spot roadblocks with automatic updates, status checks, and alerts—so nothing slips
                             </p>
                         </div>
 
@@ -86,10 +82,10 @@ export default function ToolsCardHome() {
                     {/* Card 4 */}
                     <div className="rounded-2xl shadow-lg transition bg-white flex flex-col sm:flex-row justify-between md:col-span-2 py-6 sm:py-8 px-6 sm:px-8">
                         <div className="w-full sm:w-1/2 mb-4 sm:mb-0">
-                            <h3 className="text-xl sm:text-[26px] font-semibold text-gray-900 mb-2 sm:mb-2.5 tracking-wide">
-                                Automate Your Entire <br className="hidden sm:block" />
-                                <span className="sm:hidden">Workflow</span>
-                                <span className="hidden sm:inline">Workflow</span>
+                            <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 mb-2 sm:mb-2.5 tracking-wide">
+                                Work Automation using <br className="hidden sm:block" />
+                                <span className="sm:hidden">Workflows</span>
+                                <span className="hidden sm:inline">Workflows</span>
                             </h3>
                             <p className="text-gray-800 leading-6 text-sm mb-3 sm:mb-9">
                                 Design intelligent workflows that adapt to your business

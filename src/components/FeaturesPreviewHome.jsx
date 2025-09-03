@@ -1,4 +1,4 @@
-import { ArrowRight, BarChart3, Bell, Calendar, CheckSquare, FileText, FolderOpen, Grid3x3, Settings, Shuffle, Users } from 'lucide-react';
+import { ArrowRight, BarChart3, BarChartIcon, Bell, BotMessageSquare, Calendar, CheckSquare, Files, FileText, FolderKanban, FolderOpen, Grid3x3, Layers, LayoutDashboard, MessagesSquare, Settings, Shuffle, SquareCheckBig, Target, Users } from 'lucide-react';
 import React, { useState } from 'react';
 
 export default function FeaturesPreviewHome() {
@@ -6,54 +6,54 @@ export default function FeaturesPreviewHome() {
 
     const features = [
         { 
-            icon: CheckSquare, 
-            label: 'Task Management', 
-            image: '/img/okr-tasks.png' 
+            icon: Target, 
+            label: 'OKR', 
+            image: '/img/okr_features.png' 
         },
         { 
-            icon: Users, 
-            label: 'Team Management', 
-            image: '/img/team-dashboard-img.png' 
+            icon: LayoutDashboard, 
+            label: 'Dashboard', 
+            image: '/img/dashboard_features.png' 
         },
         { 
-            icon: FileText, 
-            label: 'Templates', 
-            image: '/img/okr-templates.png' 
-        },
-        { 
-            icon: Calendar, 
-            label: 'Calendar', 
-            image: '/img/calendar-dashboard-img.png' 
-        },
-        { 
-            icon: FolderOpen, 
-            label: 'Files', 
-            image: '/img/okr-files.png' 
-        },
-        { 
-            icon: Settings, 
-            label: 'Settings', 
-            image: '/img/settings-dashboard-img.png' 
-        },
-        { 
-            icon: BarChart3, 
+            icon: BarChartIcon, 
             label: 'Reports', 
-            image: '/img/okr-reports.png' 
+            image: '/img/report_features.png' 
         },
         { 
-            icon: Bell, 
-            label: 'Notifications', 
-            image: '/img/notifications-dashboard-img.png' 
+            icon: MessagesSquare, 
+            label: 'Chats', 
+            image: '/img/chats_features.png' 
         },
         { 
-            icon: Grid3x3, 
-            label: 'Integration', 
-            image: '/img/integration-dashboard-img.png' 
+            icon: FolderKanban, 
+            label: 'Projects', 
+            image: '/img/projects_features.png' 
+        },
+        { 
+            icon: SquareCheckBig, 
+            label: 'Tasks', 
+            image: '/img/responsibilities_features.png' 
+        },
+        { 
+            icon: Layers, 
+            label: 'Templates', 
+            image: '/img/templates_features.png' 
+        },
+        { 
+            icon: Files, 
+            label: 'Files', 
+            image: '/img/files_features.png' 
+        },
+        { 
+            icon: BotMessageSquare, 
+            label: 'Ai Chat', 
+            image: '/img/AI_features.png' 
         },
         { 
             icon: Shuffle, 
             label: 'Workflow', 
-            image: '/img/okr-workflow.png' 
+            image: '/img/workflow_features.png' 
         }
     ];
 
@@ -66,8 +66,8 @@ export default function FeaturesPreviewHome() {
             <div className="max-w-7xl mx-auto">
                 {/* Header */}
                 <div className="text-center">
-                    <h1 className="text-2xl sm:text-3xl lg:text-[40px] text-white mb-6 sm:mb-8 md:mb-10 leading-tight">
-                        Powerful Features That Drive Results
+                    <h1 className="text-2xl sm:text-3xl lg:text-4xl text-white mb-5 sm:mb-6 md:mb-8 leading-tight">
+                        Explore Our Game-Changing Features.
                     </h1>
 
                     {/* Feature Icons Grid */}
@@ -82,7 +82,7 @@ export default function FeaturesPreviewHome() {
                                         onClick={() => handleFeatureClick(index)}
                                         className="flex flex-col items-center gap-2 sm:gap-3 transition-all duration-300 cursor-pointer hover:scale-105 active:scale-95 flex-shrink-0 w-22 sm:w-22"
                                     >
-                                        <div className={`w-14 h-13 sm:w-14 sm:h-14 md:w-16 md:h-16 flex items-center justify-center rounded-xl sm:rounded-xl border-2 transition-all duration-300 ${isActive
+                                        <div className={`w-14 h-13 sm:w-14 sm:h-14 md:w-14 md:h-14 flex items-center justify-center rounded-xl sm:rounded-xl border-2 transition-all duration-300 ${isActive
                                             ? 'bg-blue-600 text-white border-blue-400 shadow-lg shadow-blue-500/30'
                                             : 'bg-white/20 backdrop-blur-sm text-gray-300 border-white/50  hover:bg-white/30 hover:border-white/70 hover:text-white'
                                             }`}>

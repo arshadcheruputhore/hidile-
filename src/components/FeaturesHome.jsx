@@ -3,7 +3,7 @@ import React from 'react'
 
 function FeaturesHome() {
     return (
-        <section className='px-1 sm:px-3 max-sm:mt-16'>
+        <section className='px-1 sm:px-3 max-sm:mt-16 max-w-7xl mx-auto'>
             <div className="flex items-center justify-between w-full max-sm:flex-col max-sm:items-start max-sm:gap-2.5">
                 <div className="w-3/5 max-sm:w-full">
                     {/* Badge */}
@@ -64,7 +64,7 @@ function FeaturesHome() {
                     </h1>
                 </div>
                 <div className="w-2/5 max-sm:w-full">
-                    <p className="leading-[22px] text-left text-gray-600 text-base max-sm:text-sm max-sm:leading-5 max-sm:mb-6">
+                    <p className="leading-[22px] text-left text-gray-600 text-sm max-sm:leading-5 max-sm:mb-6">
                         Empower your team with tools that simplify, align, and accelerate productivity. All under one unified workspace.
                     </p>
                 </div>
@@ -76,11 +76,10 @@ function FeaturesHome() {
                     <div className="bg-slate-50 rounded-2xl overflow-hidden border border-solid border-zinc-200 col-span-3 max-lg:col-span-1">
                         <div className="p-6 max-sm:p-4">
                             <h3 className="text-2xl tracking-wide font-semibold text-gray-800 mb-2.5 max-sm:text-xl max-sm:mb-2">
-                                Smart Task Management
+                                One screen for everything you do.
                             </h3>
                             <p className="text-gray-600 text-sm w-3/5 leading-[22px] max-lg:w-4/5 max-sm:w-full max-sm:text-xs max-sm:leading-5">
-                                Assign, prioritize, and track tasks with clarity. Stay focused with
-                                real-time updates, custom statuses, and visual boards.
+                                Assign tasks, track progress, filter with ease, and approve in seconds — all without a single tab switch.
                             </p>
                         </div>
 
@@ -96,11 +95,10 @@ function FeaturesHome() {
                     <div className="bg-slate-50 rounded-2xl overflow-hidden border border-solid border-zinc-200 col-span-2 max-lg:col-span-1">
                         <div className="p-6 max-sm:p-4">
                             <h3 className="text-2xl tracking-wide font-semibold  text-gray-800 mb-2.5 max-sm:text-xl max-sm:mb-2">
-                                Track Your Success
+                                Every step. Counted.
                             </h3>
                             <p className="text-gray-600 text-sm leading-[22px] max-sm:text-xs max-sm:leading-5">
-                                Get detailed insights on task completion, team performance, and
-                                progress with customizable reports.
+                                Turn goals into measurable progress with real-time tracking and clear insights.
                             </p>
                         </div>
 
@@ -119,11 +117,10 @@ function FeaturesHome() {
                     <div className="bg-slate-50 rounded-2xl overflow-hidden border border-solid border-zinc-200 px-8 pt-8 flex flex-col justify-between align-middle max-sm:px-4 max-sm:pt-4">
                         <div className="max-sm:mb-4">
                             <h3 className="text-2xl tracking-wide font-semibold  text-gray-800 mb-2.5 max-sm:text-xl max-sm:mb-2">
-                                Work Together
+                               Connecting teams
                             </h3>
                             <p className="text-gray-600 text-sm leading-[22px] max-sm:text-xs max-sm:leading-5">
-                                Assign tasks, share files, and collaborate effortlessly with your
-                                team members.
+                                Connect people. Align work. Create momentum.
                             </p>
                         </div>
 
@@ -139,11 +136,10 @@ function FeaturesHome() {
                     <div className="bg-slate-50 rounded-2xl overflow-hidden border border-solid border-zinc-200 flex flex-col justify-between">
                         <div className="pr-14 pl-8 pt-8 max-sm:px-4 max-sm:pt-4">
                             <h3 className="text-2xl tracking-wide font-semibold  text-gray-800 mb-2.5 max-sm:text-xl max-sm:mb-2">
-                                Never Miss a Deadline
+                               Get Notified
                             </h3>
                             <p className="text-gray-600 text-sm leading-[22px] max-sm:text-xs max-sm:leading-5 max-sm:mb-4">
-                                Get notified about upcoming deadlines, changes, and team updates in
-                                real-time.
+                               Get notified about upcoming deadlines, changes, and team updates in real-time.
                             </p>
                         </div>
 
@@ -159,11 +155,10 @@ function FeaturesHome() {
                     <div className="bg-slate-50 rounded-2xl overflow-hidden border border-solid border-zinc-200">
                         <div className="px-6 pt-6 max-sm:px-4 max-sm:pt-4">
                             <h3 className="text-2xl tracking-wide font-semibold  text-gray-800 mb-2.5 max-sm:text-xl max-sm:mb-2">
-                                Track Productivity
+                                Design your dashboards
                             </h3>
                             <p className="text-gray-600 text-sm leading-[22px] max-sm:text-xs max-sm:leading-5 max-sm:mb-4">
-                                Keep track of time spent on tasks with built-in timers for better
-                                reporting.
+                                Custom dashboards for every department and team.
                             </p>
                         </div>
 

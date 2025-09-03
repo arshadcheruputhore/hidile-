@@ -18,13 +18,13 @@ function TeamManagement_Features() {
             id: 1,
             title: "Share information between teams",
             description: "Easily get back to recent spaces, in-progress work, and drafts, and stay updated. Create a centralized hub where teams can access shared resources, track project progress, and maintain transparency across departments.",
-            image: "/img/okr-tasks.png"
+            image: "/img/team-features.png"
         },
         {
             id: 2,
             title: "Create better documentation for your teams",
             description: "Transform the way your organization works with documentation that inspires clarity, reduces friction, and fuels innovation. Build comprehensive guides, maintain knowledge bases, and ensure everyone has access to the information they need.",
-            image: "/img/okr-files.png"
+            image: "/img/team-features.png"
         }
     ];
 
@@ -335,11 +335,11 @@ function TeamManagement_Features() {
                             </div>
                         </div>
 
-                        {/* Team Chat */}
+                        {/* Connecting teams */}
                         <div className="overflow-hidden rounded-[9.836px] bg-[#FBFBFB] shadow-[0_2.643px_2.643px_0_rgba(0,0,0,0.25)] backdrop-blur-[0.6606px] flex flex-col justify-between col-span-1 sm:col-span-2 lg:col-span-2">
                             <div className="px-4 sm:px-6 pt-6 sm:pt-8">
                                 <h3 className="text-lg sm:text-lg lg:text-xl tracking-wide font-semibold text-gray-800 mb-0 sm:mb-1 lg:mb-1">
-                                    Team Chat
+                                    Connecting Teams
                                 </h3>
                                 <p className="text-gray-600 text-xs sm:text-sm leading-5 sm:leading-[22px]">
                                     Perform multiple actions at once.

@@ -9,7 +9,7 @@ export default function Footer() {
                 <div className="hidden lg:flex items-end">
                     {/* Left Content */}
                     <div className="text-left pb-20 pt-24 pl-28 w-2/3">
-                        <h1 className="text-5xl font-bold leading-tight mb-4">
+                        <h1 className="text-[40px] font-bold leading-tight mb-4">
                             Get started with <br />
                             <span className="font-bold">Hidile OKR today</span>
                         </h1>
@@ -17,7 +17,7 @@ export default function Footer() {
                             Try Hidile OKR free for 30 days—you'll have access to every feature.
                             Cancel any time.
                         </p>
-                        <button className="bg-white text-[#2B0A3D] px-6 py-3 rounded-lg font-medium shadow-md hover:shadow-lg transition">
+                        <button className="bg-white text-base text-[#2B0A3D] px-6 py-3 rounded-lg font-medium shadow-md hover:shadow-lg transition">
                             Start your free trial →
                         </button>
                     </div>
@@ -33,7 +33,7 @@ export default function Footer() {
                 </div>
 
                 {/* Mobile Layout with Background Image */}
-                <div className="lg:hidden relative min-h-[400px] flex items-center">
+                <div className="lg:hidden relative min-h-[350px] flex items-center">
                     {/* Background Image with Opacity */}
                     <div className="absolute inset-0">
                         <img
@@ -53,7 +53,7 @@ export default function Footer() {
                             Try Hidile OKR free for 30 days—you'll have access to every feature.
                             Cancel any time.
                         </p>
-                        <button className="bg-white text-[#2B0A3D] px-5 sm:px-6 py-2.5 sm:py-3 rounded-lg font-medium shadow-md hover:shadow-lg transition text-sm sm:text-base">
+                        <button className="bg-white text-[#2B0A3D] px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-medium shadow-md hover:shadow-lg transition text-sm sm:text-base">
                             Start your free trial →
                         </button>
                     </div>

@@ -3,7 +3,7 @@ import * as React from "react";
 
 function HeroHome() {
   return (
-    <section className="flex flex-col items-center mt-12 w-full max-sm:mt-8 relative">
+    <section className="flex flex-col items-center mt-12 w-full max-sm:mt-8 relative max-w-7xl mx-auto">
       {/* Top Row Icons */}
       <div className="max-sm:mb-2 flex max-sm:flex-col justify-between items-center gap-24 max-md:gap-16 max-sm:gap-2 mt-7 relative">
         <div className="max-sm:order-2 max-sm:absolute left-3 -bottom-12">
@@ -97,7 +97,7 @@ function HeroHome() {
           </div>
 
           {/* Description */}
-          <p className="text-base leading-7 text-center text-gray-600 w-[590px] max-md:max-w-[500px] max-sm:w-full max-sm:text-sm max-sm:leading-6 max-sm:px-4 max-sm:max-w-none">
+          <p className=" leading-7 text-center text-gray-600 w-[590px] max-md:max-w-[500px] max-sm:w-full text-sm max-sm:leading-6 max-sm:px-4 max-sm:max-w-none">
             Plan on boards, sync in chat, glide through your calendar.Tie it all to OKRs and watch the wins stack up.
           </p>
 
@@ -125,7 +125,7 @@ function HeroHome() {
       </div>
 
       {/* Hero Image */}
-      <div className="w-[889px] h-[445px] mt-14 absolute top-full bg-[url('/img/OKRHeroHome.png')] bg-center bg-no-repeat bg-contain max-sm:bg-contain max-lg:w-[700px] max-lg:h-[350px] max-lg:top-[65%] max-md:w-[500px] max-md:h-[250px] max-md:top-[70%] max-sm:w-[100%] max-sm:h-[160px] max-sm:top-full max-sm:mt-8"></div>
+      <div className="w-[900px] h-[484px] mt-14 absolute top-full bg-[url('/img/OKRHeroHome.png')] bg-center bg-no-repeat bg-cover max-sm:bg-contain max-lg:w-[700px] max-lg:h-[350px] max-lg:top-[65%] max-md:w-[500px] max-md:h-[250px] max-md:top-[70%] max-sm:w-[100%] max-sm:h-[160px] max-sm:top-full max-sm:mt-8"></div>
     </section>
   );
 }

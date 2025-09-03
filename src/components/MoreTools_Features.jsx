@@ -18,19 +18,19 @@ function MoreTools_Features() {
             id: 1,
             title: "Files",
             description: "Easily get back to recent spaces, in-progress work, and drafts, and stay updated",
-            image: "/img/okr-tasks.png"
+            image: "/img/team-features.png"
         },
         {
             id: 2,
             title: "Calendar",
             description: "Easily get back to recent spaces, in-progress work, and drafts, and stay updated",
-            image: "/img/okr-files.png"
+            image: "/img/team-features.png"
         },
         {
             id: 2,
             title: "Settings",
             description: "Easily get back to recent spaces, in-progress work, and drafts, and stay updated",
-            image: "/img/okr-reports.png"
+            image: "/img/team-features.png"
         }
     ];
 

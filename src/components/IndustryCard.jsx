@@ -38,11 +38,11 @@ function Card({ icon: Icon, bgColor, iconColor, title, description }) {
 export default function IndustryCard() {
   return (
     <section className="sm:mt-16 mt-12 sm:px-3 px-1">
-      <div className=" mx-auto">
+      <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8 max-sm:mb-6">
-          <h1 className="text-2xl sm:text-3xl font-semibold md:text-4xl lg:text-[40px] text-gray-900 mb-2 sm:mb-2.5 leading-tight">
-            Where Every Industry <br className='sm:hidden' /> Works Better
+          <h1 className="text-2xl sm:text-3xl font-semibold md:text-4xl text-gray-900 mb-2 sm:mb-2.5 leading-tight">
+            We are everywhere
           </h1>
           <p className="text-gray-600 max-w-2xl mx-auto leading-relaxed text-sm sm:text-base sm:px-0">
             From finance to manufacturing, healthcare to retail — manage projects, tasks, and teams with one powerful, flexible solution that adapts to the way you work.

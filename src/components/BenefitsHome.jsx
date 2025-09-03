@@ -56,7 +56,7 @@ export default function BenefitsHome() {
 
     return (
         <section className="sm:pb-20 mt-16 sm:mt-24 bg-gray-50 min-h-screen px-2 max-sm:px-0">
-            <div className="max-w-7xl">
+            <div className="max-w-7xl mx-auto">
                 {/* Header */}
                 <div className="text-center sm:mb-8 mb-6">
                     {/* Badge */}
@@ -113,13 +113,13 @@ export default function BenefitsHome() {
 
                     {/* Main Heading */}
                     <h1 className="md:text-[40px] font-medium max-sm:text-left text-gray-900 leading-[48px] mt-4 sm:mt-6 text-2xl max-md:leading-9 max-sm:leading-8 max-sm:mt-4 mb-2 sm:mb-2.5">
-                        Everything Your Team
-                        <br />
-                        Needs to Excel
+                        Everything a Team {" "}
+                        <br className='max-sm:hidden' />
+                        Needs
                     </h1>
 
                     {/* Subheading */}
-                    <p className="leading-[22px] max-sm:text-left text-gray-600 text-base max-sm:text-sm max-sm:leading-5 mt-3 max-sm:mt-2.5">
+                    <p className="leading-[22px] max-sm:text-left text-gray-600 text-sm max-sm:leading-5 mt-3 max-sm:mt-2.5">
                         Powerful features designed to streamline workflows and
                         <br className='max-sm:hidden' /> drive organizational success
                     </p>
