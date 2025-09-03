@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-function MoreTools_Features() {
+function WorkFlowScrolling_Features() {
     const [activeSection, setActiveSection] = useState(0);
     const [isUserInteracting, setIsUserInteracting] = useState(false);
     const [progressFill, setProgressFill] = useState(0);
@@ -137,10 +137,10 @@ function MoreTools_Features() {
                     {/* Container Header - Spans full width */}
                     <div className="w-full px-4 sm:px-6 lg:px-8 pt-8 sm:pt-10 pb-2 lg:absolute lg:top-0 lg:left-0 lg:z-10 flex flex-col lg:flex-row items-start justify-between lg:items-center">
                         <h3 className="text-lg lg:text-2xl tracking-wide font-semibold text-gray-800">
-                            More Tools to Power Your<br /> Productivity
+                            Flexible Frameworks for<br /> Every Workflow
                         </h3>
                         <p className="text-gray-600 text-xs sm:text-sm leading-5 mt-1">
-                            Set your workflow on autopilot and let repetitive actions happen <br className='max-lg:hidden'/> automatically.
+                            Unlock New Levels of Efficiency and Innovation with a Comprehensive <br className='max-lg:hidden'/> Suite of Tools Designed to Boost Your Productivity.
                         </p>
                     </div>
 
@@ -329,4 +329,4 @@ function MoreTools_Features() {
     );
 }
 
-export default MoreTools_Features;
+export default WorkFlowScrolling_Features;

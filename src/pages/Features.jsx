@@ -2,10 +2,10 @@ import React from 'react'
 import HeroFeatures from '../components/HeroFeatures'
 import TeamManagement_Features from '../components/TeamManagement_Features'
 import ObjectKeyResult_Features from '../components/ObjectKeyResult_Features'
-import MoreTools_Features from '../components/MoreTools_Features'
 import TrustedBrandsScroll from '../components/TrustedBrandsScroll'
 import Testimonials from '../components/Testimonials'
 import TaskTemplates_Features from '../components/TaskTemplates_Features'
+import WorkFlowScrolling_Features from '../components/WorkFlowScrolling_Features'
 
 function Features() {
     return (
@@ -20,7 +20,7 @@ function Features() {
 
                     <ObjectKeyResult_Features />
 
-                    <MoreTools_Features />
+                    <WorkFlowScrolling_Features />
 
                     <TrustedBrandsScroll />
 

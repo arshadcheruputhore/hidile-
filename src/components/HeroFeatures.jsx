@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export default function HeroFeatures() {
   return (
-    <section className="relative overflow-hidden w-full ">
+    <section className="relative overflow-hidden w-full max-w-7xl mx-auto">
       {/* Mobile background image */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20 lg:hidden"
@@ -24,8 +24,8 @@ export default function HeroFeatures() {
         ))}
       </div>
 
-      <div className="w-full px-4 sm:px-0 lg:pt-20 py-10 sm:pb-16 md:pb-20 mt-10 lg:pl-32">
-        <div className="grid items-center gap- lg:grid-cols-12">
+      <div className="w-full px-4 sm:px-2 lg:pt-20 py-10 sm:pb-16 md:pb-20 mt-10">
+        <div className="grid items-center lg:grid-cols-12">
           {/* LEFT: headline + text + CTAs */}
           <div className="lg:col-span-6 xl:col-span-5 relative z-10">
             {/* Breadcrumb */}

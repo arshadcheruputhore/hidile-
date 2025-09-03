@@ -27,7 +27,7 @@ export default function HeroIndustries() {
             </Link>
             <li>/</li>
             <li>
-              Industries
+              CA-Auditing Firms
             </li>
           </ol>
         </nav>
@@ -35,13 +35,12 @@ export default function HeroIndustries() {
         {/* Hero Content */}
         <div className="text-center max-w-4xl mx-auto">
           <h1 className="text-2xl sm:text-4xl md:text-[40px] font-semibold leading-snug sm:leading-normal tracking-tight text-gray-900 mb-3 sm:mb-6">
-            Cutting-Edge IT Solutions : Empowering <br />
-            <span className="block">Your Digital Transformation</span>
+            You account for money. We make work . <br />
+            <span className="block">accountable</span>
           </h1>
 
           <p className="text-sm sm:text-base text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
-            Align goals, boost productivity, and achieve measurable results with the most
-            powerful OKR platform designed for modern hybrid teams.
+            A unified workspace that brings together tasks, documents, and sign-offs — all seamlessly tailored to meet the unique needs of CA firms.
           </p>
 
           {/* CTA Buttons */}
