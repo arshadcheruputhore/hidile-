@@ -73,7 +73,7 @@ function PricingCard_Pricing() {
     ];
 
     return (
-        <section className="-mt-12 lg:-mt-[8%] ">
+        <section className="-mt-12 lg:-mt-[3%] ">
             <div className="max-w-6xl mx-auto px-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {pricingPlans.map((plan) => {

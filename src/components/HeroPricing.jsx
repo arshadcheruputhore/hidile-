@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ArrowRight, Search, ChevronDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export default function HeroPricing() {
 
   return (
-    <section className="relative lg:min-h-[70vh] overflow-hidden sm:pt-28 pt-20 max-lg:pb-10 bg-gradient-to-r max-sm:px-6" style={{ background: 'linear-gradient(105deg, #87B8FF 16.17%, #E7F1FF 87.53%)' }}>
+    <section className="relative lg:min-h-[60vh] overflow-hidden sm:pt-[8%] pt-20 pb-10 lg:pb-20 bg-gradient-to-r max-sm:px-6" style={{ background: 'linear-gradient(105deg, #87B8FF 16.17%, #E7F1FF 87.53%)' }}>
       <div className="max-w-7xl mx-auto">
         {/* Main Content */}
         <div className="relative z-10 flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8">
