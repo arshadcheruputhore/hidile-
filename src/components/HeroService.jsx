@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 
 export default function HeroService() {
   return (
-    <div className="relative lg:min-h-[60vh] overflow-hidden lg:pt-28 pt-20 max-lg:pb-10 bg-[url('/img/heroService-bg.png')] bg-no-repeat bg-cover bg-center max-sm:px-6">
+    <div className="relative lg:min-h-[60vh] overflow-hidden lg:pt-[8%] pt-20 pb-10 lg:pb-20 bg-[url('/img/heroService-bg.png')] bg-no-repeat bg-cover bg-center max-sm:px-6">
       <div className="">
         {/* Main Content */}
-        <div className="relative z-10 flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 lg:pb-20">
+        <div className="relative z-10 flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8">
           {/* Breadcrumb */}
           <nav className="mb-6 max-sm:mb-4 bg-white px-4 py-0.5 rounded-3xl border border-zinc-300">
             <ol className="flex items-center space-x-1 text-xs text-gray-900">
