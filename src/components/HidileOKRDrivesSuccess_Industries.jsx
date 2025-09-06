@@ -1,6 +1,6 @@
 import React from 'react';
 
-const HiDeskOKRDrivesSuccess_Industries = () => {
+const HidileOKRDrivesSuccess_Industries = () => {
   const benefits = [
     {
       title: "Client Management Excellence",
@@ -21,15 +21,15 @@ const HiDeskOKRDrivesSuccess_Industries = () => {
   ];
 
   return (
-    <div className="bg-blue-100/70 py-10 sm:py-12 max-sm:px-3">
+    <div className="bg-blue-100/70 py-10 sm:py-20 max-sm:px-3">
       <div className="max-w-7xl mx-auto max-sm:px-2">
         {/* Main Section Header */}
         <div className="text-center mb-6 lg:mb-8">
           <h1 className="text-xl sm:text-3xl md:text-3xl font-medium text-gray-900 mb-2 lg:mb-3">
-            How HiDesk OKR Drives <br className='lg:hidden'/> Your Success
+            How Hidile OKR Drives <br className='lg:hidden' /> Your Success
           </h1>
           <p className="text-gray-600 text-sm sm:text-base w-full text-center mx-auto leading-relaxed">
-            Discover how HiDeskOKR transforms your CA practice with powerful benefits designed for modern accounting professionals.
+            Discover how HidileOKR transforms your CA practice with powerful benefits designed for modern accounting professionals.
           </p>
         </div>
 
@@ -42,7 +42,7 @@ const HiDeskOKRDrivesSuccess_Industries = () => {
             >
               {/* Blue accent bar on the left */}
               <div className="absolute left-0 top-0 bottom-0 w-1 bg-blue-500"></div>
-              
+
               {/* Content */}
               <div className="lg:p-6 lg:pl-8 p-4 pl-6">
                 {/* Title */}
@@ -63,4 +63,4 @@ const HiDeskOKRDrivesSuccess_Industries = () => {
   );
 };
 
-export default HiDeskOKRDrivesSuccess_Industries;
+export default HidileOKRDrivesSuccess_Industries;

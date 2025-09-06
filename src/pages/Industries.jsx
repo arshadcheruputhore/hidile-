@@ -2,7 +2,7 @@ import React from 'react'
 import HeroIndustries from '../components/HeroIndustries'
 import TrustedBrandsScroll from '../components/TrustedBrandsScroll'
 import Testimonials from '../components/Testimonials'
-import HiDeskOKRDrivesSuccess_Industries from '../components/HiDeskOKRDrivesSuccess_Industries'
+import HidileOKRDrivesSuccess_Industries from '../components/HidileOKRDrivesSuccess_Industries'
 import CAFirms_Industries from '../components/CAFirms_Industries'
 import StreamlinedWorkflowSection from '../components/StreamlinedWorkflow_Industries'
 import AutomatesDailyTasks_Industries from '../components/AutomatesDailyTasks_Industries'
@@ -23,7 +23,7 @@ function Industries() {
 
                     </main>
 
-                    <HiDeskOKRDrivesSuccess_Industries />
+                    <HidileOKRDrivesSuccess_Industries />
 
                     <main className="px-3 sm:px-8 md:px-14 lg:px-32 py-8 sm:py-14 lg:py-16">
 

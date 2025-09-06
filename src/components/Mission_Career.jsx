@@ -47,7 +47,7 @@ function Mission_Career() {
         return () => observer.disconnect();
     }, []);
     return (
-        <section className="">
+        <section className="max-w-7xl mx-auto">
             <div className='mission-section bg-white pt-6 flex max-sm:flex-col justify-between shadow-sm rounded-xl lg:rounded-2xl'>
                 <div className="mb-6 lg:mb-8 w-full lg:w-3/5 lg:pl-10 px-4">
                     <h1 className="text-2xl sm:text-3xl md:text-3xl font-medium text-gray-900 mb-2 lg:mb-3">
@@ -73,9 +73,9 @@ function Mission_Career() {
                         tools that help people work better together
                     </p>
                 </div>
-                <div className="flex flex-col lg:flex-row items-start ">
+                <div className="flex flex-col-reverse max-lg:gap-4 lg:flex-row items-start">
                     {/* Left Content */}
-                    <div className="flex-1 flex items-center justify-center px-2 sm:px-8 lg:px-16">
+                    <div className="flex-1 flex items-center justify-start px-2">
                         <div className="max-w-2xl w-full">
                             {/* Traits List */}
                             <div className="space-y-6 lg:space-y-7">
@@ -92,7 +92,7 @@ function Mission_Career() {
                                     >
                                         {/* Icon */}
                                         <div className="flex-shrink-0 mr-4">
-                                            <div className="w-12 h-12    bg-blue-600 rounded-lg lg:rounded-2xl flex items-center justify-center text-white group-hover:bg-blue-700 shadow-lg">
+                                            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-600 rounded-lg lg:rounded-2xl flex items-center justify-center text-white group-hover:bg-blue-700 shadow-lg">
                                                 {trait.icon}
                                             </div>
                                         </div>
@@ -114,7 +114,7 @@ function Mission_Career() {
 
                     {/* Right Image */}
                     <div className="lg:flex-1 relative overflow-hidden">
-                        <div className="absolute inset-0 lg:relative lg:h-full">
+                        <div className="relative h-full">
                             <img
                                 src="/img/looking_career.png"
                                 alt="Team collaboration"

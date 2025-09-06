@@ -15,7 +15,7 @@ function AboutUs() {
 
         <JourneyTimeline_AboutUs />
 
-        <MeetOurTeam_AboutUs />
+        {/* <MeetOurTeam_AboutUs /> */}
 
         <LocationMap_AboutUs />
       </div>

@@ -73,7 +73,7 @@ function PricingCard_Pricing() {
     ];
 
     return (
-        <section className="-mt-12 lg:-mt-24 ">
+        <section className="-mt-12 lg:-mt-[8%] ">
             <div className="max-w-6xl mx-auto px-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {pricingPlans.map((plan) => {
@@ -81,6 +81,9 @@ function PricingCard_Pricing() {
 
                         return (
                             <div key={plan.id} className="relative group">
+                                {/* Hover background */}
+                                <div className={`absolute inset-0 bg-gradient-to-br from-blue-200 via-blue-600 to-blue-100 rounded-2xl transform rotate-1 scale-95 opacity-0 group-hover:opacity-100 group-hover:scale-100 group-hover:rotate-2 transition-all duration-500 ease-out shadow-xl h-full ${plan.featured ? '-mt-10' : 'mt-0'}`}></div>
+
                                 {/* Main Card */}
                                 <div className={`relative bg-white rounded-2xl p-6 flex flex-col items-center ${plan.featured
                                         ? 'border-2 border-blue-600 lg:-mt-12'

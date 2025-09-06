@@ -3,10 +3,10 @@ import * as React from "react";
 
 function HeroHome() {
   return (
-    <section className="flex flex-col items-center mt-12 w-full max-sm:mt-8 relative max-w-7xl mx-auto">
+    <section className="flex flex-col items-center lg:mt-12 w-full mt-10 relative max-w-7xl mx-auto">
       {/* Top Row Icons */}
-      <div className="max-sm:mb-2 flex max-sm:flex-col justify-between items-center gap-24 max-md:gap-16 max-sm:gap-2 mt-7 relative">
-        <div className="max-sm:order-2 max-sm:absolute left-3 -bottom-12">
+      <div className="flex max-sm:flex-col justify-between items-center lg:gap-24 max-md:gap-16 gap-2 mt-7 relative">
+        <div className="max-sm:order-2 max-sm:absolute left-3 -bottom-13">
           <img src="/img/bell.png" alt="icon" width={60} className="max-sm:w-10 " />
         </div>
 
@@ -62,7 +62,7 @@ function HeroHome() {
           </div>
         </div>
 
-        <div className="max-sm:order-3 max-sm:absolute right-3 -bottom-12">
+        <div className="max-sm:order-3 max-sm:absolute right-3 -bottom-13">
           <img src="/img/statics.png" alt="icon" width={60} className="max-sm:w-10 " />
         </div>
       </div>
@@ -78,8 +78,8 @@ function HeroHome() {
       </div>
 
       {/* Main Content */}
-      <div className="flex flex-col items-center relative z-10 max-sm:mt-12">
-        <h1 className="mb-2.5 text-[40px] font-medium text-center max-sm:text-center text-gray-900 leading-[64px] w-full max-md:text-4xl max-md:leading-relaxed max-sm:mb-2.5 max-sm:text-xl max-sm:px-4">
+      <div className="flex flex-col items-center relative z-10 max-sm:mt-16">
+        <h1 className="mb-2.5 text-[40px] font-semibold text-center max-sm:text-center text-gray-900 leading-[64px] w-full max-md:text-4xl max-md:leading-relaxed max-sm:mb-2.5 max-sm:text-xl max-sm:px-4">
           Define OKRs. Drive Tasks. <br className="max-sm:hidden" />Deliver Outcomes. 
           
         </h1>
@@ -114,7 +114,7 @@ function HeroHome() {
 
 
         {/* Mobile-only icons row */}
-        <div className="hidden max-sm:flex justify-between items-center gap-8 mt-4 w-full px-10">
+        <div className="hidden max-sm:flex justify-between items-center gap-8 mt-12 w-full px-10">
           <div>
             <img src="/img/chess.png" alt="icon" width={48} className="max-sm:w-10 " />
           </div>
@@ -125,7 +125,7 @@ function HeroHome() {
       </div>
 
       {/* Hero Image */}
-      <div className="w-[900px] h-[484px] mt-14 absolute top-full bg-[url('/img/OKRHeroHome.png')] bg-center bg-no-repeat bg-cover max-sm:bg-contain max-lg:w-[700px] max-lg:h-[350px] max-lg:top-[65%] max-md:w-[500px] max-md:h-[250px] max-md:top-[70%] max-sm:w-[100%] max-sm:h-[160px] max-sm:top-full max-sm:mt-8"></div>
+      <div className="lg:w-[900px] lg:h-[484px] lg:mt-40 mt-10 absolute top-full bg-[url('/img/OKRHeroHome.png')] bg-center bg-no-repeat lg:bg-cover bg-contain lg:top-[65%] md:w-[500px] md:h-[250px] md:top-[70%] w-[100%] h-[160px]"></div>
     </section>
   );
 }

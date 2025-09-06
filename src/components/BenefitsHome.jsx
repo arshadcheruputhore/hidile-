@@ -55,7 +55,7 @@ export default function BenefitsHome() {
     ];
 
     return (
-        <section className="sm:pb-20 mt-16 sm:mt-24 bg-gray-50 min-h-screen px-2 max-sm:px-0">
+        <section className="sm:pb-20 mt-16 sm:mt-24 bg-gray-50 px-2 max-sm:px-0">
             <div className="max-w-7xl mx-auto">
                 {/* Header */}
                 <div className="text-center sm:mb-8 mb-6">

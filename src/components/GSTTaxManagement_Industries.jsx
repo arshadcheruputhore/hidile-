@@ -29,22 +29,10 @@ const GSTTaxManagement_Industries = () => {
     <div
       className="relative overflow-hidden bg-blue-100/70 pl-0 lg:pl-32"
     >
-      {/* Mobile background image (content sits above) */}
-      {/* <div
-        className="absolute inset-0 lg:hidden pointer-events-none"
-        aria-hidden="true"
-      >
-        <img
-          src="/img/GST_industries.png"
-          alt=""
-          className="h-full w-full object-cover opacity-20"
-        />
-      </div> */}
-
       <div className="mx-auto relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-3">
           {/* Left Content */}
-          <div className="order-1 pt-10 sm:py-14 max-sm:px-5 lg:col-span-1">
+          <div className="order-1 pt-10 sm:py-20 max-sm:px-5 lg:col-span-1">
             {/* Main Section Header */}
             <div className="mb-6 lg:mb-8">
               <h1 className="text-xl sm:text-3xl md:text-3xl font-medium text-gray-900 mb-2 lg:mb-3 lg:text-nowrap leading-snug">

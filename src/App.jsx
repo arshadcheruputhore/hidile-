@@ -12,11 +12,13 @@ import Blogs from "./pages/Blogs"
 import Careers from "./pages/Careers"
 import AboutUs from "./pages/AboutUs"
 import Pricing from "./pages/Pricing"
+import ScrollToTop from "./utils/ScrollToTop"
 
 function App() {
 
   return (
     <>
+      <ScrollToTop />
       <Routes>
         {/* Layout wraps all “regular” pages */}
         <Route element={<MainLayout />}>

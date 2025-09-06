@@ -1,4 +1,5 @@
 import { ArrowRight, Server, BarChart3, Clock, Monitor, Bot, Smartphone, Code, Shield } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const SeeOurServices = () => {
   const services = [
@@ -70,7 +71,7 @@ const SeeOurServices = () => {
 
   return (
     <section id="services-overview" className="">
-      <div className=" mx-auto">
+      <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-6 lg:mb-8">
           <h2 className="text-xl sm:text-3xl md:text-3xl font-medium text-gray-900 mb-2 lg:mb-3">
@@ -87,7 +88,8 @@ const SeeOurServices = () => {
           {services.map((service, index) => {
             const IconComponent = service.icon;
             return (
-              <div
+              <Link
+                to={'/service-details'}
                 key={index}
                 className={`bg-white relative p-6 max-sm:p-4 rounded-xl shadow-sm border border-zinc-200 hover:shadow-md transition-all duration-300 cursor-pointer group flex flex-col gap-4 lg:gap-5 justify-between`}
               >
@@ -119,7 +121,7 @@ const SeeOurServices = () => {
                     </p>
                   </div>
                 </div>
-              </div>
+              </Link>
             );
           })}
         </div>

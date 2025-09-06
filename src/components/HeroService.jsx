@@ -5,39 +5,39 @@ import { Link } from 'react-router-dom';
 export default function HeroService() {
   return (
     <div className="relative lg:min-h-[60%] overflow-hidden lg:pt-28 pt-20 max-lg:pb-10 bg-[url('/img/heroService-bg.png')] bg-no-repeat bg-cover bg-center max-sm:px-6">
-      
-      {/* Main Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 lg:pb-20">
-        {/* Breadcrumb */}
-        <nav className="mb-6 max-sm:mb-4 bg-white px-4 py-0.5 rounded-3xl border border-zinc-300">
-          <ol className="flex items-center space-x-1 text-xs text-gray-900">
-            <Link to="/" className="hover:underline">
+      <div className="">
+        {/* Main Content */}
+        <div className="relative z-10 flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 lg:pb-20">
+          {/* Breadcrumb */}
+          <nav className="mb-6 max-sm:mb-4 bg-white px-4 py-0.5 rounded-3xl border border-zinc-300">
+            <ol className="flex items-center space-x-1 text-xs text-gray-900">
+              <Link to="/" className="hover:underline">
                 Home
-            </Link>
-            <li>/</li>
-            <li>
+              </Link>
+              <li>/</li>
+              <li>
                 Services
-            </li>
-          </ol>
-        </nav>
-        
-        {/* Hero Content */}
-        <div className="text-center max-w-4xl mx-auto">
-          {/* Main Heading */}
-          <h1 className="text-2xl sm:text-4xl md:text-[40px] font-semibold leading-snug sm:leading-normal tracking-tight text-gray-900 mb-6">
-            Cutting-Edge IT Solutions : Empowering <br />
-            <span className="block">Your Digital Transformation</span>
-          </h1>
-          
-          {/* Subheading */}
-          <p className="text-sm sm:text-base text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
-            Align goals, boost productivity, and achieve measurable results with the most 
-            powerful OKR platform designed for modern hybrid teams.
-          </p>
-          
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 justify-center items-center max-lg:px-4">
-             <a
+              </li>
+            </ol>
+          </nav>
+
+          {/* Hero Content */}
+          <div className="text-center max-w-4xl mx-auto">
+            {/* Main Heading */}
+            <h1 className="text-2xl sm:text-4xl md:text-[40px] font-semibold leading-snug sm:leading-normal tracking-tight text-gray-900 mb-6">
+              Cutting-Edge IT Solutions : Empowering <br />
+              <span className="block">Your Digital Transformation</span>
+            </h1>
+
+            {/* Subheading */}
+            <p className="text-sm sm:text-base text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
+              Align goals, boost productivity, and achieve measurable results with the most
+              powerful OKR platform designed for modern hybrid teams.
+            </p>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 justify-center items-center max-lg:px-4">
+              <a
                 href="/signup"
                 className="inline-flex items-center justify-center rounded-xl bg-blue-600 px-6 py-3 text-sm font-semibold text-white shadow-md hover:bg-blue-700 focus-visible:outline-offset-2 focus-visible:outline-blue-600 transition-colors max-lg:w-full"
               >
@@ -54,6 +54,7 @@ export default function HeroService() {
                 </span>
                 Watch Demo
               </a>
+            </div>
           </div>
         </div>
       </div>

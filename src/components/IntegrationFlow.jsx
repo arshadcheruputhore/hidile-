@@ -4,7 +4,7 @@ function IntegrationFlow() {
     return (
         <>
             {/* Integration Flow */}
-            <div className="mt-16 sm:mt-20">
+            <div className="mt-16 sm:mt-20 max-w-7xl mx-auto">
                 <div className="text-base font-medium text-blue-600 tracking-wide bg-blue-100 flex justify-self-center py-1 px-6 rounded-3xl max-sm:px-5 max-sm:text-sm max-sm:mb-6">Integrate</div>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-y-4 sm:gap-6 place-items-center">
                     {/* Left image */}

@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
-import { ChevronDown, CheckSquare, LayoutTemplate, Calendar, BarChart3, ExternalLink, Workflow, Users, FileText, Settings, Bell, Building2, Car, Heart, Hammer, Factory, Briefcase, Phone } from "lucide-react";
+import { ChevronDown, CheckSquare, LayoutTemplate, Calendar, BarChart3, ExternalLink, Workflow, Users, FileText, Settings, Bell, Building2, Car, Heart, Hammer, Factory, Briefcase, Phone, X } from "lucide-react";
 import hidileLogo from "/img/hidileLogoHeader.png"
 
 
@@ -140,12 +140,13 @@ const NAV = [
     // ],
   },
   { label: "Services", to: "/services" },
+  { label: "Pricing", to: "/pricing" },
   {
     label: "Resources",
     children: [
       {
         icon: CheckSquare,
-        label: "About us",
+        label: "About Us",
         description: "Learn about our company and mission",
         to: "/resources/about-us"
       },
@@ -175,7 +176,6 @@ const NAV = [
       // },
     ],
   },
-  { label: "Pricing", to: "/pricing" },
 ];
 
 export default function Header() {
@@ -197,6 +197,24 @@ export default function Header() {
       setIsMobileMenuOpen(true);
     }
   };
+
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.classList.add('no-scroll');
+      // For better mobile support:
+      document.body.classList.add('no-scroll-mobile');
+    } else {
+      document.body.classList.remove('no-scroll');
+      document.body.classList.remove('no-scroll-mobile');
+    }
+
+    // Cleanup
+    return () => {
+      document.body.classList.remove('no-scroll');
+      document.body.classList.remove('no-scroll-mobile');
+    };
+  }, [isMobileMenuOpen])
+
 
   const handleMouseEnter = (dropdown) => setActiveDropdown(dropdown);
   const handleMouseLeave = () => setActiveDropdown(null);
@@ -229,8 +247,25 @@ export default function Header() {
     }
   };
 
+  // Helper function to check if any child is active
+  const isAnyChildActive = (item, location) => {
+    if (!item.children) return false;
+    return item.children.some(child =>
+      location.pathname === child.to ||
+      (child.end === false && location.pathname.startsWith(child.to))
+    );
+  };
+
+  // Helper function to check if specific child is active
+  const isChildActive = (child, location) => {
+    return location.pathname === child.to ||
+      (child.end === false && location.pathname.startsWith(child.to));
+  };
+
   const renderDesktopNavItem = (item, index) => {
     if (item.children) {
+      const hasActiveChild = isAnyChildActive(item, location);
+
       return (
         <div
           key={index}
@@ -242,31 +277,43 @@ export default function Header() {
             <NavLink
               to={item.to}
               end={item.end}
-              className={({ isActive }) =>
-                `tracking-tight text-sm font-medium transition-colors duration-200 relative group ${isActive ? "text-blue-600" : "text-gray-700 hover:text-blue-600"
-                }`
-              }
+              className={({ isActive }) => {
+                const shouldBeActive = isActive || hasActiveChild;
+                return `tracking-tight text-sm font-medium transition-colors duration-200 relative group ${shouldBeActive ? "text-blue-600" : "text-gray-700 hover:text-blue-600"
+                  }`;
+              }}
             >
-              {({ isActive }) => (
-                <>
-                  {item.label}
-                  <span
-                    className={`absolute -bottom-1 left-0 h-0.5 bg-blue-600 transition-all duration-200 ${isActive ? "w-full" : "w-0 group-hover:w-full"
-                      }`}
-                  />
-                </>
-              )}
+              {({ isActive }) => {
+                const shouldBeActive = isActive || hasActiveChild;
+                return (
+                  <>
+                    {item.label}
+                    <span
+                      className={`absolute -bottom-1 left-0 h-0.5 bg-blue-600 transition-all duration-200 ${shouldBeActive ? "w-full" : "w-0 group-hover:w-full"
+                        }`}
+                    />
+                  </>
+                );
+              }}
             </NavLink>
           ) : (
-            <span className="tracking-tight text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors duration-200 relative group cursor-pointer">
+            <span
+              className={`tracking-tight text-sm font-medium transition-colors duration-200 relative group cursor-pointer ${hasActiveChild ? "text-blue-600" : "text-gray-700 hover:text-blue-600"
+                }`}
+            >
               {item.label}
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-200 group-hover:w-full"></span>
+              <span
+                className={`absolute -bottom-1 left-0 h-0.5 bg-blue-600 transition-all duration-200 ${hasActiveChild ? "w-full" : "w-0 group-hover:w-full"
+                  }`}
+              />
             </span>
           )}
+
           <div className="mt-1 transition-transform duration-200 group-hover:rotate-180">
             <ChevronDown
               size={12}
-              className="text-gray-500 group-hover:text-blue-600 transition-colors duration-200"
+              className={`transition-colors duration-200 ${hasActiveChild ? "text-blue-600" : "text-gray-500 group-hover:text-blue-600"
+                }`}
             />
           </div>
 
@@ -285,20 +332,31 @@ export default function Header() {
               <div className={`grid ${item.label === 'Resources' ? 'grid-cols-1' : 'grid-cols-2'}`}>
                 {item.children.map((child, childIndex) => {
                   const IconComponent = child.icon;
+                  const childIsActive = isChildActive(child, location);
+
                   return (
                     <div
                       key={childIndex}
                       onClick={() => handleDropdownItemClick(child, item.label)}
-                      className="flex items-start gap-4 p-3 rounded-xl hover:bg-blue-50 transition-colors duration-200 cursor-pointer group/item"
+                      className={`flex items-start gap-4 p-3 rounded-xl transition-colors duration-200 cursor-pointer group/item ${childIsActive
+                          ? "bg-blue-50 border-l-2 border-blue-500"
+                          : "hover:bg-blue-50"
+                        }`}
                     >
-                      <div className="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center  transition-colors duration-200">
-                        <IconComponent className="w-5 h-5 text-gray-600" />
+                      <div className={`flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center transition-colors duration-200 ${childIsActive ? "bg-blue-100" : ""
+                        }`}>
+                        <IconComponent
+                          className={`w-5 h-5 transition-colors duration-200 ${childIsActive ? "text-blue-600" : "text-gray-600"
+                            }`}
+                        />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <h4 className="text-sm font-semibold text-gray-900 mb-1 transition-colors duration-200">
+                        <h4 className={`text-sm font-semibold mb-1 transition-colors duration-200 ${childIsActive ? "text-blue-900" : "text-gray-900"
+                          }`}>
                           {child.label}
                         </h4>
-                        <p className="text-xs text-gray-500 leading-relaxed">
+                        <p className={`text-xs leading-relaxed ${childIsActive ? "text-blue-700" : "text-gray-500"
+                          }`}>
                           {child.description}
                         </p>
                       </div>
@@ -369,8 +427,8 @@ export default function Header() {
                     onClick={() => handleDropdownItemClick(child, item.label)}
                     className="flex items-start gap-3 p-3 mx-2 rounded-lg hover:bg-blue-50 transition-colors duration-200 cursor-pointer"
                   >
-                    <div className="flex-shrink-0 w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center">
-                      <IconComponent className="w-4 h-4 text-blue-600" />
+                    <div className="flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center">
+                      <IconComponent className="w-4 h-4 text-gray-600" />
                     </div>
                     <div className="flex-1 min-w-0">
                       <h5 className="text-sm font-medium text-gray-900 mb-1">
@@ -477,12 +535,13 @@ export default function Header() {
           </nav>
 
           <div className="flex items-center gap-5 max-sm:gap-2">
-            <Link
-              to="/login"
+            <a
+              href="https://app.hidile.in/"
+              target="_self"
               className="relative text-sm font-bold text-gray-900 z-[2] cursor-pointer hover:text-blue-600 transition-colors duration-200 max-sm:hidden"
             >
               Log In
-            </Link>
+            </a>
             <Link
               to="/signup"
               className="inline-flex relative gap-2.5 justify-center items-center px-5 py-1.5 bg-blue-600 hover:bg-blue-700 rounded-md z-[2] transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 max-sm:px-3 max-sm:py-1 max-sm:hidden"
@@ -526,6 +585,7 @@ export default function Header() {
             onClick={(e) => e.stopPropagation()}
             style={{ transform: "translateX(-50%)", transformOrigin: "center top" }}
           >
+
             <div className="border-b border-gray-200 pb-4 mb-4">
               {/* Mobile Navigation */}
               <div className="flex flex-col w-full">
@@ -534,13 +594,13 @@ export default function Header() {
             </div>
 
             <div className="flex flex-col gap-3">
-              <Link
-                to="/login"
+              <a
+                href="https://app.hidile.in/"
                 className="inline-flex items-center justify-center px-4 py-2 text-sm font-semibold text-blue-800 bg-blue-50 border border-blue-200 rounded-lg hover:bg-blue-100 hover:text-blue-800 hover:border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 active:bg-blue-200 transition-all duration-200 shadow-sm hover:shadow-md"
                 onClick={toggleMobileMenu}
               >
                 Log In
-              </Link>
+              </a>
               <Link
                 to="/signup"
                 className="inline-flex gap-2.5 justify-center items-center px-5 py-2.5 bg-blue-600 hover:bg-blue-700 rounded-md transition-all duration-200"
@@ -550,6 +610,30 @@ export default function Header() {
               </Link>
             </div>
           </div>
+
+          <div className="fixed top-[25px] left-1/2 transform -translate-x-1/2 z-50">
+            <button
+              onClick={toggleMobileMenu}
+              className="w-10 h-10 flex items-center justify-center bg-gray-100 hover:bg-white rounded-full transition-all duration-200 focus:outline-none"
+              aria-label="Close menu"
+            >
+              <svg
+                className="w-6 h-6 text-gray-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          </div>
+
         </div>
       )}
     </>

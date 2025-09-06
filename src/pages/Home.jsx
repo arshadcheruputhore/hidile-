@@ -16,7 +16,7 @@ function Home() {
   return (
     <div className="bg-gray-50">
 
-      <main className="relative px-32 pb-5 pt-[70px] max-w-full min-h-[100vh] max-md:px-10 max-md:py-5 max-sm:p-4 bg-[linear-gradient(150deg,#F9FCFF_0%,#B8D5FF_40%,#D3E5FF_60%,#0169FD_100%)] rounded-b-3xl max-sm:rounded-b-lg mb-80 max-sm:mb-8">
+      <main className="relative px-32 pb-5 pt-[70px] max-w-full min-h-[100vh] max-md:px-10 max-md:py-5 max-sm:p-4 bg-[linear-gradient(150deg,#F9FCFF_0%,#B8D5FF_40%,#D3E5FF_60%,#0169FD_100%)] rounded-b-3xl max-sm:rounded-b-lg sm:mb-80 mb-0">
         <HeroHome />
       </main>
 

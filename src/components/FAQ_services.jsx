@@ -37,7 +37,7 @@ const FAQ = () => {
 
   return (
     <section className="mt-12 sm:mt-20 px-3 lg:px-24">
-      <div className="mx-auto">
+      <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-6 lg:mb-8">
           <h2 className="text-xl sm:text-3xl md:text-3xl font-medium text-gray-900 mb-2 lg:mb-3">

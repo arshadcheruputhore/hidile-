@@ -5,9 +5,9 @@ const LocationMap_AboutUs = () => {
 
     // Define office locations with approximate positions on the map
     const officeLocations = [
-        { id: 1, name: 'UK Office', x: '47%', y: '32%', delay: '0s' },
-        { id: 2, name: 'India Office', x: '70%', y: '58%', delay: '0.5s' },
-        { id: 3, name: 'Qatar Office', x: '63%', y: '52%', delay: '1s' }
+        { id: 1, name: 'UK Office', x: '48%', y: '29%', delay: '0s' },
+        { id: 2, name: 'India Office', x: '67%', y: '60%', delay: '0.5s' },
+        { id: 3, name: 'Qatar Office', x: '61%', y: '50%', delay: '1s' }
     ];
 
     useEffect(() => {
@@ -100,7 +100,7 @@ const LocationMap_AboutUs = () => {
                                 
                                 {/* Location Label - Hidden on mobile */}
                                 <div className="absolute top-12 left-1/2 transform -translate-x-1/2 hidden sm:block">
-                                    <div className="bg-blue-600 text-white px-3 py-2 rounded-lg text-sm font-medium whitespace-nowrap shadow-lg">
+                                    <div className="bg-blue-600 text-white px-2.5 py-1 rounded-lg text-sm font-medium whitespace-nowrap shadow-lg">
                                         {location.name}
                                         {/* Arrow */}
                                         <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-blue-600 rotate-45"></div>

@@ -76,8 +76,9 @@ const AllServices = () => {
 
   return (
     <div id="all-services-container" className="relative">
-      {/* Mobile Menu Button - positioned relative to AllServices container */}
-      {/* {showMobileButton && ( */}
+      <div className="max-w-7xl mx-auto">
+        {/* Mobile Menu Button - positioned relative to AllServices container */}
+        {/* {showMobileButton && ( */}
         <div className="lg:hidden sticky top-20 right-0 z-40 flex justify-end">
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -86,42 +87,43 @@ const AllServices = () => {
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <List className="w-5 h-5" />}
           </button>
         </div>
-      {/* )} */}
+        {/* )} */}
 
-      {/* Mobile Navigation */}
-      <MobileServicesNav 
-        activeService={activeService} 
-        isOpen={mobileMenuOpen}
-        onToggle={() => setMobileMenuOpen(!mobileMenuOpen)}
-        showButton={showMobileButton}
-      />
+        {/* Mobile Navigation */}
+        <MobileServicesNav
+          activeService={activeService}
+          isOpen={mobileMenuOpen}
+          onToggle={() => setMobileMenuOpen(!mobileMenuOpen)}
+          showButton={showMobileButton}
+        />
 
-      <div className="flex lg:gap-5 {'gap-8'} max-sm:-mt-10 ">
-        {/* Main Content Area */}
-        <div className="flex-1 w-full lg:w-auto">
-          {/* Each service has its own unique component and design */}
-          <EnterpriseCloudSolutions_services />
+        <div className="flex lg:gap-5 {'gap-8'} max-sm:-mt-10 ">
+          {/* Main Content Area */}
+          <div className="flex-1 w-full lg:w-auto">
+            {/* Each service has its own unique component and design */}
+            <EnterpriseCloudSolutions_services />
 
-          <MobileAppDevelopment_services />
+            <MobileAppDevelopment_services />
 
-          <DigitalTransformation_services />
+            <DigitalTransformation_services />
 
-          <ITOutsourcing_services />
+            <ITOutsourcing_services />
 
-          <IntelligentAutomation_services />
+            <IntelligentAutomation_services />
 
-          <RapidPrototyping_services />
+            <RapidPrototyping_services />
 
-          <DataAnalytics_services />
-          
-          <CybersecuritySolutions_services />
-          
-          {/* Add other service components here */}
-        </div>
-        
-        {/* Desktop Sidebar */}
-        <div className="flex-shrink-0">
-          <ServicesSidebar activeService={activeService} />
+            <DataAnalytics_services />
+
+            <CybersecuritySolutions_services />
+
+            {/* Add other service components here */}
+          </div>
+
+          {/* Desktop Sidebar */}
+          <div className="flex-shrink-0">
+            <ServicesSidebar activeService={activeService} />
+          </div>
         </div>
       </div>
     </div>

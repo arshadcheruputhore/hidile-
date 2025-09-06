@@ -31,7 +31,7 @@ const AutomatesDailyTasks_Industries = () => {
         {/* Main Section Header */}
         <div className="mb-6 lg:mb-8">
           <h1 className="text-xl sm:text-3xl md:text-3xl font-medium text-gray-900 mb-2 lg:mb-3">
-            How HiDesk OKR Automates Your Important Daily Routine Tasks
+            How Hidile OKR Automates Your Important Daily Routine Tasks
           </h1>
           <p className="text-gray-600 text-sm sm:text-base text-left leading-relaxed max-w-3xl">
             Save hours every day with intelligent automation that handles routine tasks, so you can focus on high-value client work and strategic growth.
@@ -43,7 +43,7 @@ const AutomatesDailyTasks_Industries = () => {
           {automationFeatures.map((feature, index) => (
             <div
               key={index}
-              className="bg-white rounded-2xl p-4 sm:p-6 border border-zinc-200 hover:shadow-lg transition-shadow duration-300 flex flex-col items-center text-center"
+              className="bg-white rounded-2xl p-4 sm:p-6 border border-blue-200 hover:shadow-lg transition-shadow duration-300 flex flex-col items-center text-center"
             >
               {/* Icon with background */}
               <div className="mb-4 sm:mb-6">

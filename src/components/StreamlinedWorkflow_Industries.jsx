@@ -3,12 +3,12 @@ import { LayoutTemplate, ClipboardCheck, CirclePlay, Hourglass, CircleCheckBig, 
 
 const StreamlinedWorkflow_Industries = () => {
   const workflowSteps = [
-    { icon: <LayoutTemplate className="lg:w-8 lg:h-8 w-5 h-5 text-white" />, title: "Select Templates", description: "Choose from pre-designed templates to get started quickly and efficiently." },
-    { icon: <ClipboardCheck className="lg:w-8 lg:h-8 w-5 h-5 text-white" />, title: "Assign Tasks", description: "Allocate tasks to team members based on their skills and availability." },
-    { icon: <CirclePlay className="lg:w-8 lg:h-8 w-5 h-5 text-white" />, title: "Task Execution", description: "Assigned users start working on tasks with smooth workflow." },
-    { icon: <Hourglass className="lg:w-8 lg:h-8 w-5 h-5 text-white" />, title: "Track Time", description: "Monitor time spent on tasks, ensuring productivity and transparency." },
-    { icon: <CircleCheckBig className="lg:w-8 lg:h-8 w-5 h-5 text-white" />, title: "Complete Tasks", description: "Finalize tasks once completed, ensuring everything meets standards." },
-    { icon: <ShieldCheck className="lg:w-8 lg:h-8 w-5 h-5 text-white" />, title: "Verify Results", description: "Review and verify task completion before final approval." }
+    { icon: <LayoutTemplate className="lg:w-8 lg:h-8 w-5 h-5 text-blue-500 group-hover:text-white transition-colors duration-100" />, title: "Select Templates", description: "Choose from pre-designed templates to get started quickly and efficiently." },
+    { icon: <ClipboardCheck className="lg:w-8 lg:h-8 w-5 h-5 text-blue-500 group-hover:text-white transition-colors duration-100" />, title: "Assign Tasks", description: "Allocate tasks to team members based on their skills and availability." },
+    { icon: <CirclePlay className="lg:w-8 lg:h-8 w-5 h-5 text-blue-500 group-hover:text-white transition-colors duration-100" />, title: "Task Execution", description: "Assigned users start working on tasks with smooth workflow." },
+    { icon: <Hourglass className="lg:w-8 lg:h-8 w-5 h-5 text-blue-500 group-hover:text-white transition-colors duration-100" />, title: "Track Time", description: "Monitor time spent on tasks, ensuring productivity and transparency." },
+    { icon: <CircleCheckBig className="lg:w-8 lg:h-8 w-5 h-5 text-blue-500 group-hover:text-white transition-colors duration-100" />, title: "Complete Tasks", description: "Finalize tasks once completed, ensuring everything meets standards." },
+    { icon: <ShieldCheck className="lg:w-8 lg:h-8 w-5 h-5 text-blue-500 group-hover:text-white transition-colors duration-100" />, title: "Verify Results", description: "Review and verify task completion before final approval." }
   ];
 
   return (
@@ -36,11 +36,12 @@ const StreamlinedWorkflow_Industries = () => {
                 lg:transform will-change-transform
                 lg:even:group-hover:-translate-y-8 lg:odd:group-hover:translate-y-8
                 lg:motion-reduce:transform-none
+                group-hover:border-blue-200
               "
             >
               {/* Icon */}
               <div className="flex justify-center mb-3 lg:mb-6 lg:absolute lg:-top-6 lg:left-1/2 lg:transform lg:-translate-x-1/2">
-                <div className="lg:w-14 lg:h-14 w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center drop-shadow-2xl drop-shadow-blue-50">
+                <div className="lg:w-14 lg:h-14 w-10 h-10 bg-blue-50 rounded-full flex items-center justify-center drop-shadow-2xl drop-shadow-blue-50 group-hover:bg-blue-500 ">
                   {step.icon}
                 </div>
               </div>

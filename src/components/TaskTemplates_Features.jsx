@@ -3,7 +3,7 @@ import React from 'react'
 function TaskTemplates_Features() {
     return (
         <>
-            <section className='mb-12 sm:mb-14'>
+            <section className='mb-12 sm:mb-14 max-w-7xl mx-auto'>
                 <div className="bg-zinc-100 px-8 py-10 rounded-2xl max-md:px-2 max-md:py-5">
                     <h1 className="text-xl sm:text-3xl md:text-3xl font-semibold text-left text-gray-800 leading-tight sm:leading-9 md:leading-[48px]">
                         Task Templates {/* Task Management*/}

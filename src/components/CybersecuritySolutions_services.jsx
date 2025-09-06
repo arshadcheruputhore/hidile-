@@ -87,8 +87,8 @@ const CybersecuritySolutions_services = () => {
           <div className="space-y-3 lg:space-y-4">
             {advantages.map((advantage, index) => (
               <div key={index} className="flex items-start gap-3">
-                <div className="w-5 h-5 sm:w-6 sm:h-6 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <Check className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
+                <div className="w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <Check className="w-3 h-3 text-white" />
                 </div>
                 <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
                   {advantage.text}
