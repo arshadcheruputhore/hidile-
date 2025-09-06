@@ -8,7 +8,7 @@ function IntegrationFlow() {
                 <div className="text-base font-medium text-blue-600 tracking-wide bg-blue-100 flex justify-self-center py-1 px-6 rounded-3xl max-sm:px-5 max-sm:text-sm max-sm:mb-6">Integrate</div>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-y-4 sm:gap-6 place-items-center">
                     {/* Left image */}
-                    <div className="sm:mb-10 max-sm:hidden">
+                    <div className="sm:mb-14 max-sm:hidden">
                         <img
                             src="/img/integrate-left.png"
                             alt="Integrations illustration (left)"

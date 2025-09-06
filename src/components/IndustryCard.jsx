@@ -41,7 +41,7 @@ export default function IndustryCard() {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8 max-sm:mb-6">
-          <h1 className="text-2xl sm:text-3xl font-semibold md:text-4xl text-gray-900 mb-2 sm:mb-2.5 leading-tight">
+          <h1 className="text-2xl sm:text-3xl font-medium md:text-4xl text-gray-900 mb-2 sm:mb-2.5 leading-tight">
             We are everywhere
           </h1>
           <p className="text-gray-600 max-w-2xl mx-auto leading-relaxed text-sm sm:text-base sm:px-0">

@@ -1,5 +1,6 @@
-import { ArrowRight, BarChart3, BarChartIcon, Bell, BotMessageSquare, Calendar, CheckSquare, Files, FileText, FolderKanban, FolderOpen, Grid3x3, Layers, LayoutDashboard, MessagesSquare, Settings, Shuffle, SquareCheckBig, Target, Users } from 'lucide-react';
+import { ArrowRight, BarChart3, BarChartIcon, Bell, BotMessageSquare, Calendar, CheckSquare, Files, FileText, FolderKanban, FolderOpen, Grid3x3, Layers, LayoutDashboard, MessagesSquare, Settings, Shuffle, SquareCheckBig, Target, Users, Workflow } from 'lucide-react';
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function FeaturesPreviewHome() {
     const [activeFeature, setActiveFeature] = useState(0);
@@ -51,7 +52,7 @@ export default function FeaturesPreviewHome() {
             image: '/img/AI_features.png' 
         },
         { 
-            icon: Shuffle, 
+            icon: Workflow, 
             label: 'Workflow', 
             image: '/img/workflow_features.png' 
         }
@@ -62,7 +63,7 @@ export default function FeaturesPreviewHome() {
     };
 
     return (
-        <section className="max-sm:mt-16 pt-14 px-6 max-sm:px-2 bg-[url('/img/GradientFeatures.png')] bg-no-repeat bg-center bg-cover">
+        <section className="max-sm:mt-16 py-8 lg:py-20 px-6 max-sm:px-2 bg-[url('/img/GradientFeatures.png')] bg-no-repeat bg-center bg-cover">
             <div className="max-w-7xl mx-auto">
                 {/* Header */}
                 <div className="text-center">
@@ -117,12 +118,12 @@ export default function FeaturesPreviewHome() {
                   opacity-30 blur-[15px] sm:blur-[25px]"></div>
 
                         {/* Content */}
-                        <div className="relative z-10 p-8 sm:p-10 md:p-14">
+                        <div className="relative z-10 pt-8 sm:pt-10 md:pt-14">
                             <div className="text-center">
-                                <button className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-gray-200 font-medium px-4 py-2.5 sm:px-6 sm:py-3 rounded-xl shadow-lg shadow-blue-500/30 transition-all duration-300 text-sm sm:text-base">
+                                <Link to={'/features'} className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-gray-200 font-medium px-4 py-2.5 sm:px-6 sm:py-3 rounded-xl shadow-lg shadow-blue-500/30 transition-all duration-300 text-sm sm:text-base">
                                     Explore more
                                     <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
-                                </button>
+                                </Link>
                             </div>
                         </div>
                     </div>

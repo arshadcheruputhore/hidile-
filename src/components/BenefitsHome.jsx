@@ -114,7 +114,7 @@ export default function BenefitsHome() {
                     {/* Main Heading */}
                     <h1 className="md:text-[40px] font-medium max-sm:text-left text-gray-900 leading-[48px] mt-4 sm:mt-6 text-2xl max-md:leading-9 max-sm:leading-8 max-sm:mt-4 mb-2 sm:mb-2.5">
                         Everything a Team {" "}
-                        <br className='max-sm:hidden' />
+                        {/* <br className='max-sm:hidden' /> */}
                         Needs
                     </h1>
 

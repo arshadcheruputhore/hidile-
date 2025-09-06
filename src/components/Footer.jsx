@@ -1,14 +1,15 @@
 import React from "react";
 import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Youtube } from 'lucide-react';
+import { Link } from "react-router-dom";
 
 export default function Footer() {
     return (
         <>
             <section className="bg-[#240029] text-white">
                 {/* Desktop Layout - Enhanced for XL devices */}
-                <div className="hidden lg:flex items-center">
+                <div className="hidden lg:flex items-center justify-start ml-32 relative py-24">
                     {/* Left Content */}
-                    <div className="text-left pb-20 pt-24 pl-28 w-2/3">
+                    <div className="text-left max-w-4xl">
                         <h1 className="text-[40px] font-bold leading-tight mb-4">
                             Get started with <br />
                             <span className="font-bold">Hidile OKR today</span>
@@ -23,7 +24,7 @@ export default function Footer() {
                     </div>
 
                     {/* Right Content (Image placeholder) */}
-                    <div className="flex justify-end items-end w-full h-full self-end">
+                    <div className="absolute right-0 bottom-0 max-w-4xl">
                         <img
                             src="/img/footer-img.png"
                             alt="OKR-Dashboard Preview"
@@ -96,9 +97,9 @@ export default function Footer() {
                         <div className="text-left sm:text-left max-sm:col-span-2">
                             <h3 className="font-semibold mb-3 lg:mb-4 text-base lg:text-lg">Resources</h3>
                             <ul className="space-y-1.5 lg:space-y-2 text-gray-300/80 text-sm lg:text-base">
-                                <li className="w-max hover:text-gray-200 transition-colors duration-300 cursor-pointer">About Us</li>
-                                <li className="w-max hover:text-gray-200 transition-colors duration-300 cursor-pointer">Blog</li>
-                                <li className="w-max hover:text-gray-200 transition-colors duration-300 cursor-pointer">Support</li>
+                                <li><Link to={'/resources/about-us'} className="w-max hover:text-gray-200 transition-colors duration-300 cursor-pointer">About Us</Link></li>
+                                <li><Link to={'/resources/blogs'} className="w-max hover:text-gray-200 transition-colors duration-300 cursor-pointer">Blog</Link></li>
+                                <li><Link to={'/resources/contact-us'} className="w-max hover:text-gray-200 transition-colors duration-300 cursor-pointer">Support</Link></li>
                             </ul>
                         </div>
 

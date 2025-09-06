@@ -18,7 +18,7 @@ export default function HeroIndustries() {
         </div>
 
         {/* Main Content */}
-        <div className="relative z-10 flex flex-col items-center justify-center px-2 sm:px-6 lg:px-8 lg:pb-20">
+        <div className="relative z-10 flex flex-col items-center justify-center px-2 sm:px-6 lg:px-8 lg:pb-20 my-auto">
           {/* Breadcrumb */}
           <nav className="mb-6 max-sm:mb-4 bg-white px-4 py-0.5 rounded-3xl border border-zinc-300">
             <ol className="flex items-center space-x-1 text-xs text-gray-900">

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 export default function HeroService() {
   return (
-    <div className="relative lg:min-h-[60%] overflow-hidden lg:pt-28 pt-20 max-lg:pb-10 bg-[url('/img/heroService-bg.png')] bg-no-repeat bg-cover bg-center max-sm:px-6">
+    <div className="relative lg:min-h-[60vh] overflow-hidden lg:pt-28 pt-20 max-lg:pb-10 bg-[url('/img/heroService-bg.png')] bg-no-repeat bg-cover bg-center max-sm:px-6">
       <div className="">
         {/* Main Content */}
         <div className="relative z-10 flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 lg:pb-20">
