@@ -1,9 +1,12 @@
 import { Calendar, Clock, ArrowRight, Tag, Grid, List, LayoutGrid } from 'lucide-react';
 import React, { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom';
 
 function BlogCards_Blogs() {
     const [viewMode, setViewMode] = useState('grid'); // 'grid' or 'list'
     const [activeCategory, setActiveCategory] = useState('All Posts');
+
+    const navigate = useNavigate();
 
     const blogPosts = [
         {
@@ -22,7 +25,55 @@ function BlogCards_Blogs() {
             title: 'How to Set Up Your First Project in Hidile OKR',
             description: 'Learn how to prioritize your tasks effectively to focus on what truly matters',
             date: 'Jul 10, 2023',
-            readTime: '8 min read'
+            readTime: '8 min read',
+            // Add author and content for blogs that have detailed content
+            author: {
+                name: "John Doe",
+                role: "Founder of Hidile OKR",
+                bio: "As the founder of Hidile OKR, I bring over a decade of experience in SaaS, having developed MillionVerifier and SAAS-First. I'm deeply passionate about SaaS, data, and AI. If you share a similar ambition for success, let's connect!"
+            },
+            content: {
+                intro: "Getting started with a new tool can feel overwhelming, especially when it's about something as crucial as managing your goals and projects. That's why we built Hidile OKR — to make setting objectives, tracking progress, and achieving results as simple and effective as possible.",
+                description: "In this guide, we'll walk you through how to set up your first project in Hidile OKR step by step. By the end, you'll have a live project with clear objectives and measurable results, ready to move your team forward.",
+                sections: [
+                    {
+                        title: "Step 1: Log in to Hidile OKR & Access the Dashboard",
+                        content: "Once you log into Hidile OKR, you'll land on the dashboard. This is your control center, where you can see company-wide objectives, team OKRs, and personal contributions. To create a project, navigate to the sidebar menu and select 'Projects.' This section is dedicated to tracking initiatives that support your objectives.",
+                        tip: "If you don't have an account yet, start for free and explore the demo workspace to get familiar with the interface."
+                    },
+                    
+                    {
+                        title: "Step 2: Create a New Project",
+                        content: "Click the “+ New Project” button to get started. You’ll be prompted to enter details such as the project name, owner, start and end dates, and a short description. Be clear and concise—your project name should reflect the initiative’s purpose, and the description should explain how it connects to your key results. For example, if your objective is “Improve Customer Satisfaction,” your project could be “Redesign Customer Support Portal.”",
+                    },
+
+                    {
+                        title: "Step 3: Align the Project with OKRs",
+                        content: "One of the strengths of Hidile OKR is its alignment feature. After creating your project, you can link it directly to specific objectives and key results. This ensures that everyone understands why the project exists and how it contributes to larger goals. Alignment not only boosts clarity but also helps in progress tracking and reporting.",
+                    },
+
+                    {
+                        title: "Step 4: Add Tasks and Milestones",
+                        content: "Projects become actionable when broken down into smaller tasks. Within the project space, you can create milestones and assign tasks to team members. Each task should have a deadline and clear ownership to avoid confusion. For example, under the “Redesign Customer Support Portal” project, milestones could include “User Research,” “Prototype Design,” and “Portal Launch.”",
+                    },
+
+                    {
+                        title: "Step 5: Assign Owners and Collaborators",
+                        content: "Ownership drives accountability. Every project in Hidile OKR should have a primary owner responsible for overseeing progress. However, collaboration is equally important—so you can add contributors who will execute specific tasks. This combination ensures that the project stays on track while encouraging teamwork.",
+                    },
+
+                    {
+                        title: "Step 6: Track Progress and Update Regularly",
+                        content: "As the project moves forward, updating progress is crucial. Hidile OKR provides progress bars and status indicators so that teams can visualize how far along a project is. Regular check-ins, status updates, and reviews help identify bottlenecks early and ensure alignment with objectives. Remember, a project isn’t just about finishing tasks; it’s about making measurable contributions to your OKRs.",
+                    },
+
+                    {
+                        title: "Step 7: Review and Reflect",
+                        content: "At the end of the project, take time to review the outcomes. Did it contribute effectively to your key results? Were deadlines met? What could be improved for next time? Hidile OKR allows you to generate reports and insights, making reflection a structured process. This not only helps with continuous improvement but also builds confidence for tackling bigger initiatives in the future.",
+                    },
+                ],
+                conclusion: "Setting up your first project in Hidile OKR may feel like a small step, but it's a powerful way to turn strategy into action..."
+            }
         },
         {
             id: 3,
@@ -44,12 +95,31 @@ function BlogCards_Blogs() {
         },
         {
             id: 5,
-            image: '/img/dummyBlogCard.png',
-            category: 'Strategy',
+            image: '/img/dummyBlogCard2.png',
+            category: 'Workflows',
             title: 'How to Set Up Your First Project in Hidile OKR',
             description: 'Learn how to prioritize your tasks effectively to focus on what truly matters',
-            date: 'Jul 15, 2023',
-            readTime: '8 min read'
+            date: 'Jul 10, 2023',
+            readTime: '8 min read',
+            // Add author and content for blogs that have detailed content
+            author: {
+                name: "John Doe",
+                role: "Founder of Hidile OKR",
+                bio: "As the founder of Hidile OKR, I bring over a decade of experience in SaaS, having developed MillionVerifier and SAAS-First. I'm deeply passionate about SaaS, data, and AI. If you share a similar ambition for success, let's connect!"
+            },
+            content: {
+                intro: "Getting started with a new tool can feel overwhelming, especially when it's about something as crucial as managing your goals and projects. That's why we built Hidile OKR — to make setting objectives, tracking progress, and achieving results as simple and effective as possible.",
+                description: "In this guide, we'll walk you through how to set up your first project in Hidile OKR step by step. By the end, you'll have a live project with clear objectives and measurable results, ready to move your team forward.",
+                sections: [
+                    {
+                        title: "Step 1: Log in to Hidile OKR & Access the Dashboard",
+                        content: "Once you log into Hidile OKR, you'll land on the dashboard. This is your control center, where you can see company-wide objectives, team OKRs, and personal contributions. To create a project, navigate to the sidebar menu and select 'Projects.' This section is dedicated to tracking initiatives that support your objectives.",
+                        tip: "If you don't have an account yet, start for free and explore the demo workspace to get familiar with the interface."
+                    }
+                    // ... add more sections as needed
+                ],
+                conclusion: "Setting up your first project in Hidile OKR may feel like a small step, but it's a powerful way to turn strategy into action..."
+            }
         },
         {
             id: 6,
@@ -80,13 +150,32 @@ function BlogCards_Blogs() {
         },
         {
             id: 9,
-            image: '/img/dummyBlogCard.png',
-            category: 'Analytics & Insights',
+            image: '/img/dummyBlogCard2.png',
+            category: 'Workflows',
             title: 'How to Set Up Your First Project in Hidile OKR',
             description: 'Learn how to prioritize your tasks effectively to focus on what truly matters',
             date: 'Jul 10, 2023',
-            readTime: '8 min read'
-        }
+            readTime: '8 min read',
+            // Add author and content for blogs that have detailed content
+            author: {
+                name: "John Doe",
+                role: "Founder of Hidile OKR",
+                bio: "As the founder of Hidile OKR, I bring over a decade of experience in SaaS, having developed MillionVerifier and SAAS-First. I'm deeply passionate about SaaS, data, and AI. If you share a similar ambition for success, let's connect!"
+            },
+            content: {
+                intro: "Getting started with a new tool can feel overwhelming, especially when it's about something as crucial as managing your goals and projects. That's why we built Hidile OKR — to make setting objectives, tracking progress, and achieving results as simple and effective as possible.",
+                description: "In this guide, we'll walk you through how to set up your first project in Hidile OKR step by step. By the end, you'll have a live project with clear objectives and measurable results, ready to move your team forward.",
+                sections: [
+                    {
+                        title: "Step 1: Log in to Hidile OKR & Access the Dashboard",
+                        content: "Once you log into Hidile OKR, you'll land on the dashboard. This is your control center, where you can see company-wide objectives, team OKRs, and personal contributions. To create a project, navigate to the sidebar menu and select 'Projects.' This section is dedicated to tracking initiatives that support your objectives.",
+                        tip: "If you don't have an account yet, start for free and explore the demo workspace to get familiar with the interface."
+                    }
+                    // ... add more sections as needed
+                ],
+                conclusion: "Setting up your first project in Hidile OKR may feel like a small step, but it's a powerful way to turn strategy into action..."
+            }
+        },
     ];
 
     const categories = [
@@ -103,6 +192,15 @@ function BlogCards_Blogs() {
     const filteredPosts = activeCategory === 'All Posts'
         ? blogPosts
         : blogPosts.filter(post => post.category === activeCategory);
+
+    const handleBlogClick = (blog) => {
+        navigate(`/blogs/${blog.id}`, {
+            state: { 
+                blogPosts: blogPosts,
+                selectedBlog: blog 
+            }
+        })
+    }
 
     return (
         <section className="mt-12 lg:mt-20">
@@ -162,7 +260,7 @@ function BlogCards_Blogs() {
                 {viewMode === 'grid' ? (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {filteredPosts.map((post) => (
-                            <div key={post.id} className="bg-white rounded-xl border border-gray-200 border-b-2 hover:border-b-blue-500 overflow-hidden hover:shadow-md transition-all duration-500">
+                            <div onClick={() => handleBlogClick(post)} className="bg-white rounded-xl border border-gray-200 border-b-2 hover:border-b-blue-500 overflow-hidden hover:shadow-md transition-all duration-500">
                                 {/* Image */}
                                 <div className="relative h-48 w-full bg-gray-100">
                                     <img
@@ -218,7 +316,7 @@ function BlogCards_Blogs() {
                     /* Blog Posts List */
                     <div className="space-y-4">
                         {filteredPosts.map((post) => (
-                            <div key={post.id} className="bg-white rounded-xl border border-gray-200  border-r-2 hover:border-r-blue-500 overflow-hidden hover:shadow-md transition-all duration-500">
+                            <div onClick={() => handleBlogClick(post)} key={post.id} className="bg-white rounded-xl border border-gray-200  border-r-2 hover:border-r-blue-500 overflow-hidden hover:shadow-md transition-all duration-500">
                                 <div className="flex flex-col sm:flex-row">
                                     {/* Image */}
                                     <div className="w-full sm:w-48 h-32 sm:h-auto bg-gray-50 flex items-center justify-center flex-shrink-0">

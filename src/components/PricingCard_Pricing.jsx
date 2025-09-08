@@ -1,5 +1,6 @@
 import { ThumbsUp, Star, Building2, Check, X } from 'lucide-react';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function PricingCard_Pricing() {
     const pricingPlans = [
@@ -73,7 +74,7 @@ function PricingCard_Pricing() {
     ];
 
     return (
-        <section className="-mt-12 lg:-mt-[3%] ">
+        <section className="-mt-12 lg:-mt-[6%] ">
             <div className="max-w-6xl mx-auto px-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {pricingPlans.map((plan) => {
@@ -112,7 +113,7 @@ function PricingCard_Pricing() {
                                     </div>
 
                                     {/* Description */}
-                                    <p className={`text-gray-600 leading-relaxed text-center text-sm mb-4 lg:mb-12 lg:mb-6"}`}>{plan.description}</p>
+                                    <p className={`text-gray-600 leading-relaxed text-center text-sm mb-4 lg:mb-8 inline-block"}`}>{plan.description}</p>
 
                                     {/* Features List */}
                                     <div className="space-y-3 mb-8 self-start">
@@ -132,9 +133,9 @@ function PricingCard_Pricing() {
                                     </div>
 
                                     {/* CTA Button */}
-                                    <button className={`w-full py-3 px-4 rounded-xl font-medium text-sm transition-colors duration-200 ${plan.buttonStyle}`}>
+                                    <Link to={'/reach-us'} className={`w-full py-3 px-4 rounded-xl font-medium text-sm transition-colors duration-200 text-center ${plan.buttonStyle}`}>
                                         {plan.buttonText}
-                                    </button>
+                                    </Link>
                                 </div>
                             </div>
                         );

@@ -15,7 +15,7 @@ const StreamlinedWorkflow_Industries = () => {
     <div className="mb-20 max-sm:mb-14">
       <div className="max-w-7xl mx-auto max-sm:px-2">
         {/* Main Section Header */}
-        <div className="mb-6 lg:mb-8">
+        <div className="mb-8 lg:mb-16">
           <h1 className="text-xl sm:text-3xl md:text-3xl font-medium text-gray-900 mb-2 lg:mb-3">
             Streamlined Work Management Flow
           </h1>
@@ -25,7 +25,7 @@ const StreamlinedWorkflow_Industries = () => {
         </div>
 
         {/* Workflow Steps Grid (parent is the hover target) */}
-        <div className="group grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6 lg:gap-5">
+        <div className="group grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6 lg:gap-5 max-sm:px-3">
           {workflowSteps.map((step, index) => (
             <div
               key={index}

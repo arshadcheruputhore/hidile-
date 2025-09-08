@@ -45,13 +45,13 @@ export default function HeroIndustries() {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 justify-center items-center max-lg:px-4">
-              <a
-                href="/signup"
+              <Link
+                to={"/reach-us"}
                 className="inline-flex items-center justify-center rounded-xl bg-blue-600 px-6 py-3 text-sm font-semibold text-white shadow-md hover:bg-blue-700 focus-visible:outline-offset-2 focus-visible:outline-blue-600 transition-colors max-lg:w-full"
               >
                 <ArrowRight className="h-4 w-4 mr-2" />
                 Get Started Now
-              </a>
+              </Link>
 
               <a
                 href="/demo"

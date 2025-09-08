@@ -543,7 +543,7 @@ export default function Header() {
               Log In
             </a>
             <Link
-              to="/signup"
+              to="/reach-us"
               className="inline-flex relative gap-2.5 justify-center items-center px-5 py-1.5 bg-blue-600 hover:bg-blue-700 rounded-md z-[2] transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 max-sm:px-3 max-sm:py-1 max-sm:hidden"
             >
               <span className="text-sm tracking-wide font-medium text-white max-sm:text-xs">
@@ -611,14 +611,14 @@ export default function Header() {
             </div>
           </div>
 
-          <div className="fixed top-[25px] left-1/2 transform -translate-x-1/2 z-50">
+          <div className={`fixed top-[25px] left-1/2 transform -translate-x-1/2 z-50 transition-all duration-300 ${toggleMobileMenu ? 'opacity-100 translate-y-0' : '-translate-y-16 opacity-0'}`}>
             <button
               onClick={toggleMobileMenu}
-              className="w-10 h-10 flex items-center justify-center bg-gray-100 hover:bg-white rounded-full transition-all duration-200 focus:outline-none"
+              className={`w-10 h-10 flex items-center justify-center bg-black/20 hover:bg-white rounded-full transition-all duration-200 focus:outline-none`}
               aria-label="Close menu"
             >
               <svg
-                className="w-6 h-6 text-gray-600"
+                className="w-6 h-6 text-white"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"

@@ -13,6 +13,8 @@ import Careers from "./pages/Careers"
 import AboutUs from "./pages/AboutUs"
 import Pricing from "./pages/Pricing"
 import ScrollToTop from "./utils/ScrollToTop"
+import BlogSinglePage from "./pages/BlogSinglePage"
+import ContactGetStarted from "./pages/ContactGetStarted"
 
 function App() {
 
@@ -34,6 +36,8 @@ function App() {
             <Route path="blogs" element={<Blogs />} />
             <Route path="careers" element={<Careers />} />
           </Route>
+          <Route path="blogs/:blogId" element={<BlogSinglePage />} />
+          <Route path="reach-us" element={<ContactGetStarted />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

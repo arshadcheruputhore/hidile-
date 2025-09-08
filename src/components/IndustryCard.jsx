@@ -37,7 +37,7 @@ function Card({ icon: Icon, bgColor, iconColor, title, description }) {
 
 export default function IndustryCard() {
   return (
-    <section className="sm:mt-16 mt-12 sm:px-3 px-1">
+    <section className="sm:mt-10 mt-8 sm:px-3 px-1">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8 max-sm:mb-6">

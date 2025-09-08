@@ -103,11 +103,9 @@ export default function FeaturesPreviewHome() {
                 <div className="max-w-5xl mx-auto px-2 sm:px-4 md:px-8">
                     <div className="px-4 sm:px-8 md:px-14 w-full mx-auto mt-6 sm:mt-8 rounded-lg sm:rounded-[20px] border border-white bg-white/40 shadow-[0_5px_10px_0_rgba(0,0,0,0.10)] backdrop-blur-[17.5px]">
                         <div 
-                            className="rounded-xl bg-contain bg-no-repeat bg-center aspect-[16/9] w-full transition-all duration-500 ease-in-out"
-                            style={{ 
-                                backgroundImage: `url('${features[activeFeature].image}')` 
-                            }}
+                            className="rounded-xl aspect-[16/9] w-full transition-all duration-500 ease-in-out"
                         >
+                            <img src={features[activeFeature].image} alt="okr-img" className='object-contain object-center w-full h-full' />
                         </div>
                     </div>
 

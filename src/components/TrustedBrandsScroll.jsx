@@ -3,36 +3,19 @@ import React from 'react';
 const TrustedBrandsScroll = () => {
   // Brand logos data
   const topRowBrands = [
-    { name: 'mparticle', logo: '🔲', colors: 'from-gray-800 to-black' },
-    { name: 'loom', logo: '🌟', colors: 'from-purple-500 to-blue-500' },
-    { name: 'pendo', logo: '🚀', colors: 'from-pink-500 to-red-500' },
-    { name: 'Optimizely', logo: '⚡', colors: 'from-blue-500 to-cyan-500' },
-    { name: 'draftbit', logo: '📦', colors: 'from-purple-600 to-indigo-600' },
-    { name: 'Typedream', logo: '🎨', colors: 'from-pink-500 to-purple-600' },
-    // Duplicate for seamless scroll
-    { name: 'mparticle', logo: '🔲', colors: 'from-gray-800 to-black' },
-    { name: 'loom', logo: '🌟', colors: 'from-purple-500 to-blue-500' },
-    { name: 'pendo', logo: '🚀', colors: 'from-pink-500 to-red-500' },
-    { name: 'Optimizely', logo: '⚡', colors: 'from-blue-500 to-cyan-500' },
-    { name: 'draftbit', logo: '📦', colors: 'from-purple-600 to-indigo-600' },
-    { name: 'Typedream', logo: '🎨', colors: 'from-pink-500 to-purple-600' }
+    {img: '/img/englishHouse_scroll.png', alt: 'english House' },
+    {img: '/img/usaBadge_scroll.png', alt: 'usa badge'},
+    {img: '/img/pentrack_scroll.png', alt: 'pentrack'},
+    {img: '/img/pkmathew_scroll.png', alt: 'pk mathew'},
+    {img: '/img/Impeters_scroll.png', alt: 'Impeters'},
+    {img: '/img/Flexi_scroll.png', alt: 'flexi' },
+    {img: '/img/Madre_scroll.jpg', alt: 'Madre'},
+    {img: '/img/genfam_scroll.jpeg', alt: 'Genfam'},
+    {img: '/img/edraak_scroll.png', alt: 'Edraak'},
+    {img: '/img/Billshoper_scroll.png', alt: 'Billshoper'},
   ];
 
-  const bottomRowBrands = [
-    { name: 'Notion', logo: '📝', colors: 'from-gray-700 to-gray-900' },
-    { name: 'Figma', logo: '🎯', colors: 'from-purple-500 to-pink-500' },
-    { name: 'Slack', logo: '💬', colors: 'from-green-500 to-teal-500' },
-    { name: 'Airtable', logo: '📊', colors: 'from-orange-500 to-yellow-500' },
-    { name: 'Webflow', logo: '🌊', colors: 'from-blue-600 to-purple-600' },
-    { name: 'Linear', logo: '📐', colors: 'from-indigo-500 to-blue-500' },
-    // Duplicate for seamless scroll
-    { name: 'Notion', logo: '📝', colors: 'from-gray-700 to-gray-900' },
-    { name: 'Figma', logo: '🎯', colors: 'from-purple-500 to-pink-500' },
-    { name: 'Slack', logo: '💬', colors: 'from-green-500 to-teal-500' },
-    { name: 'Airtable', logo: '📊', colors: 'from-orange-500 to-yellow-500' },
-    { name: 'Webflow', logo: '🌊', colors: 'from-blue-600 to-purple-600' },
-    { name: 'Linear', logo: '📐', colors: 'from-indigo-500 to-blue-500' }
-  ];
+  const scrollBrands = [...topRowBrands, ...topRowBrands]
 
   return (
     <div className="w-full overflow-hidden relative mt-12 sm:mt-16 max-w-7xl mx-auto">
@@ -46,19 +29,14 @@ const TrustedBrandsScroll = () => {
 
       {/* Top Row - Scrolling Right */}
       <div className="relative mb-6 sm:mb-8 overflow-hidden">
-        <div className="flex gap-4 sm:gap-4 animate-scroll-right">
-          {topRowBrands.map((brand, index) => (
+        <div className="flex gap-4 sm:gap-6 animate-scroll-left">
+          {scrollBrands.map((brand, index) => (
             <div
-              key={`top-${brand.name}-${index}`}
+              key={`top-${brand.alt}-${index}`}
               className="flex-shrink-0"
             >
-              <div className="flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-3 sm:py-4 rounded-lg bg-gray-100 min-w-[160px] sm:min-w-[200px]">
-                <div className={`w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br ${brand.colors} rounded-lg sm:rounded-xl flex items-center justify-center text-white`}>
-                  <span className="text-sm sm:text-lg">{brand.logo}</span>
-                </div>
-                <div className="font-semibold text-gray-800 text-sm sm:text-lg">
-                  {brand.name}
-                </div>
+              <div className="flex items-center justify-center rounded-lg bg-gray-100 min-w-[160px] sm:min-w-[180px] min-h-16">
+                <img src={brand.img} alt={brand.alt} className=' w-24 h-10 sm:w-28 sm:h-14 object-contain object-center' />
               </div>
             </div>
           ))}
@@ -66,25 +44,20 @@ const TrustedBrandsScroll = () => {
       </div>
 
       {/* Bottom Row - Scrolling Left */}
-      <div className="relative overflow-hidden">
+      {/* <div className="relative overflow-hidden">
         <div className="flex gap-2 sm:gap-4 animate-scroll-left">
           {bottomRowBrands.map((brand, index) => (
             <div
-              key={`bottom-${brand.name}-${index}`}
+              key={`bottom-${brand.alt}-${index}`}
               className="flex-shrink-0"
             >
               <div className="flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-3 sm:py-4 rounded-lg bg-gray-100 min-w-[160px] sm:min-w-[200px]">
-                <div className={`w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br ${brand.colors} rounded-lg sm:rounded-xl flex items-center justify-center text-white shadow-md`}>
-                  <span className="text-sm sm:text-lg">{brand.logo}</span>
-                </div>
-                <div className="font-semibold text-gray-800 text-sm sm:text-lg">
-                  {brand.name}
-                </div>
+               <img src={brand.img} alt={brand.alt} className='w-28 h-14 object-contain object-center' />
               </div>
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
 
       {/* Gradient overlays for fade effect */}
       {/* Left Fade */}
@@ -118,11 +91,11 @@ const TrustedBrandsScroll = () => {
         }
         
         .animate-scroll-right {
-          animation: scroll-right 30s linear infinite;
+          animation: scroll-right 20s linear infinite;
         }
         
         .animate-scroll-left {
-          animation: scroll-left 35s linear infinite;
+          animation: scroll-left 20s linear infinite;
         }
       `}</style>
     </div>

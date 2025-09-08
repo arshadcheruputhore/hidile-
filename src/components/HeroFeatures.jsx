@@ -1,8 +1,18 @@
 // src/sections/FeaturesHero.jsx
 import { ArrowRight, Play } from "lucide-react";
 import { Link } from "react-router-dom";
+import { WatchDemoModal } from "./WatchDemoModal";
+import { WatchDemoButton } from "./WatchDemoButton";
+import { useState } from "react";
 
 export default function HeroFeatures() {
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const videoId = "aeRYRXyd1Cs"; // Extracted from your YouTube URL
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
   return (
     <section className="relative overflow-hidden w-full max-w-7xl mx-auto">
       {/* Mobile background image */}
@@ -24,7 +34,7 @@ export default function HeroFeatures() {
         ))}
       </div>
 
-      <div className="w-full px-4 sm:px-2 lg:pt-20 py-10 sm:pb-16 md:pb-20 mt-10">
+      <div className="w-full px-4 sm:px-2 lg:pt-[6%] py-10 sm:pb-16 md:pb-20 pt-20">
         <div className="grid items-center lg:grid-cols-12">
           {/* LEFT: headline + text + CTAs */}
           <div className="lg:col-span-6 xl:col-span-5 relative z-10">
@@ -51,23 +61,15 @@ export default function HeroFeatures() {
             </p>
 
             <div className="max-sm:px-8 flex flex-col gap-2 sm:gap-3 sm:flex-row sm:items-center justify-center sm:justify-start">
-              <a
-                href="/signup"
+              <Link
+                to={"/reach-us"}
                 className="inline-flex items-center justify-center rounded-xl bg-blue-600 px-6 py-3 text-sm font-semibold text-white shadow-md hover:bg-blue-700 focus-visible:outline-offset-2 focus-visible:outline-blue-600 transition-colors"
               >
                 <ArrowRight className="h-4 w-4 mr-2" />
                 Get Started Now
-              </a>
+              </Link>
 
-              <a
-                href="/demo"
-                className="inline-flex items-center justify-center rounded-xl border border-blue-500/50 bg-white/90 px-6 py-3 text-sm font-semibold text-blue-600 hover:bg-blue-50 backdrop-blur-sm transition-colors"
-              >
-                <span className="mr-2 inline-flex h-5 w-5 items-center justify-center rounded-full">
-                  <Play className="h-3.5 w-3.5" />
-                </span>
-                Watch Demo
-              </a>
+              <WatchDemoButton onClick={openModal} />
             </div>
           </div>
 
@@ -89,6 +91,12 @@ export default function HeroFeatures() {
           </div>
         </div>
       </div>
+
+      <WatchDemoModal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        videoId={videoId}
+      />
     </section>
   );
 }

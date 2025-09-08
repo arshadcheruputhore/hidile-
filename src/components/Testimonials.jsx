@@ -26,7 +26,7 @@ function Testimonials() {
   ];
 
   return (
-    <section className="pt-12 sm:pt-16 lg:pt-20 pb-4 sm:pb-2">
+    <section className="pt-8 lg:pt-10 pb-4 sm:pb-2">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-6 sm:mb-8">

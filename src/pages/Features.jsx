@@ -13,7 +13,7 @@ function Features() {
             <div className=" ">
                 <HeroFeatures />
 
-                <main className="px-3 sm:px-8 md:px-14 lg:px-24 py-8 sm:py-14 lg:py-16">
+                <main className="px-2 sm:px-8 md:px-14 lg:px-24 py-8 sm:py-14 lg:py-16">
                     <TaskTemplates_Features />
 
                     <TeamManagement_Features />

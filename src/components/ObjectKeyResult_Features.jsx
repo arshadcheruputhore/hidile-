@@ -4,8 +4,8 @@ function ObjectKeyResult_Features() {
     return (
         <>
             <section className='mb-12 sm:mb-14 max-w-7xl mx-auto'>
-                <div className="bg-zinc-100 px-8 py-10 rounded-2xl max-md:px-2 max-md:py-5">
-                    <h1 className="text-xl sm:text-2xl md:text-3xl font-semibold text-left  text-gray-800 leading-tight sm:leading-9 md:leading-[48px]">
+                <div className="bg-zinc-100 px-8 py-10 rounded-2xl max-md:px-3 max-md:py-5">
+                    <h1 className="text-lg sm:text-2xl md:text-3xl font-semibold text-left  text-gray-800 leading-tight sm:leading-9 md:leading-[48px]">
                         OKR - Objective & Key Result
                     </h1>
                     <div className="w-full sm:w-3/4 md:w-2/3 lg:w-2/5">

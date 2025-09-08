@@ -46,7 +46,7 @@ const CoreValues_AboutUs = () => {
 
     return (
         <section className="">
-            <div className="px-3 sm:px-8 md:px-14 lg:px-32 ">
+            <div className="px-8 sm:px-8 md:px-14 lg:px-32 ">
                 <div className="max-w-7xl mx-auto">
                     {/* Main Section Header */}
                     <div className="mb-6 lg:mb-8 text-center">

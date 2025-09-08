@@ -125,7 +125,9 @@ function HeroHome() {
       </div>
 
       {/* Hero Image */}
-      <div className="lg:w-[900px] lg:h-[484px] lg:mt-40 mt-10 absolute top-full bg-[url('/img/OKRHeroHome.png')] bg-center bg-no-repeat lg:bg-cover bg-contain lg:top-[65%] md:w-[500px] md:h-[250px] md:top-[70%] w-[100%] h-[160px]"></div>
+      <div className="lg:w-[900px] lg:h-[484px] lg:mt-40 mt-10 absolute top-full lg:top-[65%] md:w-[500px] md:h-[250px] md:top-[70%] w-[100%] h-[160px]">
+        <img src="/img/OKRHeroHome.png" className="object-center object-contain lg:object-cover w-full h-full" alt="okr-dashboard" />
+      </div>
     </section>
   );
 }

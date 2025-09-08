@@ -4,10 +4,10 @@ function VissionMission_aboutUs() {
     return (
         <section className='px-3 sm:px-8 md:px-14 lg:px-32 py-12 sm:py-14 lg:py-18'>
             <div className="max-w-7xl mx-auto">
-                <div className="w-full h-auto lg:h-[600px]"><img src="/img/aboutImg_aboutUs.png" alt="about-img" className='w-full h-full object-contain' /></div>
-                <div className="lg:-mt-24 -mt-10">
+                <div className="w-full h-auto"><img src="/img/aboutImg_aboutUs.png" alt="about-img" className='w-auto h-auto object-contain ml-2.5 lg:ml-10' /></div>
+                <div className="lg:-mt-40 -mt-6">
                     <div className="">
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start px-3">
                             {/* Our Vision Card */}
                             <div className="bg-white lg:rounded-2xl lg:rounded-tr-none rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 p-4 lg:p-6 border border-gray-100">
                                 <h2 className="text-xl lg:text-2xl font-semibold text-gray-900 mb-2 lg:mb-4">

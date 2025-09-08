@@ -1,11 +1,15 @@
 import React from 'react'
+import HeroGetStarted from '../components/HeroGetStarted'
+import ReachUs_GetStarted from '../components/ReachUs_GetStarted'
 
 function ContactGetStarted() {
     return (
         <>
-            <div className="px-3 sm:px-8 md:px-14 lg:px-24 py-8 sm:py-14 lg:py-18">
-
-            </div>
+           <HeroGetStarted />
+            
+            <div className='px-4 sm:px-8 md:px-14 lg:px-32 pb-8 sm:pb-14 lg:pb-18'>
+                <ReachUs_GetStarted />
+            </div>  
         </>
     )
 }

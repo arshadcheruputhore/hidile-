@@ -18,9 +18,9 @@ export default function Footer() {
                             Try Hidile OKR free for 30 days—you'll have access to every feature.
                             Cancel any time.
                         </p>
-                        <button className="bg-white hover:bg-purple-100 text-base text-[#2B0A3D] px-6 py-3 rounded-lg font-medium shadow-md hover:shadow-lg transition">
+                        <Link to={'reach-us'} className="bg-white hover:bg-purple-100 text-base text-[#2B0A3D] px-6 py-3 rounded-lg font-medium shadow-md hover:shadow-lg transition">
                             Start your free trial →
-                        </button>
+                        </Link>
                     </div>
 
                     {/* Right Content (Image placeholder) */}
@@ -54,9 +54,9 @@ export default function Footer() {
                             Try Hidile OKR free for 30 days—you'll have access to every feature.
                             Cancel any time.
                         </p>
-                        <button className="bg-white text-[#2B0A3D] px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-medium shadow-md hover:shadow-lg transition text-sm sm:text-base">
+                        <Link to={'/reach-us'} className="bg-white text-[#2B0A3D] px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-medium shadow-md hover:shadow-lg transition text-sm sm:text-base">
                             Start your free trial →
-                        </button>
+                        </Link>
                     </div>
                 </div>
             </section>
@@ -66,9 +66,9 @@ export default function Footer() {
                     <div className="mx-auto grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-5 gap-6 lg:gap-10">
 
                         {/* Logo Section */}
-                        <div className="col-span-2 sm:col-span-2 lg:col-span-1 text-center sm:text-left">
+                        <Link to={'/'} className="col-span-2 sm:col-span-2 lg:col-span-1 text-center sm:text-left cursor-pointer">
                             <img src="/img/hidile-logo-footer.png" alt="Hidile Logo" className="h-12 lg:h-16 mb-3 mx-auto sm:mx-0" />
-                        </div>
+                        </Link>
 
                         {/* Services */}
                         <div className="sm:text-left max-sm:col-span-1">
