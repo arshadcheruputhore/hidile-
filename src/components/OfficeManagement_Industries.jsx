@@ -1,15 +1,12 @@
-import React from 'react';
-import {
-    Target,
-    Users,
-    PieChart,
-    Shield,
-    Bot,
-    Workflow,
-    LockKeyhole,
-} from 'lucide-react';
+import React, { useEffect, useRef, useState } from 'react';
+import { Target, Users, PieChart, Bot, Workflow, LockKeyhole } from 'lucide-react';
 
 export default function OfficeManagement_Industries() {
+    const [visibleItems, setVisibleItems] = useState(new Set());
+    const [headerVisible, setHeaderVisible] = useState(false);
+    const headerRef = useRef(null);
+    const itemRefs = useRef([]);
+
     const features = [
         {
             icon: Target,
@@ -55,11 +52,61 @@ export default function OfficeManagement_Industries() {
         }
     ];
 
+    useEffect(() => {
+        const observers = [];
+
+        // Header observer
+        const headerObserver = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setHeaderVisible(true);
+                }
+            },
+            { threshold: 0.3 }
+        );
+
+        if (headerRef.current) {
+            headerObserver.observe(headerRef.current);
+            observers.push(headerObserver);
+        }
+
+        // Items observer
+        const itemObserver = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        const index = parseInt(entry.target.dataset.index);
+                        setVisibleItems(prev => new Set([...prev, index]));
+                    }
+                });
+            },
+            { threshold: 0.2 }
+        );
+
+        itemRefs.current.forEach((ref) => {
+            if (ref) {
+                itemObserver.observe(ref);
+            }
+        });
+        observers.push(itemObserver);
+
+        return () => {
+            observers.forEach(observer => observer.disconnect());
+        };
+    }, []);
+
     return (
         <section className="">
             <div className="max-w-7xl mx-auto max-sm:px-2">
                 {/* Header */}
-                <div className="sm:mb-8 mb-6">
+                <div 
+                    ref={headerRef}
+                    className={`sm:mb-8 mb-6 transition-all duration-1000 ease-out ${
+                        headerVisible 
+                            ? 'opacity-100 translate-y-0' 
+                            : 'opacity-0 translate-y-8'
+                    }`}
+                >
                     {/* Main Heading */}
                     <h1 className="text-xl sm:text-3xl md:text-3xl font-medium text-gray-900 mb-2 lg:mb-3">
                         All-in-One Office Management Platform
@@ -78,7 +125,18 @@ export default function OfficeManagement_Industries() {
                         return (
                             <div
                                 key={index}
-                                className="relative group"
+                                ref={el => itemRefs.current[index] = el}
+                                data-index={index}
+                                className={`
+                                    relative group transition-all duration-700 ease-out
+                                    ${visibleItems.has(index) 
+                                        ? 'opacity-100 translate-y-0 scale-100' 
+                                        : 'opacity-0 translate-y-12 scale-95'
+                                    }
+                                `}
+                                style={{
+                                    transitionDelay: `${index * 120}ms`
+                                }}
                             >
                                 {/* Behind Card - Animated Background */}
                                 <div className="absolute inset-0 bg-gradient-to-br from-blue-200 via-blue-600 to-blue-100 rounded-2xl transform rotate-1 scale-95 opacity-0 group-hover:opacity-100 group-hover:scale-100 group-hover:rotate-2 transition-all duration-500 ease-out shadow-xl"></div>

@@ -1,6 +1,54 @@
 import React from 'react'
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useRef } from 'react';
 
 function ObjectKeyResult_Features() {
+
+    const [visibleCards, setVisibleCards] = useState(new Set());
+    const cardRefs = useRef([]);
+
+    useEffect(() => {
+        const observers = [];
+
+        cardRefs.current.forEach((ref, index) => {
+            if (ref) {
+                const observer = new IntersectionObserver(
+                    (entries) => {
+                        entries.forEach((entry) => {
+                            if (entry.isIntersecting) {
+                                setVisibleCards(prev => new Set(prev).add(index));
+                            }
+                        });
+                    },
+                    {
+                        threshold: 0.1,
+                        rootMargin: '0px 0px -50px 0px'
+                    }
+                );
+
+                observer.observe(ref);
+                observers.push(observer);
+            }
+        });
+
+        return () => {
+            observers.forEach(observer => observer.disconnect());
+        };
+    }, []);
+
+    const setCardRef = (index) => (el) => {
+        cardRefs.current[index] = el;
+    };
+
+    const getCardClassName = (index, baseClasses) => {
+        const isVisible = visibleCards.has(index);
+        return `${baseClasses} transition-all duration-700 ease-out ${isVisible
+            ? 'opacity-100 translate-y-0'
+            : 'opacity-0 translate-y-8'
+            }`;
+    };
+
     return (
         <>
             <section className='mb-12 sm:mb-14 max-w-7xl mx-auto'>
@@ -15,9 +63,10 @@ function ObjectKeyResult_Features() {
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6 mt-6 sm:mt-8">
-                        
+
                         {/* Goal Setting */}
-                        <div className="overflow-hidden rounded-[9.836px] bg-[#FBFBFB] shadow-[0_2.643px_2.643px_0_rgba(0,0,0,0.25)] backdrop-blur-[0.6606px] col-span-1 sm:col-span-2 lg:col-span-2 flex flex-col justify-end">
+                        <div ref={setCardRef(0)}
+                            className={getCardClassName(0, "overflow-hidden rounded-[9.836px] bg-[#FBFBFB] shadow-[0_2.643px_2.643px_0_rgba(0,0,0,0.25)] backdrop-blur-[0.6606px] col-span-1 sm:col-span-2 lg:col-span-2 flex flex-col justify-end")}>
                             <div className="px-4 sm:px-6 pt-6 sm:pt-8">
                                 <h3 className="text-lg sm:text-xl lg:text-xl tracking-wide font-semibold text-gray-800 mb-0 sm:mb-1 lg:mb-1">
                                     Goal Setting
@@ -37,7 +86,8 @@ function ObjectKeyResult_Features() {
                         </div>
 
                         {/* Create Objectives */}
-                        <div className="overflow-hidden rounded-[9.836px] bg-[#FBFBFB] shadow-[0_2.643px_2.643px_0_rgba(0,0,0,0.25)] backdrop-blur-[0.6606px] col-span-1 sm:col-span-2 lg:col-span-3 flex flex-col justify-end">
+                        <div ref={setCardRef(1)}
+                            className={getCardClassName(1, "overflow-hidden rounded-[9.836px] bg-[#FBFBFB] shadow-[0_2.643px_2.643px_0_rgba(0,0,0,0.25)] backdrop-blur-[0.6606px] col-span-1 sm:col-span-2 lg:col-span-3 flex flex-col justify-end")}>
                             <div className="px-4 sm:px-6 pt-6 sm:pt-8">
                                 <h3 className="text-lg sm:text-xl lg:text-xl tracking-wide font-semibold text-gray-800 mb-0 sm:mb-1 lg:mb-1">
                                     Create Objectives
@@ -54,10 +104,11 @@ function ObjectKeyResult_Features() {
                                     className="rounded-tl-xl rounded-br-xl w-full object-contain"
                                 />
                             </div>
-                        </div>  
+                        </div>
 
                         {/* Child Objectives */}
-                        <div className="overflow-hidden rounded-[9.836px] bg-[#FBFBFB] shadow-[0_2.643px_2.643px_0_rgba(0,0,0,0.25)] backdrop-blur-[0.6606px] flex flex-col justify-end col-span-1 sm:col-span-2 lg:col-span-3">
+                        <div ref={setCardRef(2)}
+                            className={getCardClassName(2, "overflow-hidden rounded-[9.836px] bg-[#FBFBFB] shadow-[0_2.643px_2.643px_0_rgba(0,0,0,0.25)] backdrop-blur-[0.6606px] flex flex-col justify-end col-span-1 sm:col-span-2 lg:col-span-3")}>
                             <div className="px-4 sm:px-6 pt-6 sm:pt-8">
                                 <h3 className="text-lg sm:text-xl lg:text-xl tracking-wide font-semibold text-gray-800 mb-0 sm:mb-1 lg:mb-1">
                                     Child Objectives
@@ -77,7 +128,8 @@ function ObjectKeyResult_Features() {
                         </div>
 
                         {/* Create Key Results */}
-                        <div className="overflow-hidden rounded-[9.836px] bg-[#FBFBFB] shadow-[0_2.643px_2.643px_0_rgba(0,0,0,0.25)] backdrop-blur-[0.6606px] flex flex-col justify-end col-span-1 sm:col-span-2 lg:col-span-2">
+                        <div ref={setCardRef(3)}
+                            className={getCardClassName(3, "overflow-hidden rounded-[9.836px] bg-[#FBFBFB] shadow-[0_2.643px_2.643px_0_rgba(0,0,0,0.25)] backdrop-blur-[0.6606px] flex flex-col justify-end col-span-1 sm:col-span-2 lg:col-span-2")}>
                             <div className="px-4 sm:px-6 pt-6 sm:pt-8 mb-3 sm:mb-4">
                                 <h3 className="text-lg sm:text-xl lg:text-xl tracking-wide font-semibold text-gray-800 mb-0 sm:mb-1 lg:mb-1">
                                     Assign task to template
@@ -94,7 +146,7 @@ function ObjectKeyResult_Features() {
                                     className="rounded-l-xl w-full h-full object-cover"
                                 />
                             </div>
-                        </div>   
+                        </div>
                     </div>
                 </div>
             </section>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   Calculator,
   Truck,
@@ -10,9 +10,41 @@ import {
   Briefcase
 } from "lucide-react";
 
-function Card({ icon: Icon, bgColor, iconColor, title, description }) {
+function Card({ icon: Icon, bgColor, iconColor, title, description, index }) {
+  const [isVisible, setIsVisible] = useState(false);
+  const cardRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.1, rootMargin: '-50px' }
+    );
+
+    if (cardRef.current) {
+      observer.observe(cardRef.current);
+    }
+
+    return () => {
+      if (cardRef.current) {
+        observer.unobserve(cardRef.current);
+      }
+    };
+  }, []);
+
   return (
-    <div className="relative group">
+    <div 
+      ref={cardRef}
+      className={`relative group transform transition-all duration-700 ease-out ${
+        isVisible 
+          ? 'translate-y-0 opacity-100' 
+          : 'translate-y-8 opacity-0'
+      }`}
+      style={{ transitionDelay: `${index * 100}ms` }}
+    >
       {/* Hover background */}
       <div className="absolute inset-0 bg-gradient-to-br from-blue-200 via-blue-600 to-blue-100 rounded-2xl transform rotate-1 scale-95 opacity-0 group-hover:opacity-100 group-hover:scale-100 group-hover:rotate-2 transition-all duration-500 ease-out shadow-xl"></div>
 
@@ -60,6 +92,7 @@ export default function IndustryCard() {
               iconColor="text-blue-600"
               title="Finance & Accounting"
               description="CA firms, tax management, compliance, and financial reporting"
+              index={0}
             />
             <Card
               icon={Activity}
@@ -67,6 +100,7 @@ export default function IndustryCard() {
               iconColor="text-green-600"
               title="Healthcare"
               description="Patient management, EHR systems, telemedicine, and clinical workflows"
+              index={4}
             />
           </div>
 
@@ -78,6 +112,7 @@ export default function IndustryCard() {
               iconColor="text-green-600"
               title="Logistics & Transport"
               description="Fleet management, route optimization, and delivery tracking"
+              index={1}
             />
             <Card
               icon={Hammer}
@@ -85,6 +120,7 @@ export default function IndustryCard() {
               iconColor="text-cyan-600"
               title="Construction"
               description="Project management, safety compliance, and resource planning"
+              index={5}
             />
           </div>
 
@@ -96,6 +132,7 @@ export default function IndustryCard() {
               iconColor="text-orange-600"
               title="Automotive"
               description="Service management, parts inventory, and customer relations"
+              index={2}
             />
             <Card
               icon={Factory}
@@ -103,6 +140,7 @@ export default function IndustryCard() {
               iconColor="text-pink-600"
               title="Manufacturing"
               description="Production planning, quality control, and supply chain management"
+              index={6}
             />
           </div>
 
@@ -114,6 +152,7 @@ export default function IndustryCard() {
               iconColor="text-purple-600"
               title="Real Estate"
               description="Property management, client tracking, and transaction workflows"
+              index={3}
             />
             <Card
               icon={Briefcase}
@@ -121,6 +160,7 @@ export default function IndustryCard() {
               iconColor="text-red-600"
               title="Professional Services"
               description="Client management, project billing, and service delivery"
+              index={7}
             />
           </div>
 
@@ -137,6 +177,7 @@ export default function IndustryCard() {
                 iconColor="text-blue-600"
                 title="Finance & Accounting"
                 description="CA firms, tax management, compliance, and financial reporting"
+                index={0}
               />
             </div>
           </div>
@@ -150,6 +191,7 @@ export default function IndustryCard() {
                 iconColor="text-green-600"
                 title="Logistics & Transport"
                 description="Fleet management, route optimization, and delivery tracking"
+                index={1}
               />
             </div>
           </div>
@@ -163,6 +205,7 @@ export default function IndustryCard() {
                 iconColor="text-orange-600"
                 title="Automotive"
                 description="Service management, parts inventory, and customer relations"
+                index={2}
               />
             </div>
           </div>
@@ -176,6 +219,7 @@ export default function IndustryCard() {
                 iconColor="text-purple-600"
                 title="Real Estate"
                 description="Property management, client tracking, and transaction workflows"
+                index={3}
               />
             </div>
           </div>
@@ -189,6 +233,7 @@ export default function IndustryCard() {
                 iconColor="text-green-600"
                 title="Healthcare"
                 description="Patient management, EHR systems, telemedicine, and clinical workflows"
+                index={4}
               />
             </div>
           </div>
@@ -202,6 +247,7 @@ export default function IndustryCard() {
                 iconColor="text-cyan-600"
                 title="Construction"
                 description="Project management, safety compliance, and resource planning"
+                index={5}
               />
             </div>
           </div>
@@ -215,6 +261,7 @@ export default function IndustryCard() {
                 iconColor="text-pink-600"
                 title="Manufacturing"
                 description="Production planning, quality control, and supply chain management"
+                index={6}
               />
             </div>
           </div>
@@ -228,6 +275,7 @@ export default function IndustryCard() {
                 iconColor="text-red-600"
                 title="Professional Services"
                 description="Client management, project billing, and service delivery"
+                index={7}
               />
             </div>
           </div>

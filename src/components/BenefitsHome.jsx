@@ -1,14 +1,52 @@
-import React from 'react';
-import {
-    Target,
-    Settings,
-    Users,
-    PieChart,
-    Shield,
-    Bot,
-} from 'lucide-react';
+import React, { useEffect, useRef, useState } from 'react';
+import { Target, Settings, Users, PieChart, Shield, Bot } from 'lucide-react';
 
-export default function BenefitsHome() {
+function BenefitsHome() {
+    const [visibleCards, setVisibleCards] = useState(new Set());
+    const cardRefs = useRef([]);
+
+    useEffect(() => {
+        const observers = [];
+        
+        cardRefs.current.forEach((ref, index) => {
+            if (ref) {
+                const observer = new IntersectionObserver(
+                    (entries) => {
+                        entries.forEach((entry) => {
+                            if (entry.isIntersecting) {
+                                setVisibleCards(prev => new Set(prev).add(index));
+                            }
+                        });
+                    },
+                    {
+                        threshold: 0.1,
+                        rootMargin: '0px 0px -50px 0px'
+                    }
+                );
+                
+                observer.observe(ref);
+                observers.push(observer);
+            }
+        });
+
+        return () => {
+            observers.forEach(observer => observer.disconnect());
+        };
+    }, []);
+
+    const setCardRef = (index) => (el) => {
+        cardRefs.current[index] = el;
+    };
+
+    const getCardClassName = (index, baseClasses) => {
+        const isVisible = visibleCards.has(index);
+        return `${baseClasses} transition-all duration-700 ease-out ${
+            isVisible 
+                ? 'opacity-100 translate-y-0' 
+                : 'opacity-0 translate-y-8'
+        }`;
+    };
+
     const features = [
         {
             icon: Target,
@@ -132,7 +170,8 @@ export default function BenefitsHome() {
                         return (
                             <div
                                 key={index}
-                                className="relative group"
+                                ref={setCardRef(index)}
+                                className={getCardClassName(index, "relative group")}
                             >
                                 {/* Behind Card - Animated Background */}
                                 <div className="absolute inset-0 bg-gradient-to-br from-blue-200 via-blue-600 to-blue-100 rounded-2xl transform rotate-1 scale-95 opacity-0 group-hover:opacity-100 group-hover:scale-100 group-hover:rotate-2 transition-all duration-500 ease-out shadow-xl"></div>
@@ -159,3 +198,5 @@ export default function BenefitsHome() {
         </section>
     );
 }
+
+export default BenefitsHome;

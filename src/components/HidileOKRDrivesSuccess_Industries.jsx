@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 const HidileOKRDrivesSuccess_Industries = () => {
   const benefits = [
@@ -20,11 +20,65 @@ const HidileOKRDrivesSuccess_Industries = () => {
     }
   ];
 
+  const [visibleElements, setVisibleElements] = useState(new Set());
+  const elementRefs = useRef([]);
+
+  useEffect(() => {
+    const observers = [];
+
+    elementRefs.current.forEach((ref, index) => {
+      if (ref) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                setVisibleElements(prev => new Set(prev).add(index));
+              }
+            });
+          },
+          {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+          }
+        );
+
+        observer.observe(ref);
+        observers.push(observer);
+      }
+    });
+
+    return () => {
+      observers.forEach(observer => observer.disconnect());
+    };
+  }, []);
+
+  const setElementRef = (index) => (el) => {
+    elementRefs.current[index] = el;
+  };
+
+  const getElementClassName = (index, baseClasses) => {
+    const isVisible = visibleElements.has(index);
+    return `${baseClasses} transition-all duration-700 ease-out ${isVisible
+      ? 'opacity-100 translate-y-0'
+      : 'opacity-0 translate-y-8'
+    }`;
+  };
+
+  const getElementStyle = (index) => {
+    return {
+      transitionDelay: `${index * 150}ms`
+    };
+  };
+
   return (
     <div className="bg-blue-100/70 py-10 sm:py-20 max-sm:px-3">
       <div className="max-w-7xl mx-auto max-sm:px-2">
         {/* Main Section Header */}
-        <div className="text-center mb-6 lg:mb-8">
+        <div 
+          ref={setElementRef(0)}
+          className={getElementClassName(0, "text-center mb-6 lg:mb-8")}
+          style={getElementStyle(0)}
+        >
           <h1 className="text-xl sm:text-3xl md:text-3xl font-medium text-gray-900 mb-2 lg:mb-3">
             How Hidile OKR Drives <br className='lg:hidden' /> Your Success
           </h1>
@@ -38,7 +92,9 @@ const HidileOKRDrivesSuccess_Industries = () => {
           {benefits.map((benefit, index) => (
             <div
               key={index}
-              className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border border-zinc-200 relative overflow-hidden"
+              ref={setElementRef(index + 1)}
+              className={getElementClassName(index + 1, "bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border border-zinc-200 relative overflow-hidden")}
+              style={getElementStyle(index + 1)}
             >
               {/* Blue accent bar on the left */}
               <div className="absolute left-0 top-0 bottom-0 w-1 bg-blue-500"></div>

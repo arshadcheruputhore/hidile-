@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 // Desktop Services Sidebar Component
 const ServicesSidebar = ({ activeService }) => {
   const services = [
@@ -49,9 +51,9 @@ const ServicesSidebar = ({ activeService }) => {
           <p className="text-blue-100 text-sm mb-4">
             Start your 30-day free trial today. No credit card required.
           </p>
-          <button className="w-full bg-white text-blue-500 font-medium py-2 px-4 rounded-lg hover:bg-gray-50 transition-colors">
+          <Link to={'/reach-us'} className="inline-block text-center w-full bg-white text-blue-500 font-medium py-2 px-4 rounded-lg hover:bg-gray-50 transition-colors">
             Get Started Free
-          </button>
+          </Link>
         </div>
       </div>
     </div>

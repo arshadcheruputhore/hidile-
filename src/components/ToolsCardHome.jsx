@@ -1,6 +1,51 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 export default function ToolsCardHome() {
+    const [visibleCards, setVisibleCards] = useState(new Set());
+    const cardRefs = useRef([]);
+
+    useEffect(() => {
+        const observers = [];
+        
+        cardRefs.current.forEach((ref, index) => {
+            if (ref) {
+                const observer = new IntersectionObserver(
+                    (entries) => {
+                        entries.forEach((entry) => {
+                            if (entry.isIntersecting) {
+                                setVisibleCards(prev => new Set(prev).add(index));
+                            }
+                        });
+                    },
+                    {
+                        threshold: 0.1,
+                        rootMargin: '0px 0px -50px 0px'
+                    }
+                );
+                
+                observer.observe(ref);
+                observers.push(observer);
+            }
+        });
+
+        return () => {
+            observers.forEach(observer => observer.disconnect());
+        };
+    }, []);
+
+    const setCardRef = (index) => (el) => {
+        cardRefs.current[index] = el;
+    };
+
+    const getCardClassName = (index, baseClasses) => {
+        const isVisible = visibleCards.has(index);
+        return `${baseClasses} transition-all duration-700 ease-out ${
+            isVisible 
+                ? 'opacity-100 translate-y-0' 
+                : 'opacity-0 translate-y-8'
+        }`;
+    };
+    
     return (
         <section className="relative w-full text-gray-900 mt-14 sm:mt-20 sm:px-3 px-1">
             <div className="mx-auto max-w-7xl">
@@ -21,7 +66,10 @@ export default function ToolsCardHome() {
                 {/* Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
                     {/* Card 1 */}
-                    <div className="pt-6 sm:pt-8 pl-6 sm:pl-8 rounded-2xl shadow-lg transition bg-white flex flex-col justify-between md:col-span-2">
+                    <div 
+                        ref={setCardRef(0)}
+                        className={getCardClassName(0, "pt-6 sm:pt-8 pl-6 sm:pl-8 rounded-2xl shadow-lg transition bg-white flex flex-col justify-between md:col-span-2")}
+                    >
                         <div className="w-full sm:w-2/3 max-sm:pr-3">
                             <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 mb-2 sm:mb-2.5 tracking-wide">
                                 OKR's for Goal Tracking
@@ -41,7 +89,10 @@ export default function ToolsCardHome() {
                     </div>
 
                     {/* Card 2 */}
-                    <div className="rounded-2xl shadow-lg transition bg-white flex flex-col md:col-span-1 justify-between">
+                    <div 
+                        ref={setCardRef(1)}
+                        className={getCardClassName(1, "rounded-2xl shadow-lg transition bg-white flex flex-col md:col-span-1 justify-between")}
+                    >
                         <div className="w-full pt-6 sm:pt-8 px-6 sm:px-8">
                             <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 mb-2 sm:mb-2.5 tracking-wide">
                                 Visualize Your Timeboxing
@@ -59,7 +110,10 @@ export default function ToolsCardHome() {
                     </div>
 
                     {/* Card 3 */}
-                    <div className="rounded-2xl shadow-lg transition bg-white flex flex-col md:col-span-1 justify-between">
+                    <div 
+                        ref={setCardRef(2)}
+                        className={getCardClassName(2, "rounded-2xl shadow-lg transition bg-white flex flex-col md:col-span-1 justify-between")}
+                    >
                         <div className="w-full pt-6 sm:pt-8 px-6 sm:px-8">
                             <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 mb-2 sm:mb-2.5 tracking-wide">
                                 AI Agents. Real-time progress.
@@ -80,7 +134,10 @@ export default function ToolsCardHome() {
                     </div>
 
                     {/* Card 4 */}
-                    <div className="rounded-2xl shadow-lg transition bg-white flex flex-col sm:flex-row justify-between md:col-span-2 py-6 sm:py-8 px-6 sm:px-8">
+                    <div 
+                        ref={setCardRef(3)}
+                        className={getCardClassName(3, "rounded-2xl shadow-lg transition bg-white flex flex-col sm:flex-row justify-between md:col-span-2 py-6 sm:py-8 px-6 sm:px-8")}
+                    >
                         <div className="w-full sm:w-1/2 mb-4 sm:mb-0">
                             <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 mb-2 sm:mb-2.5 tracking-wide">
                                 Work Automation using <br className="hidden sm:block" />

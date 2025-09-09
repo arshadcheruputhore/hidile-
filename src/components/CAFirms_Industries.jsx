@@ -1,5 +1,5 @@
-import React from 'react';
-import { CalendarSync, PieChart, Workflow, ShieldUser } from 'lucide-react';
+import React, { useEffect, useRef, useState } from 'react';
+import { Calendar, PieChart, Workflow, Shield } from 'lucide-react';
 
 const CAFirms_Industries = () => {
     const features = [
@@ -9,7 +9,7 @@ const CAFirms_Industries = () => {
             description: "Purpose-built for Chartered Accountants with industry-specific templates, compliance checklists, and regulatory frameworks."
         },
         {
-            icon: <CalendarSync className="lg:w-7 lg:h-7 w-5 h-5 text-blue-500" />,
+            icon: <Calendar className="lg:w-7 lg:h-7 w-5 h-5 text-blue-500" />,
             title: "Automated Compliance",
             description: "Stay ahead of deadlines with automated reminders for tax filings, audit schedules, and regulatory submissions."
         },
@@ -19,17 +19,71 @@ const CAFirms_Industries = () => {
             description: "Gain insights into your practice performance with detailed analytics on client profitability, team productivity, and growth trends."
         },
         {
-            icon: <ShieldUser className="lg:w-7 lg:h-7 w-5 h-5 text-blue-500" />,
+            icon: <Shield className="lg:w-7 lg:h-7 w-5 h-5 text-blue-500" />,
             title: "Client Portal",
             description: "Provide clients with secure access to their documents, progress updates, & communication channels for enhanced service delivery."
         }
     ];
 
+    const [visibleElements, setVisibleElements] = useState(new Set());
+    const elementRefs = useRef([]);
+
+    useEffect(() => {
+        const observers = [];
+
+        elementRefs.current.forEach((ref, index) => {
+            if (ref) {
+                const observer = new IntersectionObserver(
+                    (entries) => {
+                        entries.forEach((entry) => {
+                            if (entry.isIntersecting) {
+                                setVisibleElements(prev => new Set(prev).add(index));
+                            }
+                        });
+                    },
+                    {
+                        threshold: 0.1,
+                        rootMargin: '0px 0px -50px 0px'
+                    }
+                );
+
+                observer.observe(ref);
+                observers.push(observer);
+            }
+        });
+
+        return () => {
+            observers.forEach(observer => observer.disconnect());
+        };
+    }, []);
+
+    const setElementRef = (index) => (el) => {
+        elementRefs.current[index] = el;
+    };
+
+    const getElementClassName = (index, baseClasses) => {
+        const isVisible = visibleElements.has(index);
+        return `${baseClasses} transition-all duration-700 ease-out ${isVisible
+            ? 'opacity-100 translate-y-0'
+            : 'opacity-0 translate-y-8'
+        }`;
+    };
+
+    const getElementStyle = (index) => {
+        return {
+            transitionDelay: `${index * 150}ms`
+        };
+    };
+
     return (
         <div className="">
             <div className="max-w-7xl mx-auto max-sm:px-2">
                 {/* Main Section Header */}
-                <div className="text-center mb-8 lg:mb-12">
+                <div 
+                    ref={setElementRef(0)}
+                    className={getElementClassName(0, "text-center mb-8 lg:mb-12")}
+                    style={getElementStyle(0)}
+                >
                     <h1 className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-gray-900 mb-2 lg:mb-3">
                         CA & Auditing Firms
                     </h1>
@@ -39,7 +93,11 @@ const CAFirms_Industries = () => {
                 </div>
 
                 {/* Why Hidile OKR Section */}
-                <div className="mb-16 max-sm:mb-10">
+                <div 
+                    ref={setElementRef(1)}
+                    className={getElementClassName(1, "mb-16 max-sm:mb-10")}
+                    style={getElementStyle(1)}
+                >
                     <h2 className="text-xl sm:text-3xl md:text-3xl font-medium text-left text-gray-800 leading-tight sm:leading-9 md:leading-[48px] mb-1">
                         Why Hidile OKR for CA Firms?
                     </h2>
@@ -53,7 +111,9 @@ const CAFirms_Industries = () => {
                     {features.map((feature, index) => (
                         <div
                             key={index}
-                            className="bg-white rounded-tl-3xl rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 border border-blue-200 relative group hover:border-blue-200/0"
+                            ref={setElementRef(index + 2)}
+                            className={getElementClassName(index + 2, "bg-white rounded-tl-3xl rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 border border-blue-200 relative group hover:border-blue-200/0")}
+                            style={getElementStyle(index + 2)}
                         >
                             {/* Icon positioned at top-left corner */}
                             <div className="absolute lg:-top-8 lg:-left-6 -top-6 -left-3 p-1 bg-blue-50 rounded-full z-20 border border-blue-400/0 group-hover:border-blue-400/100 transition-colors duration-300">

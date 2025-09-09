@@ -1,8 +1,14 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ChevronDown, ChevronRight } from 'lucide-react';
 
 const FAQ = () => {
   const [expandedItem, setExpandedItem] = useState(0); // First item expanded by default
+    const [visibleItems, setVisibleItems] = useState(new Set());
+    const [headerVisible, setHeaderVisible] = useState(false);
+    const [ctaVisible, setCtaVisible] = useState(false);
+    const headerRef = useRef(null);
+    const contactRef = useRef(null);
+    const itemRefs = useRef([]);
 
   const faqData = [
     {
@@ -35,11 +41,76 @@ const FAQ = () => {
     setExpandedItem(expandedItem === index ? -1 : index);
   };
 
+  useEffect(() => {
+      const observers = [];
+  
+      // Header observer
+      const headerObserver = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setHeaderVisible(true);
+          }
+        },
+        { threshold: 0.3 }
+      );
+  
+      if (headerRef.current) {
+        headerObserver.observe(headerRef.current);
+        observers.push(headerObserver);
+      }
+  
+      // CTA observer
+      const ctaObserver = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setCtaVisible(true);
+          }
+        },
+        { threshold: 0.3 }
+      );
+  
+      if (contactRef.current) {
+        ctaObserver.observe(contactRef.current);
+        observers.push(ctaObserver);
+      }
+  
+      // Items observer
+      const itemObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const index = parseInt(entry.target.dataset.index);
+              setVisibleItems(prev => new Set([...prev, index]));
+            }
+          });
+        },
+        { threshold: 0.2 }
+      );
+  
+      itemRefs.current.forEach((ref) => {
+        if (ref) {
+          itemObserver.observe(ref);
+        }
+      });
+      observers.push(itemObserver);
+  
+      return () => {
+        observers.forEach(observer => observer.disconnect());
+      };
+    }, []);
+
   return (
     <section className="mt-12 sm:mt-20 px-3 lg:px-24">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-6 lg:mb-8">
+        <div 
+          ref={headerRef}
+          className={`text-center mb-6 lg:mb-8 transition-all duration-1000 ease-out ${
+            headerVisible 
+              ? 'opacity-100 translate-y-0' 
+              : 'opacity-0 translate-y-8'
+          }`}
+        >
           <h2 className="text-xl sm:text-3xl md:text-3xl font-medium text-gray-900 mb-2 lg:mb-3">
             Got Questions? We've Got Answers!
           </h2>
@@ -54,7 +125,16 @@ const FAQ = () => {
           {faqData.map((item, index) => (
             <div
               key={index}
-              className="bg-white rounded-lg lg:rounded-2xl shadow-sm border border-gray-200 overflow-hidden transition-all duration-300 hover:shadow-md"
+              ref={el => itemRefs.current[index] = el}
+                data-index={index}
+                className={`bg-white rounded-lg lg:rounded-2xl shadow-sm border border-gray-200 overflow-hidden transition-all duration-300 hover:shadow-md ${visibleItems.has(index) 
+                    ? 'opacity-100 translate-y-0 scale-100' 
+                    : 'opacity-0 translate-y-12 scale-95'
+                  }
+                `}
+                style={{
+                  transitionDelay: `${index * 100}ms`
+                }}
             >
               {/* Question */}
               <button
@@ -96,7 +176,13 @@ const FAQ = () => {
         </div>
 
         {/* Optional CTA */}
-        <div className="text-center mt-4 lg:mt-6">
+        <div 
+        ref={contactRef}
+        className={`text-center mt-4 lg:mt-6  ${
+            ctaVisible 
+              ? 'opacity-100 translate-y-0 scale-100' 
+              : 'opacity-0 translate-y-8 scale-95'
+          }`}>
           <p className="text-gray-600 mb-2 lg:mb-4 max-sm:text-xs">
             Still have questions? We're here to help!
           </p>

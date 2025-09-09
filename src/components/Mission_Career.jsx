@@ -49,7 +49,7 @@ function Mission_Career() {
     return (
         <section className="max-w-7xl mx-auto">
             <div className='mission-section bg-white pt-6 flex max-sm:flex-col justify-between shadow-sm rounded-xl lg:rounded-2xl'>
-                <div className="mb-6 lg:mb-8 w-full lg:w-3/5 lg:pl-10 px-4">
+                <div className="mb-6 lg:mb-0 w-full lg:w-3/5 lg:pl-10 px-4">
                     <h1 className="text-2xl sm:text-3xl md:text-3xl font-medium text-gray-900 mb-2 lg:mb-3">
                         Our Mission
                     </h1>

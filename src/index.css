@@ -17,3 +17,26 @@
   width: 100%;
   height: 100%;
 }
+
+
+/* globals.css */
+@layer utilities {
+  @keyframes float-y {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-8px); }
+  }
+
+  /* gentle idle float */
+  .float      { animation: float-y 6s ease-in-out infinite; }
+  .float-slow { animation: float-y 8s ease-in-out infinite; }
+  .float-fast { animation: float-y 4s ease-in-out infinite; }
+
+  /* mouse parallax: uses --mx / --my from the section + per-icon --px / --py strength */
+  .parallax-icon {
+    transform: translate(calc(var(--mx, 0) * var(--px, 0px)),
+                         calc(var(--my, 0) * var(--py, 0px)));
+    transition: transform 150ms ease-out;
+    will-change: transform;
+  }
+}
+

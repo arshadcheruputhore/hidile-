@@ -10,7 +10,7 @@ function VissionMission_aboutUs() {
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start px-3">
                             {/* Our Vision Card */}
                             <div className="bg-white lg:rounded-2xl lg:rounded-tr-none rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 p-4 lg:p-6 border border-gray-100">
-                                <h2 className="text-xl lg:text-2xl font-semibold text-gray-900 mb-2 lg:mb-4">
+                                <h2 className="text-xl lg:text-2xl font-semibold text-gray-900 mb-2 lg:mb-">
                                     Our Vision
                                 </h2>
                                 <p className="text-gray-600 text-sm lg:text-base leading-relaxed">

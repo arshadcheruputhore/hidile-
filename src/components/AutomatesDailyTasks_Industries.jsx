@@ -1,7 +1,12 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Clock, MessageCircle, FileText, CheckCircle } from 'lucide-react';
 
 const AutomatesDailyTasks_Industries = () => {
+  const [visibleItems, setVisibleItems] = useState(new Set());
+  const [headerVisible, setHeaderVisible] = useState(false);
+  const headerRef = useRef(null);
+  const itemRefs = useRef([]);
+
   const automationFeatures = [
     {
       icon: <Clock className="lg:w-6 lg:h-6 w-5 h-5 text-blue-500" />,
@@ -25,11 +30,61 @@ const AutomatesDailyTasks_Industries = () => {
     }
   ];
 
+  useEffect(() => {
+    const observers = [];
+
+    // Header observer
+    const headerObserver = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setHeaderVisible(true);
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    if (headerRef.current) {
+      headerObserver.observe(headerRef.current);
+      observers.push(headerObserver);
+    }
+
+    // Items observer
+    const itemObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = parseInt(entry.target.dataset.index);
+            setVisibleItems(prev => new Set([...prev, index]));
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    itemRefs.current.forEach((ref) => {
+      if (ref) {
+        itemObserver.observe(ref);
+      }
+    });
+    observers.push(itemObserver);
+
+    return () => {
+      observers.forEach(observer => observer.disconnect());
+    };
+  }, []);
+
   return (
     <div className="">
       <div className="max-w-7xl mx-auto max-sm:px-2">
         {/* Main Section Header */}
-        <div className="mb-6 lg:mb-8">
+        <div 
+          ref={headerRef}
+          className={`mb-6 lg:mb-8 transition-all duration-1000 ease-out ${
+            headerVisible 
+              ? 'opacity-100 translate-y-0' 
+              : 'opacity-0 translate-y-8'
+          }`}
+        >
           <h1 className="text-xl sm:text-3xl md:text-3xl font-medium text-gray-900 mb-2 lg:mb-3">
             How Hidile OKR Automates Your Important Daily Routine Tasks
           </h1>
@@ -43,7 +98,18 @@ const AutomatesDailyTasks_Industries = () => {
           {automationFeatures.map((feature, index) => (
             <div
               key={index}
-              className="bg-white rounded-2xl p-4 sm:p-6 border border-blue-200 hover:shadow-lg transition-shadow duration-300 flex flex-col items-center text-center"
+              ref={el => itemRefs.current[index] = el}
+              data-index={index}
+              className={`
+                bg-white rounded-2xl p-4 sm:p-6 border border-blue-200 hover:shadow-lg transition-all duration-700 ease-out flex flex-col items-center text-center
+                ${visibleItems.has(index) 
+                  ? 'opacity-100 translate-y-0 scale-100' 
+                  : 'opacity-0 translate-y-12 scale-95'
+                }
+              `}
+              style={{
+                transitionDelay: `${index * 150}ms`
+              }}
             >
               {/* Icon with background */}
               <div className="mb-4 sm:mb-6">

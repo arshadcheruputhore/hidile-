@@ -123,6 +123,50 @@ function TeamManagement_Features() {
         }
     }, [activeSection, isUserInteracting]);
 
+    const [visibleCards, setVisibleCards] = useState(new Set());
+        const cardRefs = useRef([]);
+    
+        useEffect(() => {
+            const observers = [];
+    
+            cardRefs.current.forEach((ref, index) => {
+                if (ref) {
+                    const observer = new IntersectionObserver(
+                        (entries) => {
+                            entries.forEach((entry) => {
+                                if (entry.isIntersecting) {
+                                    setVisibleCards(prev => new Set(prev).add(index));
+                                }
+                            });
+                        },
+                        {
+                            threshold: 0.1,
+                            rootMargin: '0px 0px -50px 0px'
+                        }
+                    );
+    
+                    observer.observe(ref);
+                    observers.push(observer);
+                }
+            });
+    
+            return () => {
+                observers.forEach(observer => observer.disconnect());
+            };
+        }, []);
+    
+        const setCardRef = (index) => (el) => {
+            cardRefs.current[index] = el;
+        };
+    
+        const getCardClassName = (index, baseClasses) => {
+            const isVisible = visibleCards.has(index);
+            return `${baseClasses} transition-all duration-700 ease-out ${isVisible
+                    ? 'opacity-100 translate-y-0'
+                    : 'opacity-0 translate-y-8'
+                }`;
+        };
+
     return (
         <>
             <section className='mb-12 sm:mb-14 max-w-7xl mx-auto'>
@@ -336,7 +380,8 @@ function TeamManagement_Features() {
                         </div>
 
                         {/* Connecting teams */}
-                        <div className="overflow-hidden rounded-[9.836px] bg-[#FBFBFB] shadow-[0_2.643px_2.643px_0_rgba(0,0,0,0.25)] backdrop-blur-[0.6606px] flex flex-col justify-between col-span-1 sm:col-span-2 lg:col-span-2">
+                        <div ref={setCardRef(0)}
+                            className={getCardClassName(0, "overflow-hidden rounded-[9.836px] bg-[#FBFBFB] shadow-[0_2.643px_2.643px_0_rgba(0,0,0,0.25)] backdrop-blur-[0.6606px] flex flex-col justify-between col-span-1 sm:col-span-2 lg:col-span-2")}>
                             <div className="px-4 sm:px-6 pt-6 sm:pt-8">
                                 <h3 className="text-lg sm:text-lg lg:text-xl tracking-wide font-semibold text-gray-800 mb-0 sm:mb-1 lg:mb-1">
                                     Connecting Teams
@@ -356,7 +401,8 @@ function TeamManagement_Features() {
                         </div>
 
                         {/* Reminders */}
-                        <div className="overflow-hidden rounded-[9.836px] bg-[#FBFBFB] shadow-[0_2.643px_2.643px_0_rgba(0,0,0,0.25)] backdrop-blur-[0.6606px] flex flex-col justify-between col-span-1 sm:col-span-2 lg:col-span-2">
+                        <div ref={setCardRef(1)}
+                            className={getCardClassName(1, "overflow-hidden rounded-[9.836px] bg-[#FBFBFB] shadow-[0_2.643px_2.643px_0_rgba(0,0,0,0.25)] backdrop-blur-[0.6606px] flex flex-col justify-between col-span-1 sm:col-span-2 lg:col-span-2")}>
                             <div className="px-4 sm:px-6 pt-6 sm:pt-8">
                                 <h3 className="text-lg sm:text-lg lg:text-xl tracking-wide font-semibold text-gray-800 mb-0 sm:mb-1 lg:mb-1">
                                     Reminders
@@ -376,7 +422,8 @@ function TeamManagement_Features() {
                         </div>
 
                         {/* Notification */}
-                        <div className="overflow-hidden rounded-[9.836px] bg-[#FBFBFB] shadow-[0_2.643px_2.643px_0_rgba(0,0,0,0.25)] backdrop-blur-[0.6606px] flex flex-col justify-between col-span-1 sm:col-span-2 lg:col-span-2">
+                        <div ref={setCardRef(2)}
+                            className={getCardClassName(2, "overflow-hidden rounded-[9.836px] bg-[#FBFBFB] shadow-[0_2.643px_2.643px_0_rgba(0,0,0,0.25)] backdrop-blur-[0.6606px] flex flex-col justify-between col-span-1 sm:col-span-2 lg:col-span-2")}>
                             <div className="px-4 sm:px-6 pt-6 sm:pt-8">
                                 <h3 className="text-lg sm:text-lg lg:text-xl tracking-wide font-semibold text-gray-800 mb-0 sm:mb-1 lg:mb-1">
                                     Notification

@@ -1,7 +1,52 @@
 import { MoveRight } from 'lucide-react'
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 function FeaturesHome() {
+    const [visibleCards, setVisibleCards] = useState(new Set());
+    const cardRefs = useRef([]);
+
+    useEffect(() => {
+        const observers = [];
+        
+        cardRefs.current.forEach((ref, index) => {
+            if (ref) {
+                const observer = new IntersectionObserver(
+                    (entries) => {
+                        entries.forEach((entry) => {
+                            if (entry.isIntersecting) {
+                                setVisibleCards(prev => new Set(prev).add(index));
+                            }
+                        });
+                    },
+                    {
+                        threshold: 0.1,
+                        rootMargin: '0px 0px -50px 0px'
+                    }
+                );
+                
+                observer.observe(ref);
+                observers.push(observer);
+            }
+        });
+
+        return () => {
+            observers.forEach(observer => observer.disconnect());
+        };
+    }, []);
+
+    const setCardRef = (index) => (el) => {
+        cardRefs.current[index] = el;
+    };
+
+    const getCardClassName = (index, baseClasses) => {
+        const isVisible = visibleCards.has(index);
+        return `${baseClasses} transition-all duration-700 ease-out ${
+            isVisible 
+                ? 'opacity-100 translate-y-0' 
+                : 'opacity-0 translate-y-8'
+        }`;
+    };
+
     return (
         <section className='px-1 sm:px-3 max-sm:mt-16 max-w-7xl mx-auto'>
             <div className="flex items-center justify-between w-full max-sm:flex-col max-sm:items-start max-sm:gap-2.5">
@@ -73,7 +118,10 @@ function FeaturesHome() {
             <section className="w-full">
                 <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 mb-7 max-sm:gap-4 max-sm:mb-6">
                     {/* 1st Row - Two Cards */}
-                    <div className="bg-slate-50 rounded-2xl overflow-hidden border border-solid border-zinc-200 col-span-3 max-lg:col-span-1">
+                    <div 
+                        ref={setCardRef(0)}
+                        className={getCardClassName(0, "bg-slate-50 rounded-2xl overflow-hidden border border-solid border-zinc-200 col-span-3 max-lg:col-span-1 ")}
+                    >
                         <div className="p-6 max-sm:p-4">
                             <h3 className="text-2xl tracking-wide font-semibold text-gray-800 mb-2.5 max-sm:text-xl max-sm:mb-2">
                                 One screen for everything you do.
@@ -87,14 +135,17 @@ function FeaturesHome() {
                             <img
                                 src="/img/smart-task.png"
                                 alt="Smart Task Management"
-                                className="rounded-t-lg w-full object-cover drop-shadow-2xl max-sm:rounded-lg max-sm:drop-shadow-lg"
+                                className="rounded-t-lg w-full object-cover drop-shadow-2xl max-sm:rounded-lg max-sm:drop-shadow-lg transition-transform duration-500 "
                             />
                         </div>
                     </div>
 
-                    <div className="bg-slate-50 rounded-2xl overflow-hidden border border-solid border-zinc-200 col-span-2 max-lg:col-span-1">
+                    <div 
+                        ref={setCardRef(1)}
+                        className={getCardClassName(1, "bg-slate-50 rounded-2xl overflow-hidden border border-solid border-zinc-200 col-span-2 max-lg:col-span-1 ")}
+                    >
                         <div className="p-6 max-sm:p-4">
-                            <h3 className="text-2xl tracking-wide font-semibold  text-gray-800 mb-2.5 max-sm:text-xl max-sm:mb-2">
+                            <h3 className="text-2xl tracking-wide font-semibold text-gray-800 mb-2.5 max-sm:text-xl max-sm:mb-2">
                                 Every step. Counted.
                             </h3>
                             <p className="text-gray-600 text-sm leading-[22px] max-sm:text-xs max-sm:leading-5">
@@ -106,7 +157,7 @@ function FeaturesHome() {
                             <img
                                 src="/img/track-success.png"
                                 alt="Track Your Success"
-                                className="rounded-t-lg w-full object-cover max-sm:rounded-lg"
+                                className="rounded-t-lg w-full object-cover max-sm:rounded-lg transition-transform duration-500 "
                             />
                         </div>
                     </div>
@@ -114,9 +165,12 @@ function FeaturesHome() {
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-sm:gap-4">
                     {/* 2nd Row - Three Cards */}
-                    <div className="bg-slate-50 rounded-2xl overflow-hidden border border-solid border-zinc-200 px-8 pt-8 flex flex-col justify-between align-middle max-sm:px-4 max-sm:pt-4">
+                    <div 
+                        ref={setCardRef(2)}
+                        className={getCardClassName(2, "bg-slate-50 rounded-2xl overflow-hidden border border-solid border-zinc-200 px-8 pt-8 flex flex-col justify-between align-middle max-sm:px-4 max-sm:pt-4 ")}
+                    >
                         <div className="max-sm:mb-4">
-                            <h3 className="text-2xl tracking-wide font-semibold  text-gray-800 mb-2.5 max-sm:text-xl max-sm:mb-2">
+                            <h3 className="text-2xl tracking-wide font-semibold text-gray-800 mb-2.5 max-sm:text-xl max-sm:mb-2">
                                Connecting teams
                             </h3>
                             <p className="text-gray-600 text-sm leading-[22px] max-sm:text-xs max-sm:leading-5">
@@ -128,14 +182,17 @@ function FeaturesHome() {
                             <img
                                 src="/img/work-together.png"
                                 alt="Work Together"
-                                className="rounded-t-lg w-full object-contain drop-shadow-2xl max-sm:rounded-lg max-sm:drop-shadow-lg"
+                                className="rounded-t-lg w-full object-contain drop-shadow-2xl max-sm:rounded-lg max-sm:drop-shadow-lg transition-transform duration-500 "
                             />
                         </div>
                     </div>
 
-                    <div className="bg-slate-50 rounded-2xl overflow-hidden border border-solid border-zinc-200 flex flex-col justify-between">
+                    <div 
+                        ref={setCardRef(3)}
+                        className={getCardClassName(3, "bg-slate-50 rounded-2xl overflow-hidden border border-solid border-zinc-200 flex flex-col justify-between ")}
+                    >
                         <div className="pr-14 pl-8 pt-8 max-sm:px-4 max-sm:pt-4">
-                            <h3 className="text-2xl tracking-wide font-semibold  text-gray-800 mb-2.5 max-sm:text-xl max-sm:mb-2">
+                            <h3 className="text-2xl tracking-wide font-semibold text-gray-800 mb-2.5 max-sm:text-xl max-sm:mb-2">
                                Get Notified
                             </h3>
                             <p className="text-gray-600 text-sm leading-[22px] max-sm:text-xs max-sm:leading-5 max-sm:mb-4">
@@ -147,14 +204,17 @@ function FeaturesHome() {
                             <img
                                 src="/img/deadline.png"
                                 alt="Never Miss a Deadline"
-                                className="rounded-t-lg w-full object-cover drop-shadow-2xl max-sm:rounded-lg max-sm:drop-shadow-lg"
+                                className="rounded-t-lg w-full object-cover drop-shadow-2xl max-sm:rounded-lg max-sm:drop-shadow-lg transition-transform duration-500 "
                             />
                         </div>
                     </div>
 
-                    <div className="bg-slate-50 rounded-2xl overflow-hidden border border-solid border-zinc-200">
+                    <div 
+                        ref={setCardRef(4)}
+                        className={getCardClassName(4, "bg-slate-50 rounded-2xl overflow-hidden border border-solid border-zinc-200 ")}
+                    >
                         <div className="px-6 pt-6 max-sm:px-4 max-sm:pt-4">
-                            <h3 className="text-2xl tracking-wide font-semibold  text-gray-800 mb-2.5 max-sm:text-xl max-sm:mb-2">
+                            <h3 className="text-2xl tracking-wide font-semibold text-gray-800 mb-2.5 max-sm:text-xl max-sm:mb-2">
                                 Design your dashboards
                             </h3>
                             <p className="text-gray-600 text-sm leading-[22px] max-sm:text-xs max-sm:leading-5 max-sm:mb-4">
@@ -166,7 +226,7 @@ function FeaturesHome() {
                             <img
                                 src="/img/productivity.png"
                                 alt="Track Productivity"
-                                className="rounded-t-lg w-full object-cover max-sm:rounded-lg"
+                                className="rounded-t-lg w-full object-cover max-sm:rounded-lg transition-transform duration-500 "
                             />
                         </div>
                     </div>

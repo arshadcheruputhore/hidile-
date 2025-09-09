@@ -611,10 +611,10 @@ export default function Header() {
             </div>
           </div>
 
-          <div className={`fixed top-[25px] left-1/2 transform -translate-x-1/2 z-50 transition-all duration-300 ${toggleMobileMenu ? 'opacity-100 translate-y-0' : '-translate-y-16 opacity-0'}`}>
+          <div className={`fixed left-1/2 transform -translate-x-1/2 z-50 transition-all will-change-transform ease-in-out duration-500  ${isMobileMenuOpen ? 'opacity-100 translate-y-6 pointer-events-auto' : '-translate-y-10 opacity-0 pointer-events-none'}`}>
             <button
               onClick={toggleMobileMenu}
-              className={`w-10 h-10 flex items-center justify-center bg-black/20 hover:bg-white rounded-full transition-all duration-200 focus:outline-none`}
+              className={`size-10 flex items-center justify-center bg-black/20 hover:bg-white rounded-full transition-all duration-200 focus:outline-none`}
               aria-label="Close menu"
             >
               <svg

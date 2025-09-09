@@ -1,7 +1,15 @@
+import React, { useEffect, useRef, useState } from 'react';
 import { ArrowRight, Server, BarChart3, Clock, Monitor, Bot, Smartphone, Code, Shield } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 const SeeOurServices = () => {
+  const [visibleItems, setVisibleItems] = useState(new Set());
+  const [headerVisible, setHeaderVisible] = useState(false);
+  const [ctaVisible, setCtaVisible] = useState(false);
+  const headerRef = useRef(null);
+  const ctaRef = useRef(null);
+  const itemRefs = useRef([]);
+
   const services = [
     {
       icon: Server,
@@ -69,11 +77,76 @@ const SeeOurServices = () => {
     }
   ];
 
+  useEffect(() => {
+    const observers = [];
+
+    // Header observer
+    const headerObserver = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setHeaderVisible(true);
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    if (headerRef.current) {
+      headerObserver.observe(headerRef.current);
+      observers.push(headerObserver);
+    }
+
+    // CTA observer
+    const ctaObserver = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setCtaVisible(true);
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    if (ctaRef.current) {
+      ctaObserver.observe(ctaRef.current);
+      observers.push(ctaObserver);
+    }
+
+    // Items observer
+    const itemObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = parseInt(entry.target.dataset.index);
+            setVisibleItems(prev => new Set([...prev, index]));
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    itemRefs.current.forEach((ref) => {
+      if (ref) {
+        itemObserver.observe(ref);
+      }
+    });
+    observers.push(itemObserver);
+
+    return () => {
+      observers.forEach(observer => observer.disconnect());
+    };
+  }, []);
+
   return (
     <section id="services-overview" className="">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-6 lg:mb-8">
+        <div 
+          ref={headerRef}
+          className={`text-center mb-6 lg:mb-8 transition-all duration-1000 ease-out ${
+            headerVisible 
+              ? 'opacity-100 translate-y-0' 
+              : 'opacity-0 translate-y-8'
+          }`}
+        >
           <h2 className="text-xl sm:text-3xl md:text-3xl font-medium text-gray-900 mb-2 lg:mb-3">
             See Our Services
           </h2>
@@ -91,11 +164,22 @@ const SeeOurServices = () => {
               <Link
                 to={'/service-details'}
                 key={index}
-                className={`bg-white relative p-6 max-sm:p-4 rounded-xl shadow-sm border border-zinc-200 hover:shadow-md transition-all duration-300 cursor-pointer group flex flex-col gap-4 lg:gap-5 justify-between`}
+                ref={el => itemRefs.current[index] = el}
+                data-index={index}
+                className={`
+                  bg-white relative p-6 max-sm:p-4 rounded-xl shadow-sm border border-zinc-200 hover:shadow-md transition-all duration-700 ease-out cursor-pointer group flex flex-col gap-4 lg:gap-5 justify-between
+                  ${visibleItems.has(index) 
+                    ? 'opacity-100 translate-y-0 scale-100' 
+                    : 'opacity-0 translate-y-12 scale-95'
+                  }
+                `}
+                style={{
+                  transitionDelay: `${index * 100}ms`
+                }}
               >
                 <div className="">
                   {/* Icon */}
-                  <div className={`w-12 h-12 sm:w-14 sm:h-14 ${service.bgColor}  rounded-xl flex items-center justify-center mb-4`}>
+                  <div className={`w-12 h-12 sm:w-14 sm:h-14 ${service.bgColor} rounded-xl flex items-center justify-center mb-4`}>
                     <IconComponent className={`w-6 h-6 sm:w-7 sm:h-7 ${service.iconColor}`} />
                   </div>
 
@@ -127,7 +211,14 @@ const SeeOurServices = () => {
         </div>
 
         {/* CTA Button */}
-        <div className="flex justify-center">
+        <div 
+          ref={ctaRef}
+          className={`flex justify-center transition-all duration-1000 ease-out ${
+            ctaVisible 
+              ? 'opacity-100 translate-y-0 scale-100' 
+              : 'opacity-0 translate-y-8 scale-95'
+          }`}
+        >
           <button className="inline-flex items-center gap-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg transition-colors duration-200 shadow-sm text-xs sm:text-sm group">
             Explore All Services
             <div className="mt-1 text-white">

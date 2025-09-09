@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ArrowRight, Play } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { WatchDemoModal } from "./WatchDemoModal";
+import { WatchDemoButton } from "./WatchDemoButton";
 
 export default function HeroService() {
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const videoId = "aeRYRXyd1Cs"; // Extracted from your YouTube URL
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
   return (
     <div className="relative lg:min-h-[60vh] overflow-hidden lg:pt-[8%] pt-20 pb-10 lg:pb-20 bg-[url('/img/heroService-bg.png')] bg-no-repeat bg-cover bg-center max-sm:px-6">
-      <div className="">
+      <div className="max-w-7xl mx-auto">
         {/* Main Content */}
         <div className="relative z-10 flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8">
           {/* Breadcrumb */}
@@ -45,18 +54,16 @@ export default function HeroService() {
                 Get Started Now
               </Link>
 
-              <a
-                href="/demo"
-                className="inline-flex items-center justify-center rounded-xl border border-blue-500/50 bg-white/90 px-6 py-3 text-sm font-semibold text-blue-600 hover:bg-blue-50 backdrop-blur-sm transition-colors max-lg:w-full"
-              >
-                <span className="mr-2 inline-flex h-5 w-5 items-center justify-center rounded-full">
-                  <Play className="h-3.5 w-3.5" />
-                </span>
-                Watch Demo
-              </a>
+              <WatchDemoButton onClick={openModal} />
             </div>
           </div>
         </div>
+
+        <WatchDemoModal
+          isOpen={isModalOpen}
+          onClose={closeModal}
+          videoId={videoId}
+        />
       </div>
     </div>
   );
