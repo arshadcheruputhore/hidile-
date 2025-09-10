@@ -37,32 +37,32 @@ function TeamManagement_Features() {
             if (progressIntervalRef.current) {
                 clearInterval(progressIntervalRef.current);
             }
-            
+
             // Reset progress fill to current position
             const currentProgress = activeSection / (teamFeatures.length - 1);
             setProgressFill(currentProgress);
-            
+
             if (!isUserInteracting) {
                 // Start progress animation
                 let startTime = Date.now();
                 const duration = 4000; // 4 seconds
                 const startProgress = currentProgress;
                 const targetProgress = (activeSection + 1) / (teamFeatures.length - 1);
-                
+
                 progressIntervalRef.current = setInterval(() => {
                     const elapsed = Date.now() - startTime;
                     const progress = Math.min(elapsed / duration, 1);
-                    
+
                     // Linear interpolation between start and target progress
                     const currentFill = startProgress + (targetProgress - startProgress) * progress;
                     setProgressFill(currentFill);
-                    
+
                     if (progress >= 1) {
                         clearInterval(progressIntervalRef.current);
                     }
                 }, 16); // ~60fps updates
             }
-            
+
             autoScrollIntervalRef.current = setInterval(() => {
                 if (!isUserInteracting) {
                     setActiveSection((prev) => (prev + 1) % teamFeatures.length);
@@ -86,7 +86,7 @@ function TeamManagement_Features() {
     const handleSectionClick = (index) => {
         setIsUserInteracting(true);
         setActiveSection(index);
-        
+
         // Resume auto-scroll after 8 seconds
         setTimeout(() => {
             setIsUserInteracting(false);
@@ -103,12 +103,12 @@ function TeamManagement_Features() {
                     const containerHeight = contentContainer.clientHeight;
                     const elementTop = activeElement.offsetTop;
                     const elementHeight = activeElement.scrollHeight;
-                    
+
                     // Check if element fits in view, if not scroll to show it
                     const currentScroll = contentContainer.scrollTop;
                     const elementBottom = elementTop + elementHeight;
                     const viewBottom = currentScroll + containerHeight;
-                    
+
                     if (elementBottom > viewBottom || elementTop < currentScroll) {
                         contentContainer.scrollTo({
                             top: Math.max(0, elementTop - 20),
@@ -117,72 +117,93 @@ function TeamManagement_Features() {
                     }
                 }
             };
-            
+
             // Small delay to allow description to expand before scrolling
             setTimeout(scrollToActiveSection, 100);
         }
     }, [activeSection, isUserInteracting]);
 
-    const [visibleCards, setVisibleCards] = useState(new Set());
-        const cardRefs = useRef([]);
-    
-        useEffect(() => {
-            const observers = [];
-    
-            cardRefs.current.forEach((ref, index) => {
-                if (ref) {
-                    const observer = new IntersectionObserver(
-                        (entries) => {
-                            entries.forEach((entry) => {
-                                if (entry.isIntersecting) {
-                                    setVisibleCards(prev => new Set(prev).add(index));
-                                }
-                            });
-                        },
-                        {
-                            threshold: 0.1,
-                            rootMargin: '0px 0px -50px 0px'
-                        }
-                    );
-    
-                    observer.observe(ref);
-                    observers.push(observer);
+    const [visibleItems, setVisibleItems] = useState(new Set());
+    const [headerVisible, setHeaderVisible] = useState(false);
+    const headerRef = useRef(null);
+    const itemRefs = useRef([]);
+
+    useEffect(() => {
+        const observers = [];
+
+        // Header observer
+        const headerObserver = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setHeaderVisible(true);
                 }
-            });
-    
-            return () => {
-                observers.forEach(observer => observer.disconnect());
-            };
-        }, []);
-    
-        const setCardRef = (index) => (el) => {
-            cardRefs.current[index] = el;
+            },
+            { threshold: 0.3 }
+        );
+
+        if (headerRef.current) {
+            headerObserver.observe(headerRef.current);
+            observers.push(headerObserver);
+        }
+
+        // Items observer
+        const itemObserver = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        const index = parseInt(entry.target.dataset.index);
+                        setVisibleItems(prev => new Set([...prev, index]));
+                    }
+                });
+            },
+            { threshold: 0.2 }
+        );
+
+        itemRefs.current.forEach((ref) => {
+            if (ref) {
+                itemObserver.observe(ref);
+            }
+        });
+        observers.push(itemObserver);
+
+        return () => {
+            observers.forEach(observer => observer.disconnect());
         };
-    
-        const getCardClassName = (index, baseClasses) => {
-            const isVisible = visibleCards.has(index);
-            return `${baseClasses} transition-all duration-700 ease-out ${isVisible
-                    ? 'opacity-100 translate-y-0'
-                    : 'opacity-0 translate-y-8'
-                }`;
-        };
+    }, []);
+
+    const getCardClassName = (index, baseClasses) => {
+        const isVisible = visibleItems.has(index);
+        return `${baseClasses} transition-all duration-700 ease-out ${isVisible
+            ? 'opacity-100 translate-y-0 scale-100'
+            : 'opacity-0 translate-y-8 scale-95'
+            }`;
+    };
 
     return (
         <>
             <section className='mb-12 sm:mb-14 max-w-7xl mx-auto'>
                 <div className="bg-zinc-100 px-8 py-10 rounded-2xl max-md:px-3 max-md:py-5">
-                    <h1 className="text-xl sm:text-3xl md:text-3xl font-semibold text-left text-gray-800 leading-tight sm:leading-9 md:leading-[48px]">
-                        Team Management
-                    </h1>
-                    <div className="w-full sm:w-3/4 md:w-2/3 lg:w-2/5">
-                        <p className="leading-relaxed text-left text-gray-500 text-sm sm:text-base mt-2">
-                            Organize to/dos and keep all the information in place.
-                        </p>
+                    <div
+                        ref={headerRef}
+                        className={`transition-all duration-1000 ease-out ${headerVisible
+                            ? 'opacity-100 translate-y-0'
+                            : 'opacity-0 translate-y-12'
+                            }`}
+                    >
+                        <h1 className="text-xl sm:text-3xl md:text-3xl font-semibold text-left text-gray-800 leading-tight sm:leading-9 md:leading-[48px]">
+                            Team Management
+                        </h1>
+                        <div className="w-full sm:w-3/4 md:w-2/3 lg:w-2/5">
+                            <p className="leading-relaxed text-left text-gray-500 text-sm sm:text-base mt-2">
+                                Organize to/dos and keep all the information in place.
+                            </p>
+                        </div>
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4 sm:gap-6 mt-6 sm:mt-8">
                         {/* Team Management - Fixed Height Container */}
-                        <div className="overflow-hidden rounded-[9.836px] bg-[#FBFBFB] shadow-[0_2.643px_2.643px_0_rgba(0,0,0,0.25)] backdrop-blur-[0.6606px] flex flex-col lg:flex-row items-center col-span-full">
+                        <div className="overflow-hidden rounded-[9.836px] bg-[#FBFBFB] shadow-[0_2.643px_2.643px_0_rgba(0,0,0,0.25)] backdrop-blur-[0.6606px] flex flex-col lg:flex-row items-center col-span-full"
+                        >
                             {/* Container Header - Spans full width */}
                             <div className="w-full px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6 pb-2 lg:absolute lg:top-0 lg:left-0 lg:z-10">
                                 <h3 className="text-lg sm:text-xl lg:text-xl tracking-wide font-semibold text-gray-800">
@@ -199,25 +220,25 @@ function TeamManagement_Features() {
                                 <div className="flex flex-col items-center mr-4 sm:mr-6 h-full">
                                     {/* Top spacing */}
                                     <div className="h-0 sm:h-6 lg:h-6"></div>
-                                    
+
                                     {/* Progress Bar - Increased height */}
                                     <div className="relative flex-1 flex items-center">
                                         <div className="relative h-full w-full flex flex-col justify-start" style={{ paddingTop: '1rem', paddingBottom: '1rem' }}>
                                             {/* Background Bar - Increased width for better visibility */}
-                                            <div 
+                                            <div
                                                 className="absolute left-1/2 w-1.5 bg-gray-300 rounded-full transform -translate-x-1/2"
                                                 style={{
                                                     top: '1rem',
                                                     height: `calc(100% - 2rem)`
                                                 }}
                                             />
-                                            
+
                                             {/* Animated Progress Fill with loading effect */}
-                                            <div 
+                                            <div
                                                 className="absolute left-1/2 w-1.5 rounded-full transform -translate-x-1/2 transition-all duration-1000 ease-out"
                                                 style={{
                                                     top: '1rem',
-                                                    height: teamFeatures.length > 1 
+                                                    height: teamFeatures.length > 1
                                                         ? `calc((100% - 2rem) * ${activeSection / (teamFeatures.length - 1)})`
                                                         : '0%',
                                                     background: 'linear-gradient(180deg, #374151 0%, #4B5563 50%, #374151 100%)',
@@ -225,18 +246,18 @@ function TeamManagement_Features() {
                                                 }}
                                             >
                                                 {/* Loading shimmer effect */}
-                                                <div 
+                                                <div
                                                     className="absolute inset-0 bg-gradient-to-b from-transparent via-white to-transparent opacity-30 rounded-full"
                                                     style={{
                                                         animation: 'shimmer 2s ease-in-out infinite'
                                                     }}
                                                 />
                                             </div>
-                                            
+
                                             {/* Topic Indicator Buttons */}
                                             <div className="relative h-full flex flex-col justify-between">
                                                 {teamFeatures.map((_, index) => (
-                                                    <div 
+                                                    <div
                                                         key={index}
                                                         className="flex items-center justify-center"
                                                     >
@@ -246,15 +267,14 @@ function TeamManagement_Features() {
                                                             title={`Go to ${teamFeatures[index].title}`}
                                                         >
                                                             <div
-                                                                className={`w-4 h-4 rounded-full border-2 transition-all duration-500 ${
-                                                                    index === activeSection
-                                                                        ? 'bg-gray-800 border-gray-900 scale-125 shadow-lg ring-2 ring-gray-400 ring-opacity-30'
-                                                                        : index < activeSection
+                                                                className={`w-4 h-4 rounded-full border-2 transition-all duration-500 ${index === activeSection
+                                                                    ? 'bg-gray-800 border-gray-900 scale-125 shadow-lg ring-2 ring-gray-400 ring-opacity-30'
+                                                                    : index < activeSection
                                                                         ? 'bg-gray-700 border-gray-700 hover:scale-110 shadow-md'
                                                                         : 'bg-white border-gray-400 hover:border-gray-600 hover:scale-110 group-hover:shadow-md'
-                                                                }`}
+                                                                    }`}
                                                             />
-                                                            
+
                                                             {/* Pulse effect for active button */}
                                                             {index === activeSection && (
                                                                 <div className="absolute inset-0 w-4 h-4 bg-gray-600 rounded-full animate-pulse opacity-20"></div>
@@ -265,7 +285,7 @@ function TeamManagement_Features() {
                                             </div>
                                         </div>
                                     </div>
-                                    
+
                                     {/* Bottom spacing */}
                                     <div className="h-4 sm:h-6 lg:h-2"></div>
                                 </div>
@@ -283,7 +303,7 @@ function TeamManagement_Features() {
                                     </div> */}
 
                                     {/* Scrollable Content Area */}
-                                    <div 
+                                    <div
                                         className="scrollable-content flex-1 overflow-y-auto pr-2 space-y-4 sm:space-y-6 lg:mt-10 mt-3"
                                         style={{
                                             scrollbarWidth: 'none',
@@ -300,29 +320,27 @@ function TeamManagement_Features() {
                                                 100% { transform: translateY(400%); }
                                             }
                                         `}</style>
-                                        
+
                                         {teamFeatures.map((feature, index) => (
                                             <div
                                                 key={feature.id}
                                                 className={`cursor-pointer transition-all duration-500 ease-in-out ${index && 'mt-14 max-sm:mt-8'}`}
                                                 onClick={() => handleSectionClick(index)}
                                             >
-                                                <h2 
-                                                    className={`font-semibold text-gray-800 transition-all duration-400 mb-2 leading-tight ${
-                                                        index === activeSection
-                                                            ? 'text-sm sm:text-base lg:text-base opacity-100 '
-                                                            : 'text-sm sm:text-base lg:text-base opacity-60 hover:opacity-80'
-                                                    }`}
+                                                <h2
+                                                    className={`font-semibold text-gray-800 transition-all duration-400 mb-2 leading-tight ${index === activeSection
+                                                        ? 'text-sm sm:text-base lg:text-base opacity-100 '
+                                                        : 'text-sm sm:text-base lg:text-base opacity-60 hover:opacity-80'
+                                                        }`}
                                                 >
                                                     {feature.title}
                                                 </h2>
-                                                
+
                                                 <div
-                                                    className={`overflow-hidden transition-all duration-600 ease-in-out ${
-                                                        index === activeSection
-                                                            ? 'max-h-96 opacity-100 mt-3 mb-6'
-                                                            : 'max-h-0 opacity-0 mt-0'
-                                                    }`}
+                                                    className={`overflow-hidden transition-all duration-600 ease-in-out ${index === activeSection
+                                                        ? 'max-h-96 opacity-100 mt-3 mb-6'
+                                                        : 'max-h-0 opacity-0 mt-0'
+                                                        }`}
                                                 >
                                                     <p className="text-gray-600 text-xs sm:text-sm lg:text-sm leading-relaxed">
                                                         {feature.description}
@@ -330,7 +348,7 @@ function TeamManagement_Features() {
                                                 </div>
                                             </div>
                                         ))}
-                                        
+
                                         {/* Extra space at bottom for better scrolling */}
                                         <div className="h-8"></div>
                                     </div>
@@ -344,11 +362,10 @@ function TeamManagement_Features() {
                                     {teamFeatures.map((feature, index) => (
                                         <div
                                             key={feature.id}
-                                            className={`absolute inset-0 transition-all duration-1000 ease-in-out ${
-                                                index === activeSection
-                                                    ? 'opacity-100 transform translate-x-0 scale-100'
-                                                    : 'opacity-0 transform translate-x-full scale-95'
-                                            }`}
+                                            className={`absolute inset-0 transition-all duration-1000 ease-in-out ${index === activeSection
+                                                ? 'opacity-100 transform translate-x-0 scale-100'
+                                                : 'opacity-0 transform translate-x-full scale-95'
+                                                }`}
                                         >
                                             <img
                                                 src={feature.image}
@@ -357,7 +374,7 @@ function TeamManagement_Features() {
                                             />
                                         </div>
                                     ))}
-                                    
+
                                     {/* Background overlay */}
                                     <div className="absolute inset-0 bg-gradient-to-br from-gray-50 to-gray-100 opacity-30" />
                                 </div>
@@ -369,19 +386,24 @@ function TeamManagement_Features() {
                                     <button
                                         key={index}
                                         onClick={() => handleSectionClick(index)}
-                                        className={`transition-all duration-600 rounded-full ${
-                                            index === activeSection
-                                                ? 'bg-gray-800 w-8 h-2'
-                                                : 'bg-gray-300 w-2 h-2 hover:bg-gray-400'
-                                        }`}
+                                        className={`transition-all duration-600 rounded-full ${index === activeSection
+                                            ? 'bg-gray-800 w-8 h-2'
+                                            : 'bg-gray-300 w-2 h-2 hover:bg-gray-400'
+                                            }`}
                                     />
                                 ))}
                             </div>
                         </div>
 
                         {/* Connecting teams */}
-                        <div ref={setCardRef(0)}
-                            className={getCardClassName(0, "overflow-hidden rounded-[9.836px] bg-[#FBFBFB] shadow-[0_2.643px_2.643px_0_rgba(0,0,0,0.25)] backdrop-blur-[0.6606px] flex flex-col justify-between col-span-1 sm:col-span-2 lg:col-span-2")}>
+                        <div
+                            ref={el => itemRefs.current[0] = el}
+                            data-index={0}
+                            className={getCardClassName(0, "overflow-hidden rounded-[9.836px] bg-[#FBFBFB] shadow-[0_2.643px_2.643px_0_rgba(0,0,0,0.25)] backdrop-blur-[0.6606px] flex flex-col justify-between col-span-1 sm:col-span-2 lg:col-span-2")}
+                            style={{
+                                transitionDelay: `${1 * 120}ms`
+                            }}
+                        >
                             <div className="px-4 sm:px-6 pt-6 sm:pt-8">
                                 <h3 className="text-lg sm:text-lg lg:text-xl tracking-wide font-semibold text-gray-800 mb-0 sm:mb-1 lg:mb-1">
                                     Connecting Teams
@@ -401,8 +423,13 @@ function TeamManagement_Features() {
                         </div>
 
                         {/* Reminders */}
-                        <div ref={setCardRef(1)}
-                            className={getCardClassName(1, "overflow-hidden rounded-[9.836px] bg-[#FBFBFB] shadow-[0_2.643px_2.643px_0_rgba(0,0,0,0.25)] backdrop-blur-[0.6606px] flex flex-col justify-between col-span-1 sm:col-span-2 lg:col-span-2")}>
+                        <div ref={el => itemRefs.current[1] = el}
+                            data-index={1}
+                            className={getCardClassName(1, "overflow-hidden rounded-[9.836px] bg-[#FBFBFB] shadow-[0_2.643px_2.643px_0_rgba(0,0,0,0.25)] backdrop-blur-[0.6606px] flex flex-col justify-between col-span-1 sm:col-span-2 lg:col-span-2")}
+                            style={{
+                                transitionDelay: `${2 * 120}ms`
+                            }}
+                        >
                             <div className="px-4 sm:px-6 pt-6 sm:pt-8">
                                 <h3 className="text-lg sm:text-lg lg:text-xl tracking-wide font-semibold text-gray-800 mb-0 sm:mb-1 lg:mb-1">
                                     Reminders
@@ -422,8 +449,13 @@ function TeamManagement_Features() {
                         </div>
 
                         {/* Notification */}
-                        <div ref={setCardRef(2)}
-                            className={getCardClassName(2, "overflow-hidden rounded-[9.836px] bg-[#FBFBFB] shadow-[0_2.643px_2.643px_0_rgba(0,0,0,0.25)] backdrop-blur-[0.6606px] flex flex-col justify-between col-span-1 sm:col-span-2 lg:col-span-2")}>
+                        <div ref={el => itemRefs.current[2] = el}
+                            data-index={2}
+                            className={getCardClassName(2, "overflow-hidden rounded-[9.836px] bg-[#FBFBFB] shadow-[0_2.643px_2.643px_0_rgba(0,0,0,0.25)] backdrop-blur-[0.6606px] flex flex-col justify-between col-span-1 sm:col-span-2 lg:col-span-2")
+                            }
+                            style={{
+                                transitionDelay: `${3 * 120}ms`
+                            }}>
                             <div className="px-4 sm:px-6 pt-6 sm:pt-8">
                                 <h3 className="text-lg sm:text-lg lg:text-xl tracking-wide font-semibold text-gray-800 mb-0 sm:mb-1 lg:mb-1">
                                     Notification

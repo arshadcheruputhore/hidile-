@@ -59,7 +59,7 @@ const ReachUs_GetStarted = () => {
   };
 
   return (
-    <div className="w-full -mt-[10%] relative z-10">
+    <div className="w-full -mt-40 z-10 relative">
       <div className="max-w-5xl mx-auto bg-blue-50 px-4 py-8 sm:px-6 sm:py-12 lg:px-8 rounded-2xl">
         <div className="text-center mb-6 sm:mb-8">
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 sm:mb-4">

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ArrowRight, Play } from 'lucide-react';
 import { WatchDemoModal } from "./WatchDemoModal";
 import { WatchDemoButton } from "./WatchDemoButton";
+import { Link } from 'react-router-dom';
 
 export default function HeroServiceDetails() {
 
@@ -55,9 +56,9 @@ export default function HeroServiceDetails() {
           {/* Breadcrumb */}
           <nav className="mb-8 max-sm:mb-4 bg-white px-4 py-1 rounded-3xl border border-zinc-300">
             <ol className="flex items-center space-x-1 text-xs text-gray-900">
-              <li>
+              <Link to={'/'} className='hover:underline'>
                 Home
-              </li>
+              </Link>
               <li>/</li>
               <li>
                 Services
@@ -85,13 +86,21 @@ export default function HeroServiceDetails() {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <a
-                href="/signup"
-                className="inline-flex max-sm:w-3/4 items-center justify-center rounded-xl bg-blue-600 px-6 py-3 text-sm font-semibold text-white shadow-md hover:bg-blue-700 focus-visible:outline-offset-2 focus-visible:outline-blue-600 transition-colors"
+              <Link
+                to="/reach-us"
+                className="group relative inline-flex items-center justify-center rounded-xl bg-blue-600 px-7 py-3 text-sm font-semibold text-white shadow-md hover:bg-blue-700 focus-visible:outline-offset-2 focus-visible:outline-blue-600 transition-all duration-300 max-lg:w-full overflow-hidden "
               >
-                <ArrowRight className="h-4 w-4 mr-2" />
-                Get Started Now
-              </a>
+                {/* Text */}
+                <span className="relative z-10 transition-transform duration-300 group-hover:-translate-x-1">
+                  Get Started Now
+                </span>
+
+                {/* Left Arrow - slides slightly right and fades */}
+                <ArrowRight className="absolute left-2 top-1/2 h-4 w-4 -translate-y-1/2 opacity-100 transition-all duration-300 group-hover:translate-x-3 group-hover:opacity-0" />
+
+                {/* Right Arrow - emerges from under text */}
+                <ArrowRight className="absolute right-2 top-1/2 h-4 w-4 -translate-y-1/2 translate-x-4 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100" />
+              </Link>
 
               <WatchDemoButton onClick={openModal} />
             </div>

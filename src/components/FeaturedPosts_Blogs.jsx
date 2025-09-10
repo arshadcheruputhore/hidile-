@@ -1,5 +1,6 @@
 import { Calendar, Clock, ArrowRight, Tag } from 'lucide-react';
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 function FeaturedPosts_Blogs() {
     return (
@@ -67,10 +68,10 @@ function FeaturedPosts_Blogs() {
 
                             {/* CTA Button */}
                             <div className=''>
-                                <button className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 lg:px-4 lg:py-2.5 rounded-lg sm:rounded-xl font-medium text-xs sm:text-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 group ">
+                                <Link to={`/blogs/${1}`} className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 lg:px-4 lg:py-2.5 rounded-lg sm:rounded-xl font-medium text-xs sm:text-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 group ">
                                     Read more
                                     <ArrowRight className="w-4 h-4" />
-                                </button>
+                                </Link>
                             </div>
                         </div>
                     </div>

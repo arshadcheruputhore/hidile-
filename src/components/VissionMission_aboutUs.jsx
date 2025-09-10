@@ -1,6 +1,37 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 function VissionMission_aboutUs() {
+        const [visibleItems, setVisibleItems] = useState(new Set());
+        const itemRefs = useRef([]);
+
+        useEffect(() => {
+                const observers = [];
+        
+                // Items observer
+                const itemObserver = new IntersectionObserver(
+                    (entries) => {
+                        entries.forEach((entry) => {
+                            if (entry.isIntersecting) {
+                                const index = parseInt(entry.target.dataset.index);
+                                setVisibleItems(prev => new Set([...prev, index]));
+                            }
+                        });
+                    },
+                    { threshold: 0.2 }
+                );
+        
+                itemRefs.current.forEach((ref) => {
+                    if (ref) {
+                        itemObserver.observe(ref);
+                    }
+                });
+                observers.push(itemObserver);
+        
+                return () => {
+                    observers.forEach(observer => observer.disconnect());
+                };
+            }, []);
+
     return (
         <section className='px-3 sm:px-8 md:px-14 lg:px-32 py-12 sm:py-14 lg:py-18'>
             <div className="max-w-7xl mx-auto">
@@ -9,7 +40,17 @@ function VissionMission_aboutUs() {
                     <div className="">
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start px-3">
                             {/* Our Vision Card */}
-                            <div className="bg-white lg:rounded-2xl lg:rounded-tr-none rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 p-4 lg:p-6 border border-gray-100">
+                            <div
+                             ref={el => itemRefs.current[0] = el}
+                                data-index={0}
+                                style={{
+                                    transitionDelay: `${0 * 120}ms`
+                                }} 
+                            className={`bg-white lg:rounded-2xl lg:rounded-tr-none rounded-lg shadow-lg p-4 lg:p-6 border border-gray-100  relative group transition-all duration-700 ease-out
+                                    ${visibleItems.has(0) 
+                                        ? 'opacity-100 translate-x-0 scale-100' 
+                                        : 'opacity-0 translate-x-12 scale-95'
+                                    }`}>
                                 <h2 className="text-xl lg:text-2xl font-semibold text-gray-900 mb-2 lg:mb-">
                                     Our Vision
                                 </h2>
@@ -22,7 +63,17 @@ function VissionMission_aboutUs() {
                             </div>
 
                             {/* Our Mission Card */}
-                            <div className="bg-white lg:rounded-2xl lg:rounded-tl-none rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 p-4 lg:p-6 border border-gray-100 lg:mt-16">
+                            <div
+                             ref={el => itemRefs.current[1] = el}
+                                data-index={1}
+                                style={{
+                                    transitionDelay: `${1 * 120}ms`
+                                }}
+                            className={`bg-white lg:rounded-2xl lg:rounded-tl-none rounded-lg shadow-lg p-4 lg:p-6 border border-gray-100 lg:mt-16 relative group transition-all duration-700 ease-out
+                                    ${visibleItems.has(1) 
+                                        ? 'opacity-100 translate-x-0 scale-100' 
+                                        : 'opacity-0 -translate-x-12 scale-95'
+                                    }`}>
                                 <h2 className="text-xl lg:text-2xl font-semibold text-gray-900 mb-2 lg:mb-4">
                                     Our Mission
                                 </h2>

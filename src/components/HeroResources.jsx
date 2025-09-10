@@ -43,7 +43,7 @@ export default function HeroResources({ currentPage = 'industries' }) {
   };
 
   return (
-    <section className="relative min-h-[55vh] lg:min-h-[65vh] overflow-hidden sm:pt-28 pt-20 bg-[url(/img/heroResourcesBg.png)] bg-center bg-no-repeat bg-cover max-sm:px-6">
+    <section className="relative min-h-[55vh] lg:min-h-[65vh] overflow-hidden lg:pt-[8%] pt-20 bg-[url(/img/heroResourcesBg.png)] bg-center bg-no-repeat bg-cover max-sm:px-3">
       <div className="max-w-7xl mx-auto">
         {/* Main Content */}
         <div className="relative z-10 flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8">

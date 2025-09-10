@@ -1,7 +1,12 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Phone, Mail, MessageCircle } from 'lucide-react';
 
 const ReachUs_ContactUs = () => {
+    const [visibleItems, setVisibleItems] = useState(new Set());
+    const [headerVisible, setHeaderVisible] = useState(false);
+    const headerRef = useRef(null);
+    const itemRefs = useRef([]);
+
     const contactMethods = [
         {
             icon: <Phone className="lg:w-7 lg:h-7 w-5 h-5 text-white" />,
@@ -27,7 +32,7 @@ const ReachUs_ContactUs = () => {
     ];
 
     const handleAction = (actionType, action) => {
-        switch(actionType) {
+        switch (actionType) {
             case 'phone':
                 window.open(`tel:${action}`, '_self');
                 break;
@@ -43,11 +48,60 @@ const ReachUs_ContactUs = () => {
         }
     };
 
+    useEffect(() => {
+        const observers = [];
+
+        // Header observer
+        const headerObserver = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setHeaderVisible(true);
+                }
+            },
+            { threshold: 0.3 }
+        );
+
+        if (headerRef.current) {
+            headerObserver.observe(headerRef.current);
+            observers.push(headerObserver);
+        }
+
+        // Items observer
+        const itemObserver = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        const index = parseInt(entry.target.dataset.index);
+                        setVisibleItems(prev => new Set([...prev, index]));
+                    }
+                });
+            },
+            { threshold: 0.2 }
+        );
+
+        itemRefs.current.forEach((ref) => {
+            if (ref) {
+                itemObserver.observe(ref);
+            }
+        });
+        observers.push(itemObserver);
+
+        return () => {
+            observers.forEach(observer => observer.disconnect());
+        };
+    }, []);
+
     return (
-        <section className="">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="px-4 sm:px-6 lg:px-8">
+            <div className="max-w-7xl mx-auto ">
                 {/* Main Section Header */}
-                <div className="text-center mb-6 lg:mb-8">
+                <div
+                    ref={headerRef}
+                    className={`sm:mb-8 mb-6 transition-all duration-1000 ease-out ${headerVisible
+                        ? 'opacity-100 translate-y-0'
+                        : 'opacity-0 translate-y-8'
+                        }`}
+                >
                     <h1 className="text-xl sm:text-3xl font-medium text-gray-900 mb-2 lg:mb-3">
                         Multiple Ways to Reach Us
                     </h1>
@@ -61,7 +115,16 @@ const ReachUs_ContactUs = () => {
                     {contactMethods.map((method, index) => (
                         <div
                             key={index}
-                            className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-zinc-200 group"
+                            ref={el => itemRefs.current[index] = el}
+                            data-index={index}
+                            className={`bg-white rounded-2xl shadow-md hover:shadow-xl hover:duration-300 border border-zinc-200 group relative group transition-all duration-700 ease-out
+                                    ${visibleItems.has(index)
+                                    ? 'opacity-100 translate-y-0 scale-100'
+                                    : 'opacity-0 translate-y-12 scale-95'
+                                }`}
+                            style={{
+                                transitionDelay: `${index * 150}ms`
+                            }}
                         >
                             {/* Content */}
                             <div className="px-4 py-6 lg:py-8 text-center">

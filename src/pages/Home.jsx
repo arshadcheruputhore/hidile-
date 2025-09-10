@@ -31,7 +31,7 @@ function Home() {
         <ToolsCardHome />
 
         <IntegrationFlow />
-
+      
         <TrustedBrandsScroll />
 
         <IndustryCard />

@@ -2,49 +2,60 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Target, Settings, Users, PieChart, Shield, Bot } from 'lucide-react';
 
 function BenefitsHome() {
-    const [visibleCards, setVisibleCards] = useState(new Set());
-    const cardRefs = useRef([]);
+    const [visibleItems, setVisibleItems] = useState(new Set());
+    const [headerVisible, setHeaderVisible] = useState(false);
+    const headerRef = useRef(null);
+    const itemRefs = useRef([]);
 
     useEffect(() => {
         const observers = [];
-        
-        cardRefs.current.forEach((ref, index) => {
-            if (ref) {
-                const observer = new IntersectionObserver(
-                    (entries) => {
-                        entries.forEach((entry) => {
-                            if (entry.isIntersecting) {
-                                setVisibleCards(prev => new Set(prev).add(index));
-                            }
-                        });
-                    },
-                    {
-                        threshold: 0.1,
-                        rootMargin: '0px 0px -50px 0px'
+
+        // Header observer
+        const headerObserver = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setHeaderVisible(true);
+                }
+            },
+            { threshold: 0.3 }
+        );
+
+        if (headerRef.current) {
+            headerObserver.observe(headerRef.current);
+            observers.push(headerObserver);
+        }
+
+        // Items observer
+        const itemObserver = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        const index = parseInt(entry.target.dataset.index);
+                        setVisibleItems(prev => new Set([...prev, index]));
                     }
-                );
-                
-                observer.observe(ref);
-                observers.push(observer);
+                });
+            },
+            { threshold: 0.2 }
+        );
+
+        itemRefs.current.forEach((ref) => {
+            if (ref) {
+                itemObserver.observe(ref);
             }
         });
+        observers.push(itemObserver);
 
         return () => {
             observers.forEach(observer => observer.disconnect());
         };
     }, []);
 
-    const setCardRef = (index) => (el) => {
-        cardRefs.current[index] = el;
-    };
-
     const getCardClassName = (index, baseClasses) => {
-        const isVisible = visibleCards.has(index);
-        return `${baseClasses} transition-all duration-700 ease-out ${
-            isVisible 
-                ? 'opacity-100 translate-y-0' 
-                : 'opacity-0 translate-y-8'
-        }`;
+        const isVisible = visibleItems.has(index);
+        return `${baseClasses} transition-all duration-700 ease-out ${isVisible
+                ? 'opacity-100 translate-y-0 scale-100'
+                : 'opacity-0 translate-y-12 scale-95'
+            }`;
     };
 
     const features = [
@@ -96,7 +107,13 @@ function BenefitsHome() {
         <section className="sm:pb-20 mt-16 sm:mt-24 bg-gray-50 px-2 max-sm:px-0">
             <div className="max-w-7xl mx-auto">
                 {/* Header */}
-                <div className="text-center sm:mb-8 mb-6">
+                <div
+                    ref={headerRef}
+                    className={`sm:mb-8 mb-6 transition-all duration-1000 ease-out text-center${headerVisible
+                            ? 'opacity-100 -translate-x-0'
+                            : 'opacity-0 -translate-x-12'
+                        }`}
+                >
                     {/* Badge */}
                     <div className="max-sm:flex justify-start">
                         <div className="inline-flex gap-2 items-center py-1.5 pr-4 pl-1 bg-white border border-solid border-zinc-200 h-[45px] rounded-3xl 
@@ -170,8 +187,12 @@ function BenefitsHome() {
                         return (
                             <div
                                 key={index}
-                                ref={setCardRef(index)}
+                                ref={el => itemRefs.current[index] = el}
+                                data-index={index}
                                 className={getCardClassName(index, "relative group")}
+                                style={{
+                                    transitionDelay: `${index * 120}ms`
+                                }}
                             >
                                 {/* Behind Card - Animated Background */}
                                 <div className="absolute inset-0 bg-gradient-to-br from-blue-200 via-blue-600 to-blue-100 rounded-2xl transform rotate-1 scale-95 opacity-0 group-hover:opacity-100 group-hover:scale-100 group-hover:rotate-2 transition-all duration-500 ease-out shadow-xl"></div>

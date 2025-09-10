@@ -54,7 +54,7 @@ const BlogSinglePage = () => {
       <div className="max-w-7xl mx-auto px-4 py-8">
         <Link to={'/resources/blogs'} className="flex gap-2 items-center bg-gray-100 w-max px-1.5 sm:px-3 sm:py-0.5 rounded-full ring ring-gray-200 mb-6">
           <ArrowLeft width={16} color='#4a5565' />
-          <span className='text-xs sm:text-sm font-semibold text-gray-600 '>Back to blogs</span>
+          <span className='text-xs sm:text-sm font-semibold text-gray-600 '>blogs</span>
         </Link>
         
         <div className="flex flex-col lg:flex-row gap-8">

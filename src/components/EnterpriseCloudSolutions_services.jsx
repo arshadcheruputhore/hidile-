@@ -1,4 +1,5 @@
 import { ArrowRight, Cloud } from "lucide-react";
+import { Link } from "react-router-dom";
 
 // Responsive Enterprise Cloud Solutions Component
 const EnterpriseCloudSolutions_services = () => {
@@ -12,45 +13,45 @@ const EnterpriseCloudSolutions_services = () => {
           </div>
           <h1 className="text-sm sm:text-lg font-semibold text-blue-600">Enterprise Cloud Solutions</h1>
         </div>
-        
+
         {/* Description */}
         <div className="mb-6 lg:mb-8">
           <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
-            While cloud computing is becoming increasingly popular in the corporate world, numerous companies 
-            grapple with comprehending its strategic significance. The cloud can deliver value across your business's 
-            economic, technical, and strategic dimensions. Organizations that have embraced cloud services have 
-            reported diverse performance improvements stemming from their adoption. Hidile will effectively 
+            While cloud computing is becoming increasingly popular in the corporate world, numerous companies
+            grapple with comprehending its strategic significance. The cloud can deliver value across your business's
+            economic, technical, and strategic dimensions. Organizations that have embraced cloud services have
+            reported diverse performance improvements stemming from their adoption. Hidile will effectively
             coordinate complementary capabilities and lead you to higher returns using cloud adoption.
           </p>
         </div>
-        
+
         {/* Image */}
         <div className="mb-6 lg:mb-8">
-          <img 
-            src="/img/enterprise_services.png" 
-            alt="enterprise-img" 
+          <img
+            src="/img/enterprise_services.png"
+            alt="enterprise-img"
             className="w-full h-auto object-contain rounded-lg"
           />
         </div>
-        
+
         {/* Additional Description */}
         <div className="mb-6 lg:mb-8">
           <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
-            Cloud services with uniform infrastructure, data management, and business processes have a competitive 
-            edge. These services allow for isolating specific processes ideal for cloud services, facilitating the seamless 
-            adoption of cloud vendors' best practices. With our consolidated and standardized technical foundation, 
+            Cloud services with uniform infrastructure, data management, and business processes have a competitive
+            edge. These services allow for isolating specific processes ideal for cloud services, facilitating the seamless
+            adoption of cloud vendors' best practices. With our consolidated and standardized technical foundation,
             you will be well-prepared for swift deployment and cost-effective access to cloud services.
           </p>
         </div>
-        
+
         {/* CTA Button */}
         <div className="flex justify-end lg:justify-start">
-          <button className="inline-flex items-center px-3 py-2 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-3xl transition-colors duration-200 shadow-sm text-sm sm:text-base">
+          <Link to={'/reach-us'} className="inline-flex items-center px-3 py-2 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-3xl transition-colors duration-200 shadow-sm text-sm sm:text-base">
             Get in Touch
             <div className="ml-2 bg-white text-black rounded-full p-1">
               <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4" />
             </div>
-          </button>
+          </Link>
         </div>
       </div>
     </section>

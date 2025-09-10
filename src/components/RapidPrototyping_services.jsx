@@ -1,4 +1,5 @@
 import { ArrowRight, Zap, GitBranch, Eye, Users } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const RapidPrototyping_services = () => {
   const prototypingFeatures = [
@@ -82,12 +83,12 @@ const RapidPrototyping_services = () => {
 
         {/* CTA Button */}
         <div className="flex justify-end lg:justify-start">
-          <button className="inline-flex items-center px-3 py-2 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-3xl transition-colors duration-200 shadow-sm text-sm sm:text-base">
+          <Link to={'/reach-us'} className="inline-flex items-center px-3 py-2 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-3xl transition-colors duration-200 shadow-sm text-sm sm:text-base">
             Get in Touch
             <div className="ml-2 bg-white text-black rounded-full p-1">
               <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4" />
             </div>
-          </button>
+          </Link>
         </div>
       </div>
     </section>

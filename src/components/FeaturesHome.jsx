@@ -2,54 +2,69 @@ import { MoveRight } from 'lucide-react'
 import React, { useEffect, useRef, useState } from 'react'
 
 function FeaturesHome() {
-    const [visibleCards, setVisibleCards] = useState(new Set());
-    const cardRefs = useRef([]);
+    const [visibleItems, setVisibleItems] = useState(new Set());
+    const [headerVisible, setHeaderVisible] = useState(false);
+    const headerRef = useRef(null);
+    const itemRefs = useRef([]);
 
     useEffect(() => {
         const observers = [];
-        
-        cardRefs.current.forEach((ref, index) => {
-            if (ref) {
-                const observer = new IntersectionObserver(
-                    (entries) => {
-                        entries.forEach((entry) => {
-                            if (entry.isIntersecting) {
-                                setVisibleCards(prev => new Set(prev).add(index));
-                            }
-                        });
-                    },
-                    {
-                        threshold: 0.1,
-                        rootMargin: '0px 0px -50px 0px'
+
+        // Header observer
+        const headerObserver = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setHeaderVisible(true);
+                }
+            },
+            { threshold: 0.3 }
+        );
+
+        if (headerRef.current) {
+            headerObserver.observe(headerRef.current);
+            observers.push(headerObserver);
+        }
+
+        // Items observer
+        const itemObserver = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        const index = parseInt(entry.target.dataset.index);
+                        setVisibleItems(prev => new Set([...prev, index]));
                     }
-                );
-                
-                observer.observe(ref);
-                observers.push(observer);
+                });
+            },
+            { threshold: 0.2 }
+        );
+
+        itemRefs.current.forEach((ref) => {
+            if (ref) {
+                itemObserver.observe(ref);
             }
         });
+        observers.push(itemObserver);
 
         return () => {
             observers.forEach(observer => observer.disconnect());
         };
     }, []);
 
-    const setCardRef = (index) => (el) => {
-        cardRefs.current[index] = el;
-    };
-
     const getCardClassName = (index, baseClasses) => {
-        const isVisible = visibleCards.has(index);
-        return `${baseClasses} transition-all duration-700 ease-out ${
-            isVisible 
-                ? 'opacity-100 translate-y-0' 
-                : 'opacity-0 translate-y-8'
-        }`;
+        const isVisible = visibleItems.has(index);
+        return `${baseClasses} transition-all duration-700 ease-out ${isVisible
+                ? 'opacity-100 translate-y-0 scale-100'
+                : 'opacity-0 translate-y-12 scale-95'
+            }`;
     };
 
     return (
         <section className='px-1 sm:px-3 max-sm:mt-16 max-w-7xl mx-auto'>
-            <div className="flex items-center justify-between w-full max-sm:flex-col max-sm:items-start max-sm:gap-2.5">
+            <div
+                ref={headerRef}
+                className={`flex items-center justify-between w-full max-sm:flex-col max-sm:items-start max-sm:gap-2.5 transition-all duration-1000 ${headerVisible
+                        ? 'opacity-100 translate-y-0'
+                        : 'opacity-0 -translate-y-12'}`}>
                 <div className="w-3/5 max-sm:w-full">
                     {/* Badge */}
                     <div className="max-sm:flex justify-start">
@@ -118,8 +133,12 @@ function FeaturesHome() {
             <section className="w-full">
                 <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 mb-7 max-sm:gap-4 max-sm:mb-6">
                     {/* 1st Row - Two Cards */}
-                    <div 
-                        ref={setCardRef(0)}
+                    <div
+                        ref={el => itemRefs.current[0] = el}
+                        data-index={0}
+                        style={{
+                                    transitionDelay: `${0 * 120}ms`
+                                }}
                         className={getCardClassName(0, "bg-slate-50 rounded-2xl overflow-hidden border border-solid border-zinc-200 col-span-3 max-lg:col-span-1 ")}
                     >
                         <div className="p-6 max-sm:p-4">
@@ -140,8 +159,12 @@ function FeaturesHome() {
                         </div>
                     </div>
 
-                    <div 
-                        ref={setCardRef(1)}
+                    <div
+                        ref={el => itemRefs.current[1] = el}
+                                data-index={1}
+                                style={{
+                                    transitionDelay: `${1 * 120}ms`
+                                }}
                         className={getCardClassName(1, "bg-slate-50 rounded-2xl overflow-hidden border border-solid border-zinc-200 col-span-2 max-lg:col-span-1 ")}
                     >
                         <div className="p-6 max-sm:p-4">
@@ -165,13 +188,17 @@ function FeaturesHome() {
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-sm:gap-4">
                     {/* 2nd Row - Three Cards */}
-                    <div 
-                        ref={setCardRef(2)}
+                    <div
+                        ref={el => itemRefs.current[2] = el}
+                                data-index={2}
+                                style={{
+                                    transitionDelay: `${2 * 120}ms`
+                                }}
                         className={getCardClassName(2, "bg-slate-50 rounded-2xl overflow-hidden border border-solid border-zinc-200 px-8 pt-8 flex flex-col justify-between align-middle max-sm:px-4 max-sm:pt-4 ")}
                     >
                         <div className="max-sm:mb-4">
                             <h3 className="text-2xl tracking-wide font-semibold text-gray-800 mb-2.5 max-sm:text-xl max-sm:mb-2">
-                               Connecting teams
+                                Connecting teams
                             </h3>
                             <p className="text-gray-600 text-sm leading-[22px] max-sm:text-xs max-sm:leading-5">
                                 Connect people. Align work. Create momentum.
@@ -187,16 +214,20 @@ function FeaturesHome() {
                         </div>
                     </div>
 
-                    <div 
-                        ref={setCardRef(3)}
+                    <div
+                        ref={el => itemRefs.current[3] = el}
+                                data-index={3}
+                                style={{
+                                    transitionDelay: `${3 * 120}ms`
+                                }}
                         className={getCardClassName(3, "bg-slate-50 rounded-2xl overflow-hidden border border-solid border-zinc-200 flex flex-col justify-between ")}
                     >
                         <div className="pr-14 pl-8 pt-8 max-sm:px-4 max-sm:pt-4">
                             <h3 className="text-2xl tracking-wide font-semibold text-gray-800 mb-2.5 max-sm:text-xl max-sm:mb-2">
-                               Get Notified
+                                Get Notified
                             </h3>
                             <p className="text-gray-600 text-sm leading-[22px] max-sm:text-xs max-sm:leading-5 max-sm:mb-4">
-                               Get notified about upcoming deadlines, changes, and team updates in real-time.
+                                Get notified about upcoming deadlines, changes, and team updates in real-time.
                             </p>
                         </div>
 
@@ -209,8 +240,12 @@ function FeaturesHome() {
                         </div>
                     </div>
 
-                    <div 
-                        ref={setCardRef(4)}
+                    <div
+                        ref={el => itemRefs.current[4] = el}
+                                data-index={4}
+                                style={{
+                                    transitionDelay: `${4 * 120}ms`
+                                }}
                         className={getCardClassName(4, "bg-slate-50 rounded-2xl overflow-hidden border border-solid border-zinc-200 ")}
                     >
                         <div className="px-6 pt-6 max-sm:px-4 max-sm:pt-4">

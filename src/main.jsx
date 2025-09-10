@@ -11,6 +11,6 @@ createRoot(document.getElementById('root')).render(
       <ScrollProvider>
         <App />
       </ScrollProvider>
-    </StrictMode>,
+    </StrictMode>
   </BrowserRouter>
 )

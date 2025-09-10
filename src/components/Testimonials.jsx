@@ -2,57 +2,76 @@ import React, { useEffect, useRef, useState } from "react";
 
 function Testimonials() {
   const testimonials = [
-    { id: 1, quote: "You made it so simple. My new site is so much faster and easier to work with than my old site.", name: "John Doe", title: "Graphic Designer", avatar: "/img/avatar1.png" },
-    { id: 2, quote: "Simply the best. Better than all the rest. I'd recommend this product to beginners and advanced users.", name: "John Doe", title: "Graphic Designer", avatar: "/img/avatar2.png" },
-    { id: 3, quote: "Must have book for all, who want to be Product Designer or Interaction Designer.", name: "John Doe", title: "Graphic Designer", avatar: "/img/avatar3.png" },
+    { id: 1, quote: "Hidile has been a game-changer for Blishoper! They helped us smoothly scale to 100K+ users, providing continuous tech support and advanced analytics to enhance our e-commerce journey. Their dedication to on-time project delivery and immediate resolution of any issues is truly outstanding. A huge thanks to Hidile for making our expansion seamless and hassle-free!", name: "Blishoper india", title: "CEO", avatar: "/img/Billshoper_scroll.png" },
+    { id: 2, quote: "Over the 14 years of my experience in Business Management, I’m so glad to meet and work with Team Hidile. The entire team of Hidile have a culture of developing and learning every day. As the technology developed by Hidile is always meeting the purpose of business, most of the time we ignore the poor front end design.", name: "Madre Integrated Engineering, Qatar", title: "COO", avatar: "/img/Madre_scroll.jpg" },
   ];
 
-  const [visible, setVisible] = useState(() => new Set()); // indexes revealed
-  const cardRefs = useRef([]);
+  const [visibleItems, setVisibleItems] = useState(new Set());
+  const [headerVisible, setHeaderVisible] = useState(false);
+  const headerRef = useRef(null);
+  const itemRefs = useRef([]);
 
   useEffect(() => {
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          const idx = Number(entry.target.getAttribute("data-index"));
-          setVisible((prev) => {
-            if (prev.has(idx)) return prev; // no re-render
-            const next = new Set(prev);
-            next.add(idx);
-            return next;
-          });
-          io.unobserve(entry.target); // reveal once
-        });
+    const observers = [];
+
+    // Header observer
+    const headerObserver = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setHeaderVisible(true);
+        }
       },
-      {
-        threshold: 0.2,            // at least 20% visible
-        rootMargin: "0px 0px -10% 0px", // don't trigger too early near bottom
-      }
+      { threshold: 0.3 }
     );
 
-    cardRefs.current.forEach((el) => el && io.observe(el));
-    return () => io.disconnect();
-  }, []);
+    if (headerRef.current) {
+      headerObserver.observe(headerRef.current);
+      observers.push(headerObserver);
+    }
 
-  const setCardRef = (i) => (el) => {
-    cardRefs.current[i] = el;
-  };
+    // Items observer
+    const itemObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = parseInt(entry.target.dataset.index);
+            setVisibleItems(prev => new Set([...prev, index]));
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    itemRefs.current.forEach((ref) => {
+      if (ref) {
+        itemObserver.observe(ref);
+      }
+    });
+    observers.push(itemObserver);
+
+    return () => {
+      observers.forEach(observer => observer.disconnect());
+    };
+  }, []);
 
   const getCardClassName = (i, base) =>
     [
       base,
-      "transition-[opacity,transform,box-shadow] duration-700 ease-out will-change-[opacity,transform]",
-      visible.has(i) ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8",
+      "transition-[opacity,transform,box-shadow] duration-700 ease-out will-change-[opacity,transform] scale-100",
+      visibleItems.has(i) ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12 scale-95",
     ].join(" ");
-
-  const getDelay = (i) => ({ transitionDelay: `${i * 150}ms` });
 
   return (
     <section className="pt-8 lg:pt-10 pb-4 sm:pb-2">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-6 sm:mb-8">
+        <div
+          ref={headerRef}
+          className={`sm:mb-8 mb-6 text-center transition-all duration-1000 ease-out ${headerVisible
+            ? 'opacity-100 translate-y-0'
+            : 'opacity-0 translate-y-12'
+            }`}
+        >
           <h2 className="text-xl sm:text-3xl md:text-3xl font-medium text-gray-800 leading-tight sm:leading-9 md:leading-[48px]">
             What people say about us
           </h2>
@@ -63,25 +82,27 @@ function Testimonials() {
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-8">
-          {testimonials.map((t, i) => (
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-8">
+          {testimonials.map((testimonial, index) => (
             <div
-              key={t.id}
-              data-index={i}
-              ref={setCardRef(i)}
+              key={testimonial.id}
+              ref={el => itemRefs.current[index] = el}
+              data-index={index}
               className={getCardClassName(
-                i,
+                index,
                 "bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-zinc-200 hover:shadow-md"
               )}
-              style={getDelay(i)}
+              style={{
+                transitionDelay: `${index * 120}ms`
+              }}
             >
               {/* Avatar */}
               <div className="mb-8 sm:mb-12">
-                <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-gray-200 to-gray-300 overflow-hidden">
+                <div className="w-24 h-14 sm:w-32 sm:h-12 bg-gray-100 border p-1 rounded-md border-zinc-200 overflow-hidden">
                   <img
-                    src={t.avatar}
-                    alt={t.name}
-                    className="w-full h-full object-cover"
+                    src={testimonial.avatar}
+                    alt={testimonial.name}
+                    className="w-full h-full object-contain"
                     onError={(e) => {
                       e.currentTarget.style.display = "none";
                     }}
@@ -92,14 +113,14 @@ function Testimonials() {
               {/* Quote */}
               <blockquote className="mb-8 sm:mb-12">
                 <p className="text-gray-800 text-base sm:text-lg leading-relaxed font-normal">
-                  "{t.quote}"
+                  "{testimonial.quote}"
                 </p>
               </blockquote>
 
               {/* Author */}
               <div>
-                <div className="font-semibold text-gray-900 text-base sm:text-lg mb-1">{t.name}</div>
-                <div className="text-gray-500 text-sm sm:text-base">{t.title}</div>
+                <div className="font-semibold text-gray-900 text-base sm:text-lg mb-1">{testimonial.name}</div>
+                <div className="text-gray-500 text-sm sm:text-base">{testimonial.title}</div>
               </div>
             </div>
           ))}

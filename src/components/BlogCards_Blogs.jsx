@@ -1,16 +1,19 @@
 import { Calendar, Clock, ArrowRight, Tag, Grid, List, LayoutGrid } from 'lucide-react';
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 
 function BlogCards_Blogs() {
     const [viewMode, setViewMode] = useState('grid'); // 'grid' or 'list'
     const [activeCategory, setActiveCategory] = useState('All Posts');
 
+    const [visibleItems, setVisibleItems] = useState(new Set());
+    const itemRefs = useRef([]);
+
     const navigate = useNavigate();
 
     const blogPosts = [
         {
-            id: 1,
+            id: 2,
             image: '/img/dummyBlogCard.png',
             category: 'Productivity Tips',
             title: 'The Ultimate Guide to Task Prioritization',
@@ -19,7 +22,7 @@ function BlogCards_Blogs() {
             readTime: '8 min read'
         },
         {
-            id: 2,
+            id: 3,
             image: '/img/dummyBlogCard2.png',
             category: 'Workflows',
             title: 'How to Set Up Your First Project in Hidile OKR',
@@ -41,7 +44,7 @@ function BlogCards_Blogs() {
                         content: "Once you log into Hidile OKR, you'll land on the dashboard. This is your control center, where you can see company-wide objectives, team OKRs, and personal contributions. To create a project, navigate to the sidebar menu and select 'Projects.' This section is dedicated to tracking initiatives that support your objectives.",
                         tip: "If you don't have an account yet, start for free and explore the demo workspace to get familiar with the interface."
                     },
-                    
+
                     {
                         title: "Step 2: Create a New Project",
                         content: "Click the “+ New Project” button to get started. You’ll be prompted to enter details such as the project name, owner, start and end dates, and a short description. Be clear and concise—your project name should reflect the initiative’s purpose, and the description should explain how it connects to your key results. For example, if your objective is “Improve Customer Satisfaction,” your project could be “Redesign Customer Support Portal.”",
@@ -76,7 +79,7 @@ function BlogCards_Blogs() {
             }
         },
         {
-            id: 3,
+            id: 4,
             image: '/img/dummyBlogCard.png',
             category: 'Productivity Tips',
             title: 'The Ultimate Guide to Task Prioritization',
@@ -85,7 +88,7 @@ function BlogCards_Blogs() {
             readTime: '8 min read'
         },
         {
-            id: 4,
+            id: 5,
             image: '/img/dummyBlogCard2.png',
             category: 'AI & Automation',
             title: 'The Ultimate Guide to Task Prioritization',
@@ -94,7 +97,7 @@ function BlogCards_Blogs() {
             readTime: '8 min read'
         },
         {
-            id: 5,
+            id: 6,
             image: '/img/dummyBlogCard2.png',
             category: 'Workflows',
             title: 'How to Set Up Your First Project in Hidile OKR',
@@ -122,17 +125,8 @@ function BlogCards_Blogs() {
             }
         },
         {
-            id: 6,
-            image: '/img/dummyBlogCard2.png',
-            category: 'Organization',
-            title: 'The Ultimate Guide to Task Prioritization',
-            description: 'Learn how to prioritize your tasks effectively to focus on what truly matters',
-            date: 'Jul 10, 2023',
-            readTime: '8 min read'
-        },
-        {
             id: 7,
-            image: '/img/dummyBlogCard.png',
+            image: '/img/dummyBlogCard2.png',
             category: 'Organization',
             title: 'The Ultimate Guide to Task Prioritization',
             description: 'Learn how to prioritize your tasks effectively to focus on what truly matters',
@@ -141,6 +135,15 @@ function BlogCards_Blogs() {
         },
         {
             id: 8,
+            image: '/img/dummyBlogCard.png',
+            category: 'Organization',
+            title: 'The Ultimate Guide to Task Prioritization',
+            description: 'Learn how to prioritize your tasks effectively to focus on what truly matters',
+            date: 'Jul 10, 2023',
+            readTime: '8 min read'
+        },
+        {
+            id: 9,
             image: '/img/dummyBlogCard2.png',
             category: 'Productivity Tips',
             title: 'The Ultimate Guide to Task Prioritization',
@@ -149,7 +152,7 @@ function BlogCards_Blogs() {
             readTime: '8 min read'
         },
         {
-            id: 9,
+            id: 10,
             image: '/img/dummyBlogCard2.png',
             category: 'Workflows',
             title: 'How to Set Up Your First Project in Hidile OKR',
@@ -178,14 +181,18 @@ function BlogCards_Blogs() {
         },
     ];
 
+    const getCategoryCount = (catName) => {
+        return blogPosts.filter(item => item.category === catName).length
+    }
+
     const categories = [
-        { name: 'All Posts', count: 9 },
-        { name: 'Workflows', count: 1 },
-        { name: 'Productivity Tips', count: 3 },
-        { name: 'AI & Automation', count: 1 },
-        { name: 'Strategy', count: 1 },
-        { name: 'Organization', count: 2 },
-        { name: 'Analytics & Insights', count: 1 }
+        { name: 'All Posts', count: blogPosts.length },
+        { name: 'Workflows', count: getCategoryCount('Workflows') },
+        { name: 'Productivity Tips', count: getCategoryCount('Productivity Tips') },
+        { name: 'AI & Automation', count: getCategoryCount('AI & Automation') },
+        { name: 'Strategy', count: getCategoryCount('Strategy') },
+        { name: 'Organization', count: getCategoryCount('Organization') },
+        { name: 'Analytics & Insights', count: getCategoryCount('Analytics & Insights') }
     ];
 
     // Filter posts based on active category
@@ -195,12 +202,40 @@ function BlogCards_Blogs() {
 
     const handleBlogClick = (blog) => {
         navigate(`/blogs/${blog.id}`, {
-            state: { 
+            state: {
                 blogPosts: blogPosts,
-                selectedBlog: blog 
+                selectedBlog: blog
             }
         })
     }
+
+    useEffect(() => {
+        const observers = [];
+
+        // Items observer
+        const itemObserver = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        const index = parseInt(entry.target.dataset.index);
+                        setVisibleItems(prev => new Set([...prev, index]));
+                    }
+                });
+            },
+            { threshold: 0.2 }
+        );
+
+        itemRefs.current.forEach((ref) => {
+            if (ref) {
+                itemObserver.observe(ref);
+            }
+        });
+        observers.push(itemObserver);
+
+        return () => {
+            observers.forEach(observer => observer.disconnect());
+        };
+    }, []);
 
     return (
         <section className="mt-12 lg:mt-20">
@@ -224,15 +259,16 @@ function BlogCards_Blogs() {
                 </div>
 
                 {/* Header with View Toggle */}
-                <div className="flex items-center justify-between mb-4">
+                <div
+                    className={`flex items-center justify-between mb-4 transition-all duration-1000 ease-out`}>
                     <div>
                         <h2 className="text-2xl font-semibold text-gray-900 mb-1">All Posts</h2>
                         <p className="text-sm text-gray-500">Showing {filteredPosts.length} of {blogPosts.length} posts</p>
                     </div>
                     <div className="flex items-center gap-2">
-                        <span className="text-xs text-gray-600 bg-gray-200 px-2 py-0.5 rounded-full border border-gray-300">
+                        {/* <span className="text-xs text-gray-600 bg-gray-200 px-2 py-0.5 rounded-full border border-gray-300">
                             {viewMode === 'grid' ? 'Grid View' : 'List View'}
-                        </span>
+                        </span> */}
                         <div className="relative group">
                             <button
                                 onClick={() => setViewMode(viewMode === 'grid' ? 'list' : 'grid')}
@@ -259,8 +295,23 @@ function BlogCards_Blogs() {
                 {/* Blog Posts Grid */}
                 {viewMode === 'grid' ? (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {filteredPosts.map((post) => (
-                            <div onClick={() => handleBlogClick(post)} className="bg-white rounded-xl border border-gray-200 border-b-2 hover:border-b-blue-500 overflow-hidden hover:shadow-md transition-all duration-500">
+                        {filteredPosts.map((post, index) => (
+                            <div
+                                ref={el => itemRefs.current[index] = el}
+                                data-index={index}
+                                onClick={() => handleBlogClick(post)}
+                                className={`bg-white rounded-xl border border-gray-200 border-b-2 hover:border-b-blue-500 
+                                overflow-hidden hover:shadow-md 
+                                transition-all duration-700 
+                                ease-out relative group
+                                ${visibleItems.has(index)
+                                    ? 'opacity-100 translate-y-0 scale-100'
+                                    : 'opacity-0 translate-y-12 scale-95'
+                                    }`}
+                                style={{
+                                    transitionDelay: `${index * 120}ms`
+                                }}
+                            >
                                 {/* Image */}
                                 <div className="relative h-48 w-full bg-gray-100">
                                     <img

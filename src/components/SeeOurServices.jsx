@@ -219,12 +219,12 @@ const SeeOurServices = () => {
               : 'opacity-0 translate-y-8 scale-95'
           }`}
         >
-          <button className="inline-flex items-center gap-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg transition-colors duration-200 shadow-sm text-xs sm:text-sm group">
+          <Link to={'/service-details'} className="inline-flex items-center gap-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg transition-colors duration-200 shadow-sm text-xs sm:text-sm group">
             Explore All Services
             <div className="mt-1 text-white">
               <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
             </div>
-          </button>
+          </Link>
         </div>
       </div>
     </section>

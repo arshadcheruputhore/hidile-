@@ -1,4 +1,5 @@
 import { ArrowRight, Smartphone, MonitorSmartphone, Users, Settings } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const MobileAppDevelopment_services = () => {
   const scopeAreas = [
@@ -9,7 +10,7 @@ const MobileAppDevelopment_services = () => {
     },
     {
       icon: Users,
-      title: "Customer Engagement", 
+      title: "Customer Engagement",
       description: "Enhance customer interaction and loyalty with a user-friendly app that provides valuable features and services."
     },
     {
@@ -29,14 +30,14 @@ const MobileAppDevelopment_services = () => {
           </div>
           <h1 className="text-sm sm:text-lg font-semibold text-blue-600">Mobile and App Development</h1>
         </div>
-        
+
         {/* Description */}
         <div className="mb-6 lg:mb-8">
           <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
-            Welcome to the era where an app is not just an option but a necessity for your brand's visibility and 
-            engagement. Just as having a website was a significant milestone in the 1990s, today, the question is 
-            whether your business has a dedicated application developed to cater to your unique needs. With the 
-            mobile handset count skyrocketing from 2 billion in 2005 to 5 billion, the app industry is witnessing 
+            Welcome to the era where an app is not just an option but a necessity for your brand's visibility and
+            engagement. Just as having a website was a significant milestone in the 1990s, today, the question is
+            whether your business has a dedicated application developed to cater to your unique needs. With the
+            mobile handset count skyrocketing from 2 billion in 2005 to 5 billion, the app industry is witnessing
             exponential growth, making it a crucial component of your communication and marketing strategy.
           </p>
         </div>
@@ -46,7 +47,7 @@ const MobileAppDevelopment_services = () => {
           <h2 className="text-lg sm:text-xl font-semibold text-gray-800 mb-4">
             Scope of mobile applications in business operations
           </h2>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-6 mb-6">
             {scopeAreas.map((area, index) => {
               const IconComponent = area.icon;
@@ -66,24 +67,24 @@ const MobileAppDevelopment_services = () => {
             })}
           </div>
         </div>
-        
+
         {/* Additional Description */}
         <div className="mb-6 lg:mb-8">
           <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
-            In this mobile-centric era, having a robust app is not just an advantage; it's a necessity. Take the lead in your 
-            industry by incorporating a tailored mobile application into your business strategy. Partnering with us to 
+            In this mobile-centric era, having a robust app is not just an advantage; it's a necessity. Take the lead in your
+            industry by incorporating a tailored mobile application into your business strategy. Partnering with us to
             explore how our expertise can elevate your brand's presence in the ever-expanding mobile landscape.
           </p>
         </div>
-        
+
         {/* CTA Button */}
         <div className="flex justify-end lg:justify-start">
-          <button className="inline-flex items-center px-3 py-2 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-3xl transition-colors duration-200 shadow-sm text-sm sm:text-base">
+          <Link to={'/reach-us'} className="inline-flex items-center px-3 py-2 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-3xl transition-colors duration-200 shadow-sm text-sm sm:text-base">
             Get in Touch
             <div className="ml-2 bg-white text-black rounded-full p-1">
               <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4" />
             </div>
-          </button>
+          </Link>
         </div>
       </div>
     </section>

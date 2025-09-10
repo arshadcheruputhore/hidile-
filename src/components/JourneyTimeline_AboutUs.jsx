@@ -138,7 +138,7 @@ const JourneyTimeline_AboutUs = () => {
                                                     </p>
 
                                                     {/* Arrow pointing to timeline */}
-                                                    <div className="absolute top-1/2 -translate-y-1/2 -right-3 w-6 h-6 bg-white transform rotate-45"></div>
+                                                    <div className="absolute top-1/2 -translate-y-1/2 -right-3 size-6 bg-white transform rotate-45"></div>
                                                 </div>
                                             )}
                                         </div>
@@ -171,7 +171,7 @@ const JourneyTimeline_AboutUs = () => {
                                                     </p>
 
                                                     {/* Arrow pointing to timeline */}
-                                                    <div className="absolute top-1/2 -translate-y-1/2 -left-3 w-6 h-6 bg-white transform rotate-45"></div>
+                                                    <div className="absolute top-1/2 -translate-y-1/2 -left-3 size-6 bg-white transform rotate-45"></div>
                                                 </div>
                                             )}
                                         </div>
@@ -206,7 +206,7 @@ const JourneyTimeline_AboutUs = () => {
                                                 </p>
 
                                                 {/* Arrow pointing to timeline */}
-                                                <div className="absolute top-6 -left-3 w-6 h-6 bg-white transform rotate-45"></div>
+                                                <div className="absolute top-6 -left-2 size-5 bg-white transform rotate-45"></div>
                                             </div>
                                         </div>
                                     </div>

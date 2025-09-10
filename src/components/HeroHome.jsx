@@ -54,23 +54,23 @@ function HeroHome() {
     return () => clearInterval(interval);
   }, [features.length]);
 
-  const handleNext = () => {
-    if (isAnimating) return;
-    setIsAnimating(true);
-    setTimeout(() => {
-      setCurrentIndex((prev) => (prev + 1) % features.length);
-      setIsAnimating(false);
-    }, 150);
-  };
+  // const handleNext = () => {
+  //   if (isAnimating) return;
+  //   setIsAnimating(true);
+  //   setTimeout(() => {
+  //     setCurrentIndex((prev) => (prev + 1) % features.length);
+  //     setIsAnimating(false);
+  //   }, 150);
+  // };
 
-  const handlePrevious = () => {
-    if (isAnimating) return;
-    setIsAnimating(true);
-    setTimeout(() => {
-      setCurrentIndex((prev) => (prev - 1 + features.length) % features.length);
-      setIsAnimating(false);
-    }, 150);
-  };
+  // const handlePrevious = () => {
+  //   if (isAnimating) return;
+  //   setIsAnimating(true);
+  //   setTimeout(() => {
+  //     setCurrentIndex((prev) => (prev - 1 + features.length) % features.length);
+  //     setIsAnimating(false);
+  //   }, 150);
+  // };
 
   return (
     <section 
@@ -92,7 +92,7 @@ function HeroHome() {
         </div>
 
         {/* Feature Badge */}
-        <div className="max-sm:flex justify-start">
+        <div className="max-sm:flex justify-start relative z-10">
           <div className="inline-flex gap-2 items-center py-1.5 pr-4 pl-1 bg-white border border-solid border-zinc-200 h-[45px] rounded-3xl 
   max-sm:min-w-max max-sm:max-w-sm 
   max-sm:h-[30px] max-sm:gap-1.5 max-sm:pr-2 max-sm:pl-0.5 max-sm:py-4">
@@ -100,11 +100,11 @@ function HeroHome() {
             {/* Left blue label with slide animation */}
             <div className="relative flex flex-col items-center justify-center px-4 md:pt-1.5 md:pb-2 pb-1 bg-blue-600 rounded-3xl max-sm:px-2.5 overflow-hidden">
               <div 
-                className={`transition-transform duration-300 ease-in-out ${
-                  isAnimating ? '-translate-y-full opacity-100' : 'translate-y-0 opacity-100'
+                className={`transition-all duration-300 ease-in-out ${
+                  isAnimating ? 'translate-y-full opacity-0' : 'translate-y-0 opacity-100'
                 }`}
               >
-                <span className="text-sm text-center text-white tracking-wider font-medium max-sm:text-[10px] whitespace-nowrap inline-block">
+                <span className="text-sm text-center text-white tracking-wider font-medium  whitespace-nowrap inline-block">
                   {features[currentIndex].label}
                 </span>
               </div>
@@ -113,7 +113,7 @@ function HeroHome() {
             {/* Center text with fade animation */}
             <div className="flex justify-center items-center flex-1">
               <span 
-                className={`text-sm font-medium tracking-wide text-center text-gray-700 max-sm:text-[11px] transition-opacity duration-300 ${
+                className={`text-sm font-medium tracking-wide text-center text-gray-700 transition-opacity duration-300 ${
                   isAnimating ? 'opacity-50' : 'opacity-100'
                 }`}
               >
@@ -186,8 +186,8 @@ function HeroHome() {
 
       {/* Main Content */}
       <div className="flex flex-col items-center relative z-10 max-sm:mt-16">
-        <h1 className="mb-2.5 text-[40px] font-semibold text-center max-sm:text-center text-gray-900 leading-[64px] w-full max-md:text-4xl max-md:leading-relaxed max-sm:mb-2.5 max-sm:text-xl max-sm:px-4">
-          Define OKRs. Drive Tasks. <br className="max-sm:hidden" />Deliver Outcomes.
+        <h1 className="mb-2.5 text-[40px] font-semibold text-center max-sm:text-center text-gray-900 leading-[64px] w-full max-md:text-4xl max-md:leading-relaxed max-sm:mb-2.5 max-sm:text-2xl text-nowrap">
+          Define OKRs. Drive Tasks. <br />Deliver Outcomes.
 
         </h1>
 
@@ -205,7 +205,7 @@ function HeroHome() {
           </div>
 
           {/* Description */}
-          <p className=" leading-7 text-center text-gray-600 w-[590px] max-md:max-w-[500px] max-sm:w-full text-sm max-sm:leading-6 max-sm:px-4 max-sm:max-w-none">
+          <p className=" leading-7 text-center text-gray-600 w-[590px] max-md:max-w-[500px] max-sm:w-full text-base max-sm:leading-6 max-sm:max-w-none">
             Plan on boards, sync in chat, glide through your calendar.Tie it all to OKRs and watch the wins stack up.
           </p>
 

@@ -47,11 +47,19 @@ export default function HeroService() {
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 justify-center items-center max-lg:px-4">
               <Link
-                to={"/reach-us"}
-                className="inline-flex items-center justify-center rounded-xl bg-blue-600 px-6 py-3 text-sm font-semibold text-white shadow-md hover:bg-blue-700 focus-visible:outline-offset-2 focus-visible:outline-blue-600 transition-colors max-lg:w-full"
+                to="/reach-us"
+                className="group relative inline-flex items-center justify-center rounded-xl bg-blue-600 px-7 py-3 text-sm font-semibold text-white shadow-md hover:bg-blue-700 focus-visible:outline-offset-2 focus-visible:outline-blue-600 transition-all duration-300 max-lg:w-full overflow-hidden "
               >
-                <ArrowRight className="h-4 w-4 mr-2" />
-                Get Started Now
+                {/* Text */}
+                <span className="relative z-10 transition-transform duration-300 group-hover:-translate-x-1">
+                  Get Started Now
+                </span>
+
+                {/* Left Arrow - slides slightly right and fades */}
+                <ArrowRight className="absolute left-2 top-1/2 h-4 w-4 -translate-y-1/2 opacity-100 transition-all duration-300 group-hover:translate-x-3 group-hover:opacity-0" />
+
+                {/* Right Arrow - emerges from under text */}
+                <ArrowRight className="absolute right-2 top-1/2 h-4 w-4 -translate-y-1/2 translate-x-4 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100" />
               </Link>
 
               <WatchDemoButton onClick={openModal} />

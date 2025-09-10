@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
-import { ChevronDown, CheckSquare, LayoutTemplate, Calendar, BarChart3, ExternalLink, Workflow, Users, FileText, Settings, Bell, Building2, Car, Heart, Hammer, Factory, Briefcase, Phone, X } from "lucide-react";
+import { ChevronDown, ChartNoAxesCombinedIcon, Send, Binoculars, BookOpenText } from "lucide-react";
 import hidileLogo from "/img/hidileLogoHeader.png"
 
 
@@ -145,25 +145,25 @@ const NAV = [
     label: "Resources",
     children: [
       {
-        icon: CheckSquare,
+        icon: Binoculars,
         label: "About Us",
         description: "Learn about our company and mission",
         to: "/resources/about-us"
       },
       {
-        icon: LayoutTemplate,
+        icon: Send,
         label: "Contact Us",
         description: "Get in touch with our team",
         to: "/resources/contact-us"
       },
       {
-        icon: Calendar,
+        icon: BookOpenText,
         label: "Blogs",
         description: "Latest insights and industry trends",
         to: "/resources/blogs"
       },
       {
-        icon: CheckSquare,
+        icon: ChartNoAxesCombinedIcon,
         label: "Careers",
         description: "Join our team and explore job opportunities",
         to: "/resources/careers"
@@ -279,7 +279,7 @@ export default function Header() {
               end={item.end}
               className={({ isActive }) => {
                 const shouldBeActive = isActive || hasActiveChild;
-                return `tracking-tight text-sm font-medium transition-colors duration-200 relative group ${shouldBeActive ? "text-blue-600" : "text-gray-700 hover:text-blue-600"
+                return `tracking-tight text-sm font-medium transition-colors duration-200 relative group ${shouldBeActive ? "text-blue-600" : "text-gray-500 hover:text-blue-600"
                   }`;
               }}
             >
@@ -298,7 +298,7 @@ export default function Header() {
             </NavLink>
           ) : (
             <span
-              className={`tracking-tight text-sm font-medium transition-colors duration-200 relative group cursor-pointer ${hasActiveChild ? "text-blue-600" : "text-gray-700 hover:text-blue-600"
+              className={`tracking-tight text-sm font-medium transition-colors duration-200 relative group cursor-pointer ${hasActiveChild ? "text-blue-600" : "text-gray-500 hover:text-blue-600"
                 }`}
             >
               {item.label}
@@ -351,12 +351,11 @@ export default function Header() {
                         />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <h4 className={`text-sm font-semibold mb-1 transition-colors duration-200 ${childIsActive ? "text-blue-900" : "text-gray-900"
+                        <h4 className={`text-sm font-semibold mb-1 transition-colors duration-200 ${childIsActive ? "text-blue-700" : "text-gray-600"
                           }`}>
                           {child.label}
                         </h4>
-                        <p className={`text-xs leading-relaxed ${childIsActive ? "text-blue-700" : "text-gray-500"
-                          }`}>
+                        <p className={`text-xs leading-relaxed text-gray-500`}>
                           {child.description}
                         </p>
                       </div>
@@ -376,7 +375,7 @@ export default function Header() {
         to={item.to}
         end={item.end}
         className={({ isActive }) =>
-          `tracking-tight text-sm font-medium transition-colors duration-200 relative group ${isActive ? "text-blue-600" : "text-gray-700 hover:text-blue-600"
+          `tracking-tight text-sm font-medium transition-colors duration-200 relative group ${isActive ? "text-blue-600" : "text-gray-500 hover:text-blue-600"
           }`
         }
       >
@@ -421,17 +420,24 @@ export default function Header() {
 
               {item.children.map((child, childIndex) => {
                 const IconComponent = child.icon;
+                const childIsActive = isChildActive(child, location);
                 return (
                   <div
                     key={childIndex}
                     onClick={() => handleDropdownItemClick(child, item.label)}
-                    className="flex items-start gap-3 p-3 mx-2 rounded-lg hover:bg-blue-50 transition-colors duration-200 cursor-pointer"
+                    className={`flex items-start gap-3 p-3 mx-2 rounded-lg transition-colors duration-200 cursor-pointer $${childIsActive
+                          ? "bg-blue-50 border-l-2 border-blue-500"
+                          : "hover:bg-blue-50"
+                        }`} 
                   >
-                    <div className="flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center">
-                      <IconComponent className="w-4 h-4 text-gray-600" />
+                    <div className={`flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center ${childIsActive ? "bg-blue-100" : ""
+                        }`}>
+                      <IconComponent className={`w-4 h-4 ${childIsActive ? "text-blue-600" : "text-gray-600"
+                            }`} />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h5 className="text-sm font-medium text-gray-900 mb-1">
+                      <h5 className={`text-sm font-medium mb-1 ${childIsActive ? "text-blue-700" : "text-gray-600"
+                          }`}>
                         {child.label}
                       </h5>
                       <p className="text-xs text-gray-500 leading-relaxed">
@@ -519,8 +525,8 @@ export default function Header() {
         }
       `}</style>
 
-      <header className="fixed top-0 left-1/2 -translate-x-1/2 w-[85%] max-w-7xl h-[55px] z-50 pt-5 max-sm:w-full max-sm:px-2 max-sm:pt-3">
-        <div className="flex justify-between items-center w-full rounded-2xl backdrop-blur-lg bg-white/60 h-[50px] px-5 max-sm:px-4">
+      <header className="fixed top-0 left-1/2 -translate-x-1/2 w-full sm:w-[85%] max-w-7xl h-[55px] z-50 pt-5 max-sm:px-2 max-sm:pt-3">
+        <div className="flex justify-between items-center w-full rounded-2xl backdrop-blur-lg bg-white/60 h-[50px] px-5 max-sm:px-4 border border-black/5">
           <Link to="/">
             <img
               src={hidileLogo}
@@ -530,7 +536,7 @@ export default function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="flex relative gap-6 items-center z-[2] max-md:gap-4 max-sm:hidden ml-28">
+          <nav className="flex relative gap-6 items-center z-[2] max-md:gap-4 max-lg:hidden ml-28">
             {NAV.map((item, index) => renderDesktopNavItem(item, index))}
           </nav>
 
@@ -551,7 +557,7 @@ export default function Header() {
               </span>
             </Link>
             <button
-              className="hidden relative text-xl text-gray-800 z-[2] max-sm:block hover:text-blue-600 transition-colors duration-200 p-1"
+              className="hidden relative text-xl text-gray-800 z-[2] max-lg:block hover:text-blue-600 transition-colors duration-200 p-1"
               onClick={toggleMobileMenu}
             >
               <svg
@@ -577,7 +583,7 @@ export default function Header() {
       {/* Mobile Menu Overlay */}
       {(isMobileMenuOpen || isClosing) && (
         <div
-          className="fixed inset-0 bg-black/50 z-50 sm:hidden mobile-menu-overlay"
+          className="fixed inset-0 bg-black/50 z-50 md:hidden mobile-menu-overlay"
           onClick={toggleMobileMenu}
         >
           <div
@@ -602,7 +608,7 @@ export default function Header() {
                 Log In
               </a>
               <Link
-                to="/signup"
+                to="/reach-us"
                 className="inline-flex gap-2.5 justify-center items-center px-5 py-2.5 bg-blue-600 hover:bg-blue-700 rounded-md transition-all duration-200"
                 onClick={toggleMobileMenu}
               >

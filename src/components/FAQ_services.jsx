@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { ChevronDown, ChevronRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const FAQ = () => {
   const [expandedItem, setExpandedItem] = useState(0); // First item expanded by default
@@ -186,9 +187,9 @@ const FAQ = () => {
           <p className="text-gray-600 mb-2 lg:mb-4 max-sm:text-xs">
             Still have questions? We're here to help!
           </p>
-          <button className="inline-flex items-center gap-3 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg transition-colors duration-200 shadow-sm max-sm:text-xs text-sm">
+          <Link to={'/reach-us'} className="inline-flex items-center gap-3 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg transition-colors duration-200 shadow-sm max-sm:text-xs text-sm">
             Contact Support
-          </button>
+          </Link>
         </div>
       </div>
     </section>

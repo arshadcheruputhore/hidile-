@@ -32,8 +32,8 @@ const ContactForm_ContactUs = () => {
     ];
 
     return (
-        <div className="">
-            <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 mt-12 lg:mt-20">
+        <div className="px-2 sm:px-6 lg:px-8 mt-12 lg:mt-24">
+            <div className="max-w-7xl mx-auto ">
                 {/* Main Section Header */}
                 <div className="text-center mb-4 lg:mb-8">
                     <h1 className="text-xl sm:text-3xl font-medium text-gray-900 mb-2 lg:mb-3">
@@ -46,7 +46,7 @@ const ContactForm_ContactUs = () => {
                 </div>
 
                 {/* Contact Form Section */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10 bg-white p-2 rounded-xl">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10 bg-slate-50 p-4 rounded-xl">
                     {/* Left Side - Contact Info Card */}
                     <div className="bg-gradient-to-br from-blue-400 to-blue-600 rounded-2xl p-6 lg:p-8 text-white relative overflow-hidden">
                         <div className="relative z-10">

@@ -60,7 +60,7 @@ const HidileOKRDrivesSuccess_Industries = () => {
     const isVisible = visibleElements.has(index);
     return `${baseClasses} transition-all duration-700 ease-out ${isVisible
       ? 'opacity-100 translate-y-0'
-      : 'opacity-0 translate-y-8'
+      : 'opacity-0 -translate-y-8'
     }`;
   };
 
@@ -93,7 +93,7 @@ const HidileOKRDrivesSuccess_Industries = () => {
             <div
               key={index}
               ref={setElementRef(index + 1)}
-              className={getElementClassName(index + 1, "bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border border-zinc-200 relative overflow-hidden")}
+              className={getElementClassName(index + 1, "bg-white rounded-lg shadow-md border border-zinc-200 relative overflow-hidden")}
               style={getElementStyle(index + 1)}
             >
               {/* Blue accent bar on the left */}

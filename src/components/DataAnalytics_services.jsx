@@ -1,4 +1,5 @@
-import { ArrowRight, BarChart3, Link, Target, Users, TrendingUp } from "lucide-react";
+import { ArrowRight, BarChart3, Target, Users, TrendingUp, LinkIcon } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const DataAnalytics_services = () => {
   const analyticsFeatures = [
@@ -13,7 +14,7 @@ const DataAnalytics_services = () => {
       description: "Achieve end-to-end personalization that goes beyond promises. Our approach empowers businesses to not only overcome challenges but to thrive in the era of AI-driven recommendations."
     },
     {
-      icon: Link,
+      icon: LinkIcon,
       title: "Strategic Integration",
       description: "We are at the forefront of integrating automation, AI-powered intelligence, and activation tools strategically. This sets your brand apart in the dynamic digital landscape."
     },
@@ -104,12 +105,12 @@ const DataAnalytics_services = () => {
 
         {/* CTA Button */}
         <div className="flex justify-end lg:justify-start">
-          <button className="inline-flex items-center px-3 py-2 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-3xl transition-colors duration-200 shadow-sm text-sm sm:text-base">
+          <Link to={'/reach-us'} className="inline-flex items-center px-3 py-2 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-3xl transition-colors duration-200 shadow-sm text-sm sm:text-base">
             Get in Touch
             <div className="ml-2 bg-white text-black rounded-full p-1">
               <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4" />
             </div>
-          </button>
+          </Link>
         </div>
       </div>
     </section>

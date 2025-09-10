@@ -1,56 +1,73 @@
 import React, { useEffect, useRef, useState } from "react";
 
 export default function ToolsCardHome() {
-    const [visibleCards, setVisibleCards] = useState(new Set());
-    const cardRefs = useRef([]);
+    const [visibleItems, setVisibleItems] = useState(new Set());
+    const [headerVisible, setHeaderVisible] = useState(false);
+    const headerRef = useRef(null);
+    const itemRefs = useRef([]);
 
     useEffect(() => {
         const observers = [];
-        
-        cardRefs.current.forEach((ref, index) => {
-            if (ref) {
-                const observer = new IntersectionObserver(
-                    (entries) => {
-                        entries.forEach((entry) => {
-                            if (entry.isIntersecting) {
-                                setVisibleCards(prev => new Set(prev).add(index));
-                            }
-                        });
-                    },
-                    {
-                        threshold: 0.1,
-                        rootMargin: '0px 0px -50px 0px'
+
+        // Header observer
+        const headerObserver = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setHeaderVisible(true);
+                }
+            },
+            { threshold: 0.3 }
+        );
+
+        if (headerRef.current) {
+            headerObserver.observe(headerRef.current);
+            observers.push(headerObserver);
+        }
+
+        // Items observer
+        const itemObserver = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        const index = parseInt(entry.target.dataset.index);
+                        setVisibleItems(prev => new Set([...prev, index]));
                     }
-                );
-                
-                observer.observe(ref);
-                observers.push(observer);
+                });
+            },
+            { threshold: 0.2 }
+        );
+
+        itemRefs.current.forEach((ref) => {
+            if (ref) {
+                itemObserver.observe(ref);
             }
         });
+        observers.push(itemObserver);
 
         return () => {
             observers.forEach(observer => observer.disconnect());
         };
     }, []);
 
-    const setCardRef = (index) => (el) => {
-        cardRefs.current[index] = el;
+    const getCardClassName = (index, baseClasses) => {
+        const isVisible = visibleItems.has(index);
+        return `${baseClasses} transition-all duration-700 ease-out ${isVisible
+            ? 'opacity-100 translate-y-0 scale-100'
+            : 'opacity-0 translate-y-12 scale-95'
+            }`;
     };
 
-    const getCardClassName = (index, baseClasses) => {
-        const isVisible = visibleCards.has(index);
-        return `${baseClasses} transition-all duration-700 ease-out ${
-            isVisible 
-                ? 'opacity-100 translate-y-0' 
-                : 'opacity-0 translate-y-8'
-        }`;
-    };
-    
     return (
         <section className="relative w-full text-gray-900 mt-14 sm:mt-20 sm:px-3 px-1">
             <div className="mx-auto max-w-7xl">
                 {/* Heading */}
-                <div className="text-center mb-6 sm:mb-8">
+                <div
+                    ref={headerRef}
+                    className={`sm:mb-8 mb-6 text-center transition-all duration-1000 ease-out ${headerVisible
+                        ? 'opacity-100 translate-y-0'
+                        : 'opacity-0 -translate-y-12'
+                        }`}
+                >
                     <h1 className="text-2xl font-medium md:text-4xl text-gray-900 mb-2 sm:mb-2.5">
                         The Tools That Keep Your <br />
                         <span className="sm:hidden">Work Moving</span>
@@ -66,8 +83,12 @@ export default function ToolsCardHome() {
                 {/* Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
                     {/* Card 1 */}
-                    <div 
-                        ref={setCardRef(0)}
+                    <div
+                        ref={el => itemRefs.current[0] = el}
+                        data-index={0}
+                        style={{
+                                    transitionDelay: `${0 * 120}ms`
+                                }}
                         className={getCardClassName(0, "pt-6 sm:pt-8 pl-6 sm:pl-8 rounded-2xl shadow-lg transition bg-white flex flex-col justify-between md:col-span-2")}
                     >
                         <div className="w-full sm:w-2/3 max-sm:pr-3">
@@ -89,8 +110,12 @@ export default function ToolsCardHome() {
                     </div>
 
                     {/* Card 2 */}
-                    <div 
-                        ref={setCardRef(1)}
+                    <div
+                        ref={el => itemRefs.current[1] = el}
+                        data-index={1}
+                        style={{
+                                    transitionDelay: `${1 * 120}ms`
+                                }}
                         className={getCardClassName(1, "rounded-2xl shadow-lg transition bg-white flex flex-col md:col-span-1 justify-between")}
                     >
                         <div className="w-full pt-6 sm:pt-8 px-6 sm:px-8">
@@ -110,8 +135,12 @@ export default function ToolsCardHome() {
                     </div>
 
                     {/* Card 3 */}
-                    <div 
-                        ref={setCardRef(2)}
+                    <div
+                        ref={el => itemRefs.current[2] = el}
+                        data-index={2}
+                        style={{
+                                    transitionDelay: `${2 * 120}ms`
+                                }}
                         className={getCardClassName(2, "rounded-2xl shadow-lg transition bg-white flex flex-col md:col-span-1 justify-between")}
                     >
                         <div className="w-full pt-6 sm:pt-8 px-6 sm:px-8">
@@ -119,7 +148,7 @@ export default function ToolsCardHome() {
                                 AI Agents. Real-time progress.
                             </h3>
                             <p className="text-gray-800 leading-6 text-sm mb-4">
-                               Track progress at every stage. Spot roadblocks with automatic updates, status checks, and alerts—so nothing slips
+                                Track progress at every stage. Spot roadblocks with automatic updates, status checks, and alerts—so nothing slips
                             </p>
                         </div>
 
@@ -134,8 +163,12 @@ export default function ToolsCardHome() {
                     </div>
 
                     {/* Card 4 */}
-                    <div 
-                        ref={setCardRef(3)}
+                    <div
+                        ref={el => itemRefs.current[3] = el}
+                        data-index={3}
+                        style={{
+                                    transitionDelay: `${3 * 120}ms`
+                                }}
                         className={getCardClassName(3, "rounded-2xl shadow-lg transition bg-white flex flex-col sm:flex-row justify-between md:col-span-2 py-6 sm:py-8 px-6 sm:px-8")}
                     >
                         <div className="w-full sm:w-1/2 mb-4 sm:mb-0">

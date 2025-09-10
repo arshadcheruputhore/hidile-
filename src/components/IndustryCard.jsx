@@ -11,39 +11,46 @@ import {
 } from "lucide-react";
 
 function Card({ icon: Icon, bgColor, iconColor, title, description, index }) {
-  const [isVisible, setIsVisible] = useState(false);
-  const cardRef = useRef(null);
+  const [visibleItems, setVisibleItems] = useState(new Set());
+  const itemRefs = useRef([]);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
+    const observers = [];
+
+    // Items observer
+    const itemObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = parseInt(entry.target.dataset.index);
+            setVisibleItems(prev => new Set([...prev, index]));
+          }
+        });
       },
-      { threshold: 0.1, rootMargin: '-50px' }
+      { threshold: 0.2 }
     );
 
-    if (cardRef.current) {
-      observer.observe(cardRef.current);
-    }
+    itemRefs.current.forEach((ref) => {
+      if (ref) {
+        itemObserver.observe(ref);
+      }
+    });
+    observers.push(itemObserver);
 
     return () => {
-      if (cardRef.current) {
-        observer.unobserve(cardRef.current);
-      }
+      observers.forEach(observer => observer.disconnect());
     };
   }, []);
 
   return (
-    <div 
-      ref={cardRef}
-      className={`relative group transform transition-all duration-700 ease-out ${
-        isVisible 
-          ? 'translate-y-0 opacity-100' 
-          : 'translate-y-8 opacity-0'
-      }`}
-      style={{ transitionDelay: `${index * 100}ms` }}
+    <div
+      ref={el => itemRefs.current[index] = el}
+      data-index={index}
+      className={`relative group transform transition-all duration-700 ease-out ${visibleItems.has(index)
+        ? 'translate-y-0 opacity-100 scale-100'
+        : 'translate-y-12 opacity-0 scale-95'
+        }`}
+      style={{ transitionDelay: `${index * 120}ms` }}
     >
       {/* Hover background */}
       <div className="absolute inset-0 bg-gradient-to-br from-blue-200 via-blue-600 to-blue-100 rounded-2xl transform rotate-1 scale-95 opacity-0 group-hover:opacity-100 group-hover:scale-100 group-hover:rotate-2 transition-all duration-500 ease-out shadow-xl"></div>
@@ -68,11 +75,44 @@ function Card({ icon: Icon, bgColor, iconColor, title, description, index }) {
 }
 
 export default function IndustryCard() {
+
+  const [headerVisible, setHeaderVisible] = useState(false);
+  const headerRef = useRef(null);
+
+  useEffect(() => {
+    const observers = [];
+
+    // Header observer
+    const headerObserver = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setHeaderVisible(true);
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    if (headerRef.current) {
+      headerObserver.observe(headerRef.current);
+      observers.push(headerObserver);
+    }
+
+    return () => {
+      observers.forEach(observer => observer.disconnect());
+    };
+  }, []);
+
   return (
     <section className="sm:mt-10 mt-8 sm:px-3 px-1">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-8 max-sm:mb-6">
+        <div
+          ref={headerRef}
+          className={`sm:mb-8 mb-6 text-center transition-all duration-1000 ease-out ${headerVisible
+              ? 'opacity-100 translate-y-0'
+              : 'opacity-0 -translate-y-12'
+            }`}
+        >
           <h1 className="text-2xl sm:text-3xl font-medium md:text-4xl text-gray-900 mb-2 sm:mb-2.5 leading-tight">
             We are everywhere
           </h1>
@@ -83,7 +123,7 @@ export default function IndustryCard() {
 
         {/* Features Grid - Mobile: Alternating single column, Desktop: 4 columns */}
         <div className="hidden lg:grid lg:grid-cols-4 gap-6">
-          
+
           {/* Column 1 */}
           <div className="space-y-6">
             <Card

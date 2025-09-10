@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import HeroResources from '../components/HeroResources'
 import { Outlet, useLocation } from 'react-router-dom'
 
@@ -14,12 +14,6 @@ function ResourcesLayout() {
     };
 
     const currentPageType = getPageType(location.pathname);
-
-    const OpeningRef = useRef(null);
-
-    const scrollToOpenings = () => {
-        OpeningRef.current?.scrollIntoView({ behavior: 'smooth' });
-    };
 
     return (
         <>
